@@ -1,56 +1,48 @@
 {
-    "name": "xyz",
+    "name": "azwebex",
+    "version": "1.0.0",
+    "keywords": "web",
+    "types": {
+
+    },
     "resources": {
-        "xyz:index:StaticPage": {
+        "azwebex:azwebex:staticWebsite":{
             "isComponent": true,
             "inputProperties": {
-                "indexContent": {
+                "appSkuName": {
                     "type": "string",
-                    "description": "The HTML content for index.html."
-                }
-            },
-            "requiredInputs": [
-                "indexContent"
-            ],
-            "properties": {
-                "bucket": {
-                    "$ref": "/aws/v4.0.0/schema.json#/resources/aws:s3%2Fbucket:Bucket",
-                    "description": "The bucket resource."
+                    "description": "The name of the compute instance running the server. Also see appSkuTier",
+                    "default": "B1"
                 },
-                "websiteUrl": {
+                "appSkuTier": {
                     "type": "string",
-                    "description": "The website URL."
+                    "description": "The tier of the compute instance running the server. Also see appSkuName",
+                    "default": "Basic"
+                },
+                "filePath": {
+                    "type": "string",
+                    "description": "The relative file path to the folder containing web files."
+                },
+                "containerPublicAccess": {
+                    "$ref": "/azure-native/v1.0.0/schema.json#/azure-native:storage:PublicAccess",
+                    "description": "The public access level of the BlobContainer containg the website data."
+                },
+                "storageSkuName":{
+                    "$ref": "/azure-native/v1.0.0/schema.json#/azure-native:storage:SkuName",
+                    "description": "The name of the SKU of the storage account created, if storageAccount is not provided"
+                },
+                "storageAccount":{
+                    "$ref": "/azure-native/v1.0.0/schema.json#/azure-native:storage:StorageAccount",
+                    "description": "The storage account to use. One will be created if not provided."
+                },
+                "resourceGroup": {
+                    "$ref": "/azure-native/v1.0.0/schema.json#/azure-native:resources:ResourceGroup",
+                    "description": "The resource group to use. One will be created if not provided."
+                },
+                "namePrefix": {
+                    "type": "string",
+                    "description": "The name prefix given to child resources of this component. Should not contain dashes."
                 }
-            },
-            "required": [
-                "bucket",
-                "websiteUrl"
-            ]
-        }
-    },
-    "language": {
-        "csharp": {
-            "packageReferences": {
-                "Pulumi": "3.*",
-                "Pulumi.Aws": "5.*"
-            }
-        },
-        "go": {
-            "generateResourceContainerTypes": true,
-            "importBasePath": "github.com/pulumi/pulumi-xyz/sdk/go/xyz"
-        },
-        "nodejs": {
-            "dependencies": {
-                "@pulumi/aws": "^5.0.0"
-            },
-            "devDependencies": {
-                "typescript": "^3.7.0"
-            }
-        },
-        "python": {
-            "requires": {
-                "pulumi": ">=3.0.0,<4.0.0",
-                "pulumi-aws": ">=5.0.0,<6.0.0"
             }
         }
     }
