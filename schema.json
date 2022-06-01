@@ -1,7 +1,6 @@
 {
     "name": "azwebex",
     "version": "1.0.0",
-    "keywords": "web",
     "types": {
 
     },
@@ -24,19 +23,19 @@
                     "description": "The relative file path to the folder containing web files."
                 },
                 "containerPublicAccess": {
-                    "$ref": "/azure-native/v1.0.0/schema.json#/azure-native:storage:PublicAccess",
+                    "$ref": "/azure-native/v1.64.1/schema.json#/types/azure-native:storage:PublicAccess",
                     "description": "The public access level of the BlobContainer containg the website data."
                 },
                 "storageSkuName":{
-                    "$ref": "/azure-native/v1.0.0/schema.json#/azure-native:storage:SkuName",
+                    "$ref": "/azure-native/v1.64.1/schema.json#/types/azure-native:storage:SkuName",
                     "description": "The name of the SKU of the storage account created, if storageAccount is not provided"
                 },
                 "storageAccount":{
-                    "$ref": "/azure-native/v1.0.0/schema.json#/azure-native:storage:StorageAccount",
+                    "$ref": "/azure-native/v1.64.1/schema.json#/resources/azure-native:storage:StorageAccount",
                     "description": "The storage account to use. One will be created if not provided."
                 },
                 "resourceGroup": {
-                    "$ref": "/azure-native/v1.0.0/schema.json#/azure-native:resources:ResourceGroup",
+                    "$ref": "/azure-native/v1.64.1/schema.json#/resources/azure-native:resources:ResourceGroup",
                     "description": "The resource group to use. One will be created if not provided."
                 },
                 "namePrefix": {
