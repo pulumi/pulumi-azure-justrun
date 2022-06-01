@@ -7,11 +7,15 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
-namespace Pulumi.Azwebex.Azwebex
+namespace Pulumi.Azwebex
 {
-    [AzwebexResourceType("azwebex:azwebex:staticWebsite")]
+    [AzwebexResourceType("azwebex:index:staticWebsite")]
     public partial class StaticWebsite : Pulumi.ComponentResource
     {
+        [Output("url")]
+        public Output<string?> Url { get; private set; } = null!;
+
+
         /// <summary>
         /// Create a StaticWebsite resource with the given unique name, arguments, and options.
         /// </summary>
@@ -20,7 +24,7 @@ namespace Pulumi.Azwebex.Azwebex
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
         public StaticWebsite(string name, StaticWebsiteArgs? args = null, ComponentResourceOptions? options = null)
-            : base("azwebex:azwebex:staticWebsite", name, args ?? new StaticWebsiteArgs(), MakeResourceOptions(options, ""), remote: true)
+            : base("azwebex:index:staticWebsite", name, args ?? new StaticWebsiteArgs(), MakeResourceOptions(options, ""), remote: true)
         {
         }
 

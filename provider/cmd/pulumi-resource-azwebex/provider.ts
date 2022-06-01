@@ -43,7 +43,7 @@ async function constructWebApp(name: string, inputs: pulumi.Inputs,
     return {
         urn: staticPage.urn,
         state: {
-            url: staticPage.endpoint,
+            url: staticPage.url,
         },
     };
 }

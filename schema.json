@@ -5,7 +5,7 @@
 
     },
     "resources": {
-        "azwebex:azwebex:staticWebsite":{
+        "azwebex:index:staticWebsite":{
             "isComponent": true,
             "inputProperties": {
                 "appSkuName": {
@@ -41,6 +41,11 @@
                 "namePrefix": {
                     "type": "string",
                     "description": "The name prefix given to child resources of this component. Should not contain dashes."
+                }
+            },
+            "properties": {
+                "url": {
+                    "type": "string"
                 }
             }
         }

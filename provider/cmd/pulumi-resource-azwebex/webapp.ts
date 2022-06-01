@@ -7,7 +7,7 @@ import * as web from "@pulumi/azure-native/web";
 // Define a component for serving a static website on S3
 export class WebApp extends pulumi.ComponentResource {
 
-    public readonly endpoint!: pulumi.Output<string>;
+    public readonly url!: pulumi.Output<string>;
 
     constructor(name: string, args: WebAppArgs, opts: pulumi.ResourceOptions = {}) {
         super("web-components:web-components:staticWebsite", name, {}, opts); // Register this component with name pulumi:examples:S3Folder
@@ -66,7 +66,7 @@ export class WebApp extends pulumi.ComponentResource {
         }, {parent: this});
         
 
-        this.endpoint = pulumi.interpolate `https://${app.defaultHostName}`;
+        this.url = pulumi.interpolate `https://${app.defaultHostName}`;
         this.registerOutputs();
     }   
 }
