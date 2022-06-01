@@ -1,4 +1,5 @@
 {
+    "name": "temp",
     "version": "${VERSION}",
     "bin": "bin/index.js",
     "dependencies": {

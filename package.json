@@ -1,4 +1,6 @@
 {
+  "name": "@pulumi/azwebex",
+  "version": "0.0.0",
   "devDependencies": {
     "@types/node": "^17.0.38",
     "@vercel/ncc": "^0.28.6",
