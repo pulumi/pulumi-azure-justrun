@@ -38,7 +38,7 @@ export class StaticWebsite extends pulumi.ComponentResource {
             resourceInputs["appSkuName"] = (args ? args.appSkuName : undefined) ?? "B1";
             resourceInputs["appSkuTier"] = (args ? args.appSkuTier : undefined) ?? "Basic";
             resourceInputs["containerPublicAccess"] = args ? args.containerPublicAccess : undefined;
-            resourceInputs["filePath"] = args ? args.filePath : undefined;
+            resourceInputs["filePath"] = (args ? args.filePath : undefined) ?? "wwwroot";
             resourceInputs["namePrefix"] = args ? args.namePrefix : undefined;
             resourceInputs["resourceGroup"] = args ? args.resourceGroup : undefined;
             resourceInputs["storageAccount"] = args ? args.storageAccount : undefined;

@@ -95,6 +95,7 @@ namespace Pulumi.Azwebex
         {
             AppSkuName = "B1";
             AppSkuTier = "Basic";
+            FilePath = "wwwroot";
         }
     }
 }

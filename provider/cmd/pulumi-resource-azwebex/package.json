@@ -1,6 +1,6 @@
 {
-    "name": "temp",
-    "version": "${VERSION}",
+    "name": "azwebex",
+    "version": "v1.0.0",
     "bin": "bin/index.js",
     "dependencies": {
         "@pulumi/pulumi": "^3.0.0",

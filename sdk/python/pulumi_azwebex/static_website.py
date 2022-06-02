@@ -43,6 +43,8 @@ class StaticWebsiteArgs:
             pulumi.set(__self__, "app_sku_tier", app_sku_tier)
         if container_public_access is not None:
             pulumi.set(__self__, "container_public_access", container_public_access)
+        if file_path is None:
+            file_path = 'wwwroot'
         if file_path is not None:
             pulumi.set(__self__, "file_path", file_path)
         if name_prefix is not None:
@@ -230,6 +232,8 @@ class StaticWebsite(pulumi.ComponentResource):
                 app_sku_tier = 'Basic'
             __props__.__dict__["app_sku_tier"] = app_sku_tier
             __props__.__dict__["container_public_access"] = container_public_access
+            if file_path is None:
+                file_path = 'wwwroot'
             __props__.__dict__["file_path"] = file_path
             __props__.__dict__["name_prefix"] = name_prefix
             __props__.__dict__["resource_group"] = resource_group

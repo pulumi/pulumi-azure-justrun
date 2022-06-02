@@ -32,6 +32,9 @@ func NewStaticWebsite(ctx *pulumi.Context,
 	if isZero(args.AppSkuTier) {
 		args.AppSkuTier = pulumi.StringPtr("Basic")
 	}
+	if isZero(args.FilePath) {
+		args.FilePath = pulumi.StringPtr("wwwroot")
+	}
 	var resource StaticWebsite
 	err := ctx.RegisterRemoteComponentResource("azwebex:index:staticWebsite", name, args, &resource, opts...)
 	if err != nil {

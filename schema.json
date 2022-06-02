@@ -1,6 +1,6 @@
 {
     "name": "azwebex",
-    "version": "1.0.0",
+    "version": "v1.0.0",
     "types": {
 
     },
@@ -20,7 +20,8 @@
                 },
                 "filePath": {
                     "type": "string",
-                    "description": "The relative file path to the folder containing web files."
+                    "description": "The relative file path to the folder containing web files.",
+                    "default": "wwwroot"
                 },
                 "containerPublicAccess": {
                     "$ref": "/azure-native/v1.64.1/schema.json#/types/azure-native:storage:PublicAccess",
