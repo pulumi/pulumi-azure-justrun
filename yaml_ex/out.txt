@@ -1,0 +1,91 @@
+I0602 22:49:45.016931   16692 backend.go:420] found username for access token
+I0602 22:49:45.901695   16692 backend.go:420] found username for access token
+I0602 22:49:46.540677   16692 backend.go:420] found username for access token
+I0602 22:49:46.650947   16692 backend.go:420] found username for access token
+I0602 22:49:46.649044   16692 backend.go:950] Stack dev being updated to version 1
+I0602 22:49:46.717163   16692 update.go:192] *** Starting Update(preview=true) ***
+I0602 22:49:46.717594   16692 plugins.go:76] gatherPluginsFromProgram(): gathering plugins from language host
+I0602 22:49:46.736770   16692 plugins.go:1057] GetPluginPath(language, yaml, <nil>): found on $PATH C:\ProgramData\chocolatey\lib\pulumi\tools\Pulumi\bin\pulumi-language-yaml.exe
+I0602 22:49:46.739764   16692 plugin.go:184] Launching plugin 'yaml' from 'C:\ProgramData\chocolatey\lib\pulumi\tools\Pulumi\bin\pulumi-language-yaml.exe' with args: -root=C:\pulumidev\azwebex\yaml_ex,127.0.0.1:60852
+I0602 22:49:46.860231   16692 langruntime_plugin.go:207] langhost[yaml].GetPluginInfo() executing
+I0602 22:49:46.861454   16692 langruntime_plugin.go:115] langhost[yaml].GetRequiredPlugins(proj=yaml_ex,pwd=C:\pulumidev\azwebex\yaml_ex,program=.) executing
+I0602 22:49:46.862723   16692 langruntime_plugin.go:157] langhost[yaml].GetRequiredPlugins(proj=yaml_ex,pwd=C:\pulumidev\azwebex\yaml_ex,program=.) success: #versions=1
+I0602 22:49:46.862723   16692 plugins.go:88] gatherPluginsFromProgram(): plugin yaml <nil> () is required by language host
+I0602 22:49:46.862723   16692 plugins.go:88] gatherPluginsFromProgram(): plugin azwebex <nil> () is required by language host
+I0602 22:49:46.862723   16692 plugins.go:100] gatherPluginsFromSnapshot(): gathering plugins from snapshot
+I0602 22:49:46.862723   16692 plugins.go:137] ensurePluginsAreInstalled(): beginning
+I0602 22:49:46.877442   16692 plugins.go:1057] GetPluginPath(language, yaml, <nil>): found on $PATH C:\ProgramData\chocolatey\lib\pulumi\tools\Pulumi\bin\pulumi-language-yaml.exe
+I0602 22:49:46.877442   16692 plugins.go:142] ensurePluginsAreInstalled(): plugin yaml <nil> already installed
+I0602 22:49:46.897208   16692 plugins.go:150] ensurePluginsAreInstalled(): plugin azwebex <nil> not installed, doing install
+I0602 22:49:46.897208   16692 plugins.go:169] installPlugin(azwebex, <nil>): beginning install
+I0602 22:49:46.897208   16692 plugins.go:178] installPlugin(azwebex): version not specified, trying to lookup latest version
+I0602 22:49:46.897748   16692 plugins.go:240] plugin GitHub releases url: https://api.github.com/repos/pulumi/pulumi-azwebex/releases/latest
+I0602 22:49:46.897748   16692 plugins.go:676] full plugin download url: https://api.github.com/repos/pulumi/pulumi-azwebex/releases/latest
+I0602 22:49:46.897836   16692 plugins.go:677] plugin install request headers: map[Accept:[application/json] User-Agent:[pulumi-cli/1 (; windows)]]
+I0602 22:49:46.951021   16692 plugins.go:684] plugin install response headers: map[Access-Control-Allow-Origin:[*] Access-Control-Expose-Headers:[ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Used, X-RateLimit-Resource, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval, X-GitHub-Media-Type, X-GitHub-SSO, X-GitHub-Request-Id, Deprecation, Sunset] Content-Security-Policy:[default-src 'none'] Content-Type:[application/json; charset=utf-8] Date:[Fri, 03 Jun 2022 05:49:28 GMT] Referrer-Policy:[origin-when-cross-origin, strict-origin-when-cross-origin] Server:[GitHub.com] Strict-Transport-Security:[max-age=31536000; includeSubdomains; preload] Vary:[Accept-Encoding, Accept, X-Requested-With] X-Content-Type-Options:[nosniff] X-Frame-Options:[deny] X-Github-Media-Type:[github.v3] X-Github-Request-Id:[EDB7:9813:1778F0C:184CCEA:6299A0FB] X-Ratelimit-Limit:[60] X-Ratelimit-Remaining:[53] X-Ratelimit-Reset:[1654238584] X-Ratelimit-Resource:[core] X-Ratelimit-Used:[7] X-Xss-Protection:[0]]
+I0602 22:49:46.951310   16692 plugins.go:157] ensurePluginsAreInstalled(): completed
+I0602 22:49:46.951310   16692 update.go:251] newUpdateSource(): failed to install missing plugins: could not get latest version for plugin azwebex: 404 HTTP error fetching plugin from https://api.github.com/repos/pulumi/pulumi-azwebex/releases/latest. If this is a private GitHub repository, try providing a token via the GITHUB_TOKEN environment variable. See: https://github.com/settings/tokens
+I0602 22:49:46.951310   16692 plugins.go:258] computeDefaultProviderPlugins(): considering yaml
+I0602 22:49:46.951310   16692 plugins.go:261] computeDefaultProviderPlugins(): skipping yaml, not a resource provider
+I0602 22:49:46.951310   16692 plugins.go:258] computeDefaultProviderPlugins(): considering azwebex
+I0602 22:49:46.951310   16692 plugins.go:289] computeDefaultProviderPlugins(): plugin azwebex selected for package azwebex (first seen)
+I0602 22:49:46.951310   16692 plugins.go:295] computeDefaultProviderPlugins(): summary of default plugins:
+I0602 22:49:46.951310   16692 plugins.go:297]   azwebex         = <nil>
+I0602 22:49:46.952020   16692 step_generator.go:1132] stepGenerator.GeneratePendingDeletes(): scanning previous snapshot for pending deletes
+I0602 22:49:46.952020   16692 deployment_executor.go:474] deploymentExecutor.retirePendingDeletes(...): no pending deletions
+I0602 22:49:46.952155   16692 deployment_executor.go:255] deploymentExecutor.Execute(...): waiting for incoming events
+I0602 22:49:46.952155   16692 langruntime_plugin.go:168] langhost[yaml].Run(pwd=C:\pulumidev\azwebex\yaml_ex,program=.,#args=0,proj=yaml_ex,stack=dev,#config=1,dryrun=true) executing
+I0602 22:49:46.952206   16692 step_executor.go:364] StepExecutor worker(-2): worker coming online
+I0602 22:49:46.952206   16692 step_executor.go:364] StepExecutor worker(-2): worker waiting for incoming chains
+I0602 22:49:46.954662   16692 source_eval.go:629] ResourceMonitor.SupportsFeature(id: resourceReferences) = true
+I0602 22:49:46.955221   16692 source_eval.go:629] ResourceMonitor.SupportsFeature(id: outputValues) = true
+I0602 22:49:46.956536   16692 eventsink.go:59] Registering resource [webapp]
+I0602 22:49:46.956556   16692 eventsink.go:62] eventSink::Debug(<{%reset%}>Registering resource [webapp]<{%reset%}>)
+I0602 22:49:46.956576   16692 source_eval.go:1072] ResourceMonitor.RegisterResource received: t=pulumi:pulumi:Stack, name=yaml_ex-dev, custom=false, #props=0, parent=, protect=false, provider=, deps=[], deleteBeforeReplace=<nil>, ignoreChanges=[], aliases=[], customTimeouts={0 0 0}, providers=map[], replaceOnChanges=[], retainOnDelete=false
+I0602 22:49:46.956576   16692 source_eval.go:167] EvalSourceIterator produced a registration: t=pulumi:pulumi:Stack,name=yaml_ex-dev,#props=0
+I0602 22:49:46.956576   16692 deployment_executor.go:259] deploymentExecutor.Execute(...): incoming event (nil? false, <nil>)
+I0602 22:49:46.956576   16692 deployment_executor.go:446] deploymentExecutor.handleSingleEvent(...): received RegisterResourceEvent
+I0602 22:49:46.956576   16692 step_generator.go:689] Planner decided to create 'urn:pulumi:dev::yaml_ex::pulumi:pulumi:Stack::yaml_ex-dev' (inputs=map[])
+I0602 22:49:46.956576   16692 step_executor.go:364] StepExecutor worker(-2): worker received chain for execution
+I0602 22:49:46.956576   16692 step_executor.go:364] StepExecutor worker(-2): worker waiting for incoming chains
+I0602 22:49:46.956576   16692 step_executor.go:364] StepExecutor worker(0): launching oneshot worker
+I0602 22:49:46.956576   16692 step_executor.go:364] StepExecutor worker(0): applying step create on urn:pulumi:dev::yaml_ex::pulumi:pulumi:Stack::yaml_ex-dev (preview true)
+I0602 22:49:46.956576   16692 step_executor.go:364] StepExecutor worker(0): step create on urn:pulumi:dev::yaml_ex::pulumi:pulumi:Stack::yaml_ex-dev retired
+I0602 22:49:46.956576   16692 source_eval.go:1152] stripping unknowns from RegisterResource response for urn urn:pulumi:dev::yaml_ex::pulumi:pulumi:Stack::yaml_ex-dev
+I0602 22:49:46.957107   16692 source_eval.go:1162] ResourceMonitor.RegisterResource operation finished: t=pulumi:pulumi:Stack, urn=urn:pulumi:dev::yaml_ex::pulumi:pulumi:Stack::yaml_ex-dev, #outs=0
+I0602 22:49:46.982819   16692 eventsink.go:86] eventSink::Error(<{%reset%}>Error: error resolving type of resource webapp: internal error loading package "azwebex": no resource plugin 'pulumi-resource-azwebex' found in the workspace or on your $PATH, install the plugin using `pulumi plugin install resource azwebex`
+
+  on Pulumi.yaml line 8:
+   8:     type: azwebex:index:WebApp
+
+error resolving type of resource webapp: internal error loading package "azwebex": no resource plugin 'pulumi-resource-azwebex' found in the workspace or on your $PATH, install the plugin using `pulumi plugin install resource azwebex`
+
+<{%reset%}>)
+I0602 22:49:46.983474   16692 source_eval.go:1207] ResourceMonitor.RegisterResourceOutputs received: urn=urn:pulumi:dev::yaml_ex::pulumi:pulumi:Stack::yaml_ex-dev, #outs=0
+I0602 22:49:46.983474   16692 source_eval.go:172] EvalSourceIterator produced a completion: urn=urn:pulumi:dev::yaml_ex::pulumi:pulumi:Stack::yaml_ex-dev,#outs=0
+I0602 22:49:46.983474   16692 deployment_executor.go:259] deploymentExecutor.Execute(...): incoming event (nil? false, <nil>)
+I0602 22:49:46.983474   16692 deployment_executor.go:452] deploymentExecutor.handleSingleEvent(...): received register resource outputs
+I0602 22:49:46.983474   16692 step_executor.go:364] StepExecutor worker(-1): registered resource outputs urn:pulumi:dev::yaml_ex::pulumi:pulumi:Stack::yaml_ex-dev: old=#0, new=#0
+I0602 22:49:46.983474   16692 source_eval.go:1231] ResourceMonitor.RegisterResourceOutputs operation finished: urn=urn:pulumi:dev::yaml_ex::pulumi:pulumi:Stack::yaml_ex-dev, #outs=0
+I0602 22:49:46.983474   16692 eventsink.go:78] eventSink::Infoerr(<{%reset%}>[31mError[0m: error resolving type of resource webapp: internal error loading package "azwebex": no resource plugin 'pulumi-resource-azwebex' found in the workspace or on your $PATH, install the plugin using `pulumi plugin install resource azwebex`
+<{%reset%}>)
+I0602 22:49:46.984011   16692 eventsink.go:78] eventSink::Infoerr(<{%reset%}>  on Pulumi.yaml line 8:
+<{%reset%}>)
+I0602 22:49:46.984032   16692 eventsink.go:78] eventSink::Infoerr(<{%reset%}>   8:     type: [1;4mazwebex:index:WebApp[0m
+<{%reset%}>)
+I0602 22:49:46.984032   16692 eventsink.go:78] eventSink::Infoerr(<{%reset%}>error resolving type of resource webapp: internal error loading package "azwebex": no resource plugin 'pulumi-resource-azwebex' found in the workspace or on your $PATH, install the plugin using `pulumi plugin install resource azwebex`
+<{%reset%}>)
+I0602 22:49:46.984032   16692 langruntime_plugin.go:200] langhost[yaml].RunPlan(pwd=C:\pulumidev\azwebex\yaml_ex,program=.,...,dryrun=true) success: progerr=failed to evaluate template
+I0602 22:49:46.999941   16692 source_eval.go:187] EvalSourceIterator ended with an error: an unhandled error occurred: failed to evaluate template
+I0602 22:49:46.999941   16692 deployment_executor.go:259] deploymentExecutor.Execute(...): incoming event (nil? true, Error: an unhandled error occurred: failed to evaluate template)
+I0602 22:49:46.999941   16692 eventsink.go:86] eventSink::Error(<{%reset%}>an unhandled error occurred: failed to evaluate template<{%reset%}>)
+I0602 22:49:46.999941   16692 step_executor.go:364] StepExecutor worker(-1): StepExecutor.waitForCompletion(): waiting for worker threads to exit
+I0602 22:49:46.999941   16692 step_executor.go:364] StepExecutor worker(-2): worker exiting due to cancellation
+I0602 22:49:46.999941   16692 step_executor.go:364] StepExecutor worker(-1): StepExecutor.waitForCompletion(): worker threads all exited
+I0602 22:49:46.999941   16692 deployment_executor.go:303] deploymentExecutor.Execute(...): step executor has completed
+I0602 22:49:46.999941   16692 deployment_executor.go:161] deploymentExecutor.Execute(...): exiting provider canceller
+I0602 22:49:46.999941   16692 ignore.go:44] Explicitly ignoring and discarding error: rpc error: code = Canceled desc = grpc: the client connection is closing
+I0602 22:49:47.013147   16692 host.go:417] Error closing 'yaml' language plugin during shutdown; ignoring: 1 error occurred:
+	* TerminateProcess: Access is denied.
+
+I0602 22:49:47.013724   16692 update.go:195] *** Update(preview=true) complete ***
