@@ -2,6 +2,51 @@
     "name": "azwebex",
     "version": "v1.0.0",
     "types": {
+        "azwebex:index:PublicAccess":{
+            "type": "string",
+            "description": "Duplicates azure-native:storage:PublicAccess",
+            "enum": [
+                {
+                    "value": "Container"
+                },
+                {
+                    "value": "Blob"
+                },
+                {
+                    "value": "None"
+                }
+            ]
+        },
+        "azwebex:index:SkuName":{
+            "type": "string",
+            "description": "Duplicates azure-native:storage:SkuName",
+            "enum": [
+                {
+                    "value": "Standard_LRS"
+                },
+                {
+                    "value": "Standard_GRS"
+                },
+                {
+                    "value": "Standard_RAGRS"
+                },
+                {
+                    "value": "Standard_ZRS"
+                },
+                {
+                    "value": "Premium_LRS"
+                },
+                {
+                    "value": "Premium_ZRS"
+                },
+                {
+                    "value": "Standard_GZRS"
+                },
+                {
+                    "value": "Standard_RAGZRS"
+                }
+            ]
+        }
 
     },
     "resources": {
@@ -24,18 +69,16 @@
                     "default": "wwwroot"
                 },
                 "containerPublicAccess": {
-                    "$ref": "/azure-native/v1.64.1/schema.json#/types/azure-native:storage:PublicAccess",
+                    "$ref": "#/types/azwebex:index:PublicAccess",
                     "description": "The public access level of the BlobContainer containg the website data."
                 },
                 "storageSkuName":{
-                    "type": "string", 
-                    "description": "The name of the SKU of the storage account created, if storageAccount is not provided",
-                    "_comment": "$ref\": \"/azure-native/v1.64.1/schema.json#/types/azure-native:storage:SkuName"
+                    "$ref": "#/types/azwebex:index:SkuName",
+                    "description": "The name of the SKU of the storage account created, if storageAccount is not provided"
                 },
                 "storageAccount":{
-                    "type": "string",
-                    "description": "The storage account to use. One will be created if not provided.",
-                    "_comment": "$ref\": \"/azure-native/v1.64.1/schema.json#/resources/azure-native:storage:StorageAccount"
+                    "$ref": "/azure-native/v1.64.1/schema.json#/resources/azure-native:storage:StorageAccount",
+                    "description": "The storage account to use. One will be created if not provided."
                 },
                 "resourceGroup": {
                     "$ref": "/azure-native/v1.64.1/schema.json#/resources/azure-native:resources:ResourceGroup",

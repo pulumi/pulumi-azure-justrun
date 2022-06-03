@@ -59,7 +59,7 @@ namespace Pulumi.Azwebex
         /// The public access level of the BlobContainer containg the website data.
         /// </summary>
         [Input("containerPublicAccess")]
-        public Input<Pulumi.AzureNative.Storage.PublicAccess>? ContainerPublicAccess { get; set; }
+        public Input<Pulumi.Azwebex.PublicAccess>? ContainerPublicAccess { get; set; }
 
         /// <summary>
         /// The relative file path to the folder containing web files.
@@ -83,13 +83,13 @@ namespace Pulumi.Azwebex
         /// The storage account to use. One will be created if not provided.
         /// </summary>
         [Input("storageAccount")]
-        public Input<string>? StorageAccount { get; set; }
+        public Input<Pulumi.AzureNative.Storage.StorageAccount>? StorageAccount { get; set; }
 
         /// <summary>
         /// The name of the SKU of the storage account created, if storageAccount is not provided
         /// </summary>
         [Input("storageSkuName")]
-        public Input<string>? StorageSkuName { get; set; }
+        public Input<Pulumi.Azwebex.SkuName>? StorageSkuName { get; set; }
 
         public WebappArgs()
         {

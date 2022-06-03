@@ -8,8 +8,8 @@ import (
 	"reflect"
 
 	resources "github.com/pulumi/pulumi-azure-native/sdk/go/azure/resources"
+	storage "github.com/pulumi/pulumi-azure-native/sdk/go/azure/storage"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"storage"
 )
 
 type Webapp struct {
@@ -48,7 +48,7 @@ type webappArgs struct {
 	// The tier of the compute instance running the server. Also see appSkuName
 	AppSkuTier *string `pulumi:"appSkuTier"`
 	// The public access level of the BlobContainer containg the website data.
-	ContainerPublicAccess *storage.PublicAccess `pulumi:"containerPublicAccess"`
+	ContainerPublicAccess *PublicAccess `pulumi:"containerPublicAccess"`
 	// The relative file path to the folder containing web files.
 	FilePath *string `pulumi:"filePath"`
 	// The name prefix given to child resources of this component. Should not contain dashes.
@@ -56,9 +56,9 @@ type webappArgs struct {
 	// The resource group to use. One will be created if not provided.
 	ResourceGroup *resources.ResourceGroup `pulumi:"resourceGroup"`
 	// The storage account to use. One will be created if not provided.
-	StorageAccount *string `pulumi:"storageAccount"`
+	StorageAccount *storage.StorageAccount `pulumi:"storageAccount"`
 	// The name of the SKU of the storage account created, if storageAccount is not provided
-	StorageSkuName *string `pulumi:"storageSkuName"`
+	StorageSkuName *SkuName `pulumi:"storageSkuName"`
 }
 
 // The set of arguments for constructing a Webapp resource.
@@ -68,7 +68,7 @@ type WebappArgs struct {
 	// The tier of the compute instance running the server. Also see appSkuName
 	AppSkuTier pulumi.StringPtrInput
 	// The public access level of the BlobContainer containg the website data.
-	ContainerPublicAccess storage.PublicAccessPtrInput
+	ContainerPublicAccess PublicAccessPtrInput
 	// The relative file path to the folder containing web files.
 	FilePath pulumi.StringPtrInput
 	// The name prefix given to child resources of this component. Should not contain dashes.
@@ -76,9 +76,9 @@ type WebappArgs struct {
 	// The resource group to use. One will be created if not provided.
 	ResourceGroup resources.ResourceGroupInput
 	// The storage account to use. One will be created if not provided.
-	StorageAccount pulumi.StringPtrInput
+	StorageAccount storage.StorageAccountInput
 	// The name of the SKU of the storage account created, if storageAccount is not provided
-	StorageSkuName pulumi.StringPtrInput
+	StorageSkuName SkuNamePtrInput
 }
 
 func (WebappArgs) ElementType() reflect.Type {

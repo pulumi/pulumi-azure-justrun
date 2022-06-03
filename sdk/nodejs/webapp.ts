@@ -2,7 +2,7 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "./types";
+import { input as inputs, output as outputs, enums } from "./types";
 import * as utilities from "./utilities";
 
 import * as pulumiAzureNative from "@pulumi/azure-native";
@@ -67,7 +67,7 @@ export interface WebappArgs {
     /**
      * The public access level of the BlobContainer containg the website data.
      */
-    containerPublicAccess?: pulumi.Input<enums.storage.PublicAccess>;
+    containerPublicAccess?: pulumi.Input<enums.PublicAccess>;
     /**
      * The relative file path to the folder containing web files.
      */
@@ -83,9 +83,9 @@ export interface WebappArgs {
     /**
      * The storage account to use. One will be created if not provided.
      */
-    storageAccount?: pulumi.Input<string>;
+    storageAccount?: pulumi.Input<pulumiAzureNative.storage.StorageAccount>;
     /**
      * The name of the SKU of the storage account created, if storageAccount is not provided
      */
-    storageSkuName?: pulumi.Input<string>;
+    storageSkuName?: pulumi.Input<enums.SkuName>;
 }
