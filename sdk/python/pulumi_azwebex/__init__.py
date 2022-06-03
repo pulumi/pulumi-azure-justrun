@@ -6,7 +6,7 @@ from . import _utilities
 import typing
 # Export this package's modules as members:
 from .provider import *
-from .static_website import *
+from .webapp import *
 _utilities.register(
     resource_modules="""
 [
@@ -15,7 +15,7 @@ _utilities.register(
   "mod": "index",
   "fqn": "pulumi_azwebex",
   "classes": {
-   "azwebex:index:staticWebsite": "StaticWebsite"
+   "azwebex:index:webapp": "Webapp"
   }
  }
 ]

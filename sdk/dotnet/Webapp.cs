@@ -9,22 +9,22 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Azwebex
 {
-    [AzwebexResourceType("azwebex:index:staticWebsite")]
-    public partial class StaticWebsite : Pulumi.ComponentResource
+    [AzwebexResourceType("azwebex:index:webapp")]
+    public partial class Webapp : Pulumi.ComponentResource
     {
         [Output("url")]
         public Output<string?> Url { get; private set; } = null!;
 
 
         /// <summary>
-        /// Create a StaticWebsite resource with the given unique name, arguments, and options.
+        /// Create a Webapp resource with the given unique name, arguments, and options.
         /// </summary>
         ///
         /// <param name="name">The unique name of the resource</param>
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
-        public StaticWebsite(string name, StaticWebsiteArgs? args = null, ComponentResourceOptions? options = null)
-            : base("azwebex:index:staticWebsite", name, args ?? new StaticWebsiteArgs(), MakeResourceOptions(options, ""), remote: true)
+        public Webapp(string name, WebappArgs? args = null, ComponentResourceOptions? options = null)
+            : base("azwebex:index:webapp", name, args ?? new WebappArgs(), MakeResourceOptions(options, ""), remote: true)
         {
         }
 
@@ -41,7 +41,7 @@ namespace Pulumi.Azwebex
         }
     }
 
-    public sealed class StaticWebsiteArgs : Pulumi.ResourceArgs
+    public sealed class WebappArgs : Pulumi.ResourceArgs
     {
         /// <summary>
         /// The name of the compute instance running the server. Also see appSkuTier
@@ -83,15 +83,15 @@ namespace Pulumi.Azwebex
         /// The storage account to use. One will be created if not provided.
         /// </summary>
         [Input("storageAccount")]
-        public Input<Pulumi.AzureNative.Storage.StorageAccount>? StorageAccount { get; set; }
+        public Input<string>? StorageAccount { get; set; }
 
         /// <summary>
         /// The name of the SKU of the storage account created, if storageAccount is not provided
         /// </summary>
         [Input("storageSkuName")]
-        public Input<Pulumi.AzureNative.Storage.SkuName>? StorageSkuName { get; set; }
+        public Input<string>? StorageSkuName { get; set; }
 
-        public StaticWebsiteArgs()
+        public WebappArgs()
         {
             AppSkuName = "B1";
             AppSkuTier = "Basic";

@@ -9,10 +9,10 @@ from typing import Any, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
 import pulumi_azure_native
 
-__all__ = ['StaticWebsiteArgs', 'StaticWebsite']
+__all__ = ['WebappArgs', 'Webapp']
 
 @pulumi.input_type
-class StaticWebsiteArgs:
+class WebappArgs:
     def __init__(__self__, *,
                  app_sku_name: Optional[pulumi.Input[str]] = None,
                  app_sku_tier: Optional[pulumi.Input[str]] = None,
@@ -20,18 +20,18 @@ class StaticWebsiteArgs:
                  file_path: Optional[pulumi.Input[str]] = None,
                  name_prefix: Optional[pulumi.Input[str]] = None,
                  resource_group: Optional[pulumi.Input['pulumi_azure_native.resources.ResourceGroup']] = None,
-                 storage_account: Optional[pulumi.Input['pulumi_azure_native.storage.StorageAccount']] = None,
-                 storage_sku_name: Optional[pulumi.Input['_storage.SkuName']] = None):
+                 storage_account: Optional[pulumi.Input[str]] = None,
+                 storage_sku_name: Optional[pulumi.Input[str]] = None):
         """
-        The set of arguments for constructing a StaticWebsite resource.
+        The set of arguments for constructing a Webapp resource.
         :param pulumi.Input[str] app_sku_name: The name of the compute instance running the server. Also see appSkuTier
         :param pulumi.Input[str] app_sku_tier: The tier of the compute instance running the server. Also see appSkuName
         :param pulumi.Input['_storage.PublicAccess'] container_public_access: The public access level of the BlobContainer containg the website data.
         :param pulumi.Input[str] file_path: The relative file path to the folder containing web files.
         :param pulumi.Input[str] name_prefix: The name prefix given to child resources of this component. Should not contain dashes.
         :param pulumi.Input['pulumi_azure_native.resources.ResourceGroup'] resource_group: The resource group to use. One will be created if not provided.
-        :param pulumi.Input['pulumi_azure_native.storage.StorageAccount'] storage_account: The storage account to use. One will be created if not provided.
-        :param pulumi.Input['_storage.SkuName'] storage_sku_name: The name of the SKU of the storage account created, if storageAccount is not provided
+        :param pulumi.Input[str] storage_account: The storage account to use. One will be created if not provided.
+        :param pulumi.Input[str] storage_sku_name: The name of the SKU of the storage account created, if storageAccount is not provided
         """
         if app_sku_name is None:
             app_sku_name = 'B1'
@@ -130,30 +130,30 @@ class StaticWebsiteArgs:
 
     @property
     @pulumi.getter(name="storageAccount")
-    def storage_account(self) -> Optional[pulumi.Input['pulumi_azure_native.storage.StorageAccount']]:
+    def storage_account(self) -> Optional[pulumi.Input[str]]:
         """
         The storage account to use. One will be created if not provided.
         """
         return pulumi.get(self, "storage_account")
 
     @storage_account.setter
-    def storage_account(self, value: Optional[pulumi.Input['pulumi_azure_native.storage.StorageAccount']]):
+    def storage_account(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "storage_account", value)
 
     @property
     @pulumi.getter(name="storageSkuName")
-    def storage_sku_name(self) -> Optional[pulumi.Input['_storage.SkuName']]:
+    def storage_sku_name(self) -> Optional[pulumi.Input[str]]:
         """
         The name of the SKU of the storage account created, if storageAccount is not provided
         """
         return pulumi.get(self, "storage_sku_name")
 
     @storage_sku_name.setter
-    def storage_sku_name(self, value: Optional[pulumi.Input['_storage.SkuName']]):
+    def storage_sku_name(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "storage_sku_name", value)
 
 
-class StaticWebsite(pulumi.ComponentResource):
+class Webapp(pulumi.ComponentResource):
     @overload
     def __init__(__self__,
                  resource_name: str,
@@ -164,11 +164,11 @@ class StaticWebsite(pulumi.ComponentResource):
                  file_path: Optional[pulumi.Input[str]] = None,
                  name_prefix: Optional[pulumi.Input[str]] = None,
                  resource_group: Optional[pulumi.Input['pulumi_azure_native.resources.ResourceGroup']] = None,
-                 storage_account: Optional[pulumi.Input['pulumi_azure_native.storage.StorageAccount']] = None,
-                 storage_sku_name: Optional[pulumi.Input['_storage.SkuName']] = None,
+                 storage_account: Optional[pulumi.Input[str]] = None,
+                 storage_sku_name: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Create a StaticWebsite resource with the given unique name, props, and options.
+        Create a Webapp resource with the given unique name, props, and options.
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] app_sku_name: The name of the compute instance running the server. Also see appSkuTier
@@ -177,24 +177,24 @@ class StaticWebsite(pulumi.ComponentResource):
         :param pulumi.Input[str] file_path: The relative file path to the folder containing web files.
         :param pulumi.Input[str] name_prefix: The name prefix given to child resources of this component. Should not contain dashes.
         :param pulumi.Input['pulumi_azure_native.resources.ResourceGroup'] resource_group: The resource group to use. One will be created if not provided.
-        :param pulumi.Input['pulumi_azure_native.storage.StorageAccount'] storage_account: The storage account to use. One will be created if not provided.
-        :param pulumi.Input['_storage.SkuName'] storage_sku_name: The name of the SKU of the storage account created, if storageAccount is not provided
+        :param pulumi.Input[str] storage_account: The storage account to use. One will be created if not provided.
+        :param pulumi.Input[str] storage_sku_name: The name of the SKU of the storage account created, if storageAccount is not provided
         """
         ...
     @overload
     def __init__(__self__,
                  resource_name: str,
-                 args: Optional[StaticWebsiteArgs] = None,
+                 args: Optional[WebappArgs] = None,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Create a StaticWebsite resource with the given unique name, props, and options.
+        Create a Webapp resource with the given unique name, props, and options.
         :param str resource_name: The name of the resource.
-        :param StaticWebsiteArgs args: The arguments to use to populate this resource's properties.
+        :param WebappArgs args: The arguments to use to populate this resource's properties.
         :param pulumi.ResourceOptions opts: Options for the resource.
         """
         ...
     def __init__(__self__, resource_name: str, *args, **kwargs):
-        resource_args, opts = _utilities.get_resource_args_opts(StaticWebsiteArgs, pulumi.ResourceOptions, *args, **kwargs)
+        resource_args, opts = _utilities.get_resource_args_opts(WebappArgs, pulumi.ResourceOptions, *args, **kwargs)
         if resource_args is not None:
             __self__._internal_init(resource_name, opts, **resource_args.__dict__)
         else:
@@ -209,8 +209,8 @@ class StaticWebsite(pulumi.ComponentResource):
                  file_path: Optional[pulumi.Input[str]] = None,
                  name_prefix: Optional[pulumi.Input[str]] = None,
                  resource_group: Optional[pulumi.Input['pulumi_azure_native.resources.ResourceGroup']] = None,
-                 storage_account: Optional[pulumi.Input['pulumi_azure_native.storage.StorageAccount']] = None,
-                 storage_sku_name: Optional[pulumi.Input['_storage.SkuName']] = None,
+                 storage_account: Optional[pulumi.Input[str]] = None,
+                 storage_sku_name: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         if opts is None:
             opts = pulumi.ResourceOptions()
@@ -223,7 +223,7 @@ class StaticWebsite(pulumi.ComponentResource):
         else:
             if __props__ is not None:
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
-            __props__ = StaticWebsiteArgs.__new__(StaticWebsiteArgs)
+            __props__ = WebappArgs.__new__(WebappArgs)
 
             if app_sku_name is None:
                 app_sku_name = 'B1'
@@ -240,8 +240,8 @@ class StaticWebsite(pulumi.ComponentResource):
             __props__.__dict__["storage_account"] = storage_account
             __props__.__dict__["storage_sku_name"] = storage_sku_name
             __props__.__dict__["url"] = None
-        super(StaticWebsite, __self__).__init__(
-            'azwebex:index:staticWebsite',
+        super(Webapp, __self__).__init__(
+            'azwebex:index:webapp',
             resource_name,
             __props__,
             opts,

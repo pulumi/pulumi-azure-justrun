@@ -1,3 +1,0 @@
-name: demo
-runtime: nodejs
-description: A minimal JavaScript Pulumi program with the native Azure provider

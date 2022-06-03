@@ -5,7 +5,7 @@
 
     },
     "resources": {
-        "azwebex:index:staticWebsite":{
+        "azwebex:index:webapp":{
             "isComponent": true,
             "inputProperties": {
                 "appSkuName": {
@@ -28,12 +28,14 @@
                     "description": "The public access level of the BlobContainer containg the website data."
                 },
                 "storageSkuName":{
-                    "$ref": "/azure-native/v1.64.1/schema.json#/types/azure-native:storage:SkuName",
-                    "description": "The name of the SKU of the storage account created, if storageAccount is not provided"
+                    "type": "string", 
+                    "description": "The name of the SKU of the storage account created, if storageAccount is not provided",
+                    "_comment": "$ref\": \"/azure-native/v1.64.1/schema.json#/types/azure-native:storage:SkuName"
                 },
                 "storageAccount":{
-                    "$ref": "/azure-native/v1.64.1/schema.json#/resources/azure-native:storage:StorageAccount",
-                    "description": "The storage account to use. One will be created if not provided."
+                    "type": "string",
+                    "description": "The storage account to use. One will be created if not provided.",
+                    "_comment": "$ref\": \"/azure-native/v1.64.1/schema.json#/resources/azure-native:storage:StorageAccount"
                 },
                 "resourceGroup": {
                     "$ref": "/azure-native/v1.64.1/schema.json#/resources/azure-native:resources:ResourceGroup",

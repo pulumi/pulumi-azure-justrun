@@ -8,22 +8,21 @@ import (
 	"reflect"
 
 	resources "github.com/pulumi/pulumi-azure-native/sdk/go/azure/resources"
-	storage "github.com/pulumi/pulumi-azure-native/sdk/go/azure/storage"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 	"storage"
 )
 
-type StaticWebsite struct {
+type Webapp struct {
 	pulumi.ResourceState
 
 	Url pulumi.StringPtrOutput `pulumi:"url"`
 }
 
-// NewStaticWebsite registers a new resource with the given unique name, arguments, and options.
-func NewStaticWebsite(ctx *pulumi.Context,
-	name string, args *StaticWebsiteArgs, opts ...pulumi.ResourceOption) (*StaticWebsite, error) {
+// NewWebapp registers a new resource with the given unique name, arguments, and options.
+func NewWebapp(ctx *pulumi.Context,
+	name string, args *WebappArgs, opts ...pulumi.ResourceOption) (*Webapp, error) {
 	if args == nil {
-		args = &StaticWebsiteArgs{}
+		args = &WebappArgs{}
 	}
 
 	if isZero(args.AppSkuName) {
@@ -35,15 +34,15 @@ func NewStaticWebsite(ctx *pulumi.Context,
 	if isZero(args.FilePath) {
 		args.FilePath = pulumi.StringPtr("wwwroot")
 	}
-	var resource StaticWebsite
-	err := ctx.RegisterRemoteComponentResource("azwebex:index:staticWebsite", name, args, &resource, opts...)
+	var resource Webapp
+	err := ctx.RegisterRemoteComponentResource("azwebex:index:webapp", name, args, &resource, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return &resource, nil
 }
 
-type staticWebsiteArgs struct {
+type webappArgs struct {
 	// The name of the compute instance running the server. Also see appSkuTier
 	AppSkuName *string `pulumi:"appSkuName"`
 	// The tier of the compute instance running the server. Also see appSkuName
@@ -57,13 +56,13 @@ type staticWebsiteArgs struct {
 	// The resource group to use. One will be created if not provided.
 	ResourceGroup *resources.ResourceGroup `pulumi:"resourceGroup"`
 	// The storage account to use. One will be created if not provided.
-	StorageAccount *storage.StorageAccount `pulumi:"storageAccount"`
+	StorageAccount *string `pulumi:"storageAccount"`
 	// The name of the SKU of the storage account created, if storageAccount is not provided
-	StorageSkuName *storage.SkuName `pulumi:"storageSkuName"`
+	StorageSkuName *string `pulumi:"storageSkuName"`
 }
 
-// The set of arguments for constructing a StaticWebsite resource.
-type StaticWebsiteArgs struct {
+// The set of arguments for constructing a Webapp resource.
+type WebappArgs struct {
 	// The name of the compute instance running the server. Also see appSkuTier
 	AppSkuName pulumi.StringPtrInput
 	// The tier of the compute instance running the server. Also see appSkuName
@@ -77,53 +76,53 @@ type StaticWebsiteArgs struct {
 	// The resource group to use. One will be created if not provided.
 	ResourceGroup resources.ResourceGroupInput
 	// The storage account to use. One will be created if not provided.
-	StorageAccount storage.StorageAccountInput
+	StorageAccount pulumi.StringPtrInput
 	// The name of the SKU of the storage account created, if storageAccount is not provided
-	StorageSkuName storage.SkuNamePtrInput
+	StorageSkuName pulumi.StringPtrInput
 }
 
-func (StaticWebsiteArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*staticWebsiteArgs)(nil)).Elem()
+func (WebappArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*webappArgs)(nil)).Elem()
 }
 
-type StaticWebsiteInput interface {
+type WebappInput interface {
 	pulumi.Input
 
-	ToStaticWebsiteOutput() StaticWebsiteOutput
-	ToStaticWebsiteOutputWithContext(ctx context.Context) StaticWebsiteOutput
+	ToWebappOutput() WebappOutput
+	ToWebappOutputWithContext(ctx context.Context) WebappOutput
 }
 
-func (*StaticWebsite) ElementType() reflect.Type {
-	return reflect.TypeOf((**StaticWebsite)(nil)).Elem()
+func (*Webapp) ElementType() reflect.Type {
+	return reflect.TypeOf((**Webapp)(nil)).Elem()
 }
 
-func (i *StaticWebsite) ToStaticWebsiteOutput() StaticWebsiteOutput {
-	return i.ToStaticWebsiteOutputWithContext(context.Background())
+func (i *Webapp) ToWebappOutput() WebappOutput {
+	return i.ToWebappOutputWithContext(context.Background())
 }
 
-func (i *StaticWebsite) ToStaticWebsiteOutputWithContext(ctx context.Context) StaticWebsiteOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(StaticWebsiteOutput)
+func (i *Webapp) ToWebappOutputWithContext(ctx context.Context) WebappOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WebappOutput)
 }
 
-type StaticWebsiteOutput struct{ *pulumi.OutputState }
+type WebappOutput struct{ *pulumi.OutputState }
 
-func (StaticWebsiteOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**StaticWebsite)(nil)).Elem()
+func (WebappOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**Webapp)(nil)).Elem()
 }
 
-func (o StaticWebsiteOutput) ToStaticWebsiteOutput() StaticWebsiteOutput {
+func (o WebappOutput) ToWebappOutput() WebappOutput {
 	return o
 }
 
-func (o StaticWebsiteOutput) ToStaticWebsiteOutputWithContext(ctx context.Context) StaticWebsiteOutput {
+func (o WebappOutput) ToWebappOutputWithContext(ctx context.Context) WebappOutput {
 	return o
 }
 
-func (o StaticWebsiteOutput) Url() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *StaticWebsite) pulumi.StringPtrOutput { return v.Url }).(pulumi.StringPtrOutput)
+func (o WebappOutput) Url() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Webapp) pulumi.StringPtrOutput { return v.Url }).(pulumi.StringPtrOutput)
 }
 
 func init() {
-	pulumi.RegisterInputType(reflect.TypeOf((*StaticWebsiteInput)(nil)).Elem(), &StaticWebsite{})
-	pulumi.RegisterOutputType(StaticWebsiteOutput{})
+	pulumi.RegisterInputType(reflect.TypeOf((*WebappInput)(nil)).Elem(), &Webapp{})
+	pulumi.RegisterOutputType(WebappOutput{})
 }

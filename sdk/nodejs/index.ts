@@ -6,17 +6,17 @@ import * as utilities from "./utilities";
 
 // Export members:
 export * from "./provider";
-export * from "./staticWebsite";
+export * from "./webapp";
 
 // Import resources to register:
-import { StaticWebsite } from "./staticWebsite";
+import { Webapp } from "./webapp";
 
 const _module = {
     version: utilities.getVersion(),
     construct: (name: string, type: string, urn: string): pulumi.Resource => {
         switch (type) {
-            case "azwebex:index:staticWebsite":
-                return new StaticWebsite(name, <any>undefined, { urn })
+            case "azwebex:index:webapp":
+                return new Webapp(name, <any>undefined, { urn })
             default:
                 throw new Error(`unknown resource type ${type}`);
         }

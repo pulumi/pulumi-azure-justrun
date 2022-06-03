@@ -7,31 +7,31 @@ import * as utilities from "./utilities";
 
 import * as pulumiAzureNative from "@pulumi/azure-native";
 
-export class StaticWebsite extends pulumi.ComponentResource {
+export class Webapp extends pulumi.ComponentResource {
     /** @internal */
-    public static readonly __pulumiType = 'azwebex:index:staticWebsite';
+    public static readonly __pulumiType = 'azwebex:index:webapp';
 
     /**
-     * Returns true if the given object is an instance of StaticWebsite.  This is designed to work even
+     * Returns true if the given object is an instance of Webapp.  This is designed to work even
      * when multiple copies of the Pulumi SDK have been loaded into the same process.
      */
-    public static isInstance(obj: any): obj is StaticWebsite {
+    public static isInstance(obj: any): obj is Webapp {
         if (obj === undefined || obj === null) {
             return false;
         }
-        return obj['__pulumiType'] === StaticWebsite.__pulumiType;
+        return obj['__pulumiType'] === Webapp.__pulumiType;
     }
 
     public /*out*/ readonly url!: pulumi.Output<string | undefined>;
 
     /**
-     * Create a StaticWebsite resource with the given unique name, arguments, and options.
+     * Create a Webapp resource with the given unique name, arguments, and options.
      *
      * @param name The _unique_ name of the resource.
      * @param args The arguments to use to populate this resource's properties.
      * @param opts A bag of options that control this resource's behavior.
      */
-    constructor(name: string, args?: StaticWebsiteArgs, opts?: pulumi.ComponentResourceOptions) {
+    constructor(name: string, args?: WebappArgs, opts?: pulumi.ComponentResourceOptions) {
         let resourceInputs: pulumi.Inputs = {};
         opts = opts || {};
         if (!opts.id) {
@@ -48,14 +48,14 @@ export class StaticWebsite extends pulumi.ComponentResource {
             resourceInputs["url"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
-        super(StaticWebsite.__pulumiType, name, resourceInputs, opts, true /*remote*/);
+        super(Webapp.__pulumiType, name, resourceInputs, opts, true /*remote*/);
     }
 }
 
 /**
- * The set of arguments for constructing a StaticWebsite resource.
+ * The set of arguments for constructing a Webapp resource.
  */
-export interface StaticWebsiteArgs {
+export interface WebappArgs {
     /**
      * The name of the compute instance running the server. Also see appSkuTier
      */
@@ -83,9 +83,9 @@ export interface StaticWebsiteArgs {
     /**
      * The storage account to use. One will be created if not provided.
      */
-    storageAccount?: pulumi.Input<pulumiAzureNative.storage.StorageAccount>;
+    storageAccount?: pulumi.Input<string>;
     /**
      * The name of the SKU of the storage account created, if storageAccount is not provided
      */
-    storageSkuName?: pulumi.Input<enums.storage.SkuName>;
+    storageSkuName?: pulumi.Input<string>;
 }
