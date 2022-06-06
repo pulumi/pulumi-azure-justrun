@@ -1,6 +1,6 @@
 VERSION         := 0.0.1
 
-PACK            := azwebex
+PACK            := azure-justrun
 PROJECT         := github.com/pulumi/pulumi-${PACK}
 
 PROVIDER        := pulumi-resource-${PACK}

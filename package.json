@@ -1,5 +1,5 @@
 {
-  "name": "@pulumi/azwebex",
+  "name": "@pulumi/azure-justrun",
   "version": "0.0.0",
   "devDependencies": {
     "@types/node": "^17.0.38",
