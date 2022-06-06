@@ -58,6 +58,8 @@ gen_go_sdk::
 	rm -rf sdk/go
 	cd provider/cmd/${CODEGEN} && go run . go ../../../sdk/go ${SCHEMA_PATH}
 
+## Empty build target for Go
+build_go_sdk::
 
 # .NET SDK
 
