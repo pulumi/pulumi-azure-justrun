@@ -1,5 +1,5 @@
 {
-    "name": "",
+    "name": "azure-justrun",
     "version": "v1.0.0",
     "bin": "bin/index.js",
     "dependencies": {
