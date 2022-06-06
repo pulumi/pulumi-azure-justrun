@@ -2,7 +2,7 @@
     "name": "azure-justrun",
     "version": "v1.0.0",
     "types": {
-        ":index:PublicAccess":{
+        "azure-justrun:index:PublicAccess":{
             "type": "string",
             "description": "Duplicates azure-native:storage:PublicAccess",
             "enum": [
@@ -17,7 +17,7 @@
                 }
             ]
         },
-        ":index:SkuName":{
+        "azure-justrun:index:SkuName":{
             "type": "string",
             "description": "Duplicates azure-native:storage:SkuName",
             "enum": [
@@ -50,7 +50,7 @@
 
     },
     "resources": {
-        ":index:webapp":{
+        "azure-justrun:index:webapp":{
             "isComponent": true,
             "inputProperties": {
                 "appSkuName": {

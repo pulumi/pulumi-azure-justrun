@@ -18,21 +18,21 @@ const _module = {
     version: utilities.getVersion(),
     construct: (name: string, type: string, urn: string): pulumi.Resource => {
         switch (type) {
-            case "azwebex:index:webapp":
+            case "azure-justrun:index:webapp":
                 return new Webapp(name, <any>undefined, { urn })
             default:
                 throw new Error(`unknown resource type ${type}`);
         }
     },
 };
-pulumi.runtime.registerResourceModule("azwebex", "index", _module)
+pulumi.runtime.registerResourceModule("azure-justrun", "index", _module)
 
 import { Provider } from "./provider";
 
-pulumi.runtime.registerResourcePackage("azwebex", {
+pulumi.runtime.registerResourcePackage("azure-justrun", {
     version: utilities.getVersion(),
     constructProvider: (name: string, type: string, urn: string): pulumi.ProviderResource => {
-        if (type !== "pulumi:providers:azwebex") {
+        if (type !== "pulumi:providers:azure-justrun") {
             throw new Error(`unknown provider type ${type}`);
         }
         return new Provider(name, <any>undefined, { urn });

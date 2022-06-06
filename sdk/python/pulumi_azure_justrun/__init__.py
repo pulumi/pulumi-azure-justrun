@@ -12,11 +12,11 @@ _utilities.register(
     resource_modules="""
 [
  {
-  "pkg": "azwebex",
+  "pkg": "azure-justrun",
   "mod": "index",
-  "fqn": "pulumi_azwebex",
+  "fqn": "pulumi_azure_justrun",
   "classes": {
-   "azwebex:index:webapp": "Webapp"
+   "azure-justrun:index:webapp": "Webapp"
   }
  }
 ]
@@ -24,9 +24,9 @@ _utilities.register(
     resource_packages="""
 [
  {
-  "pkg": "azwebex",
-  "token": "pulumi:providers:azwebex",
-  "fqn": "pulumi_azwebex",
+  "pkg": "azure-justrun",
+  "token": "pulumi:providers:azure-justrun",
+  "fqn": "pulumi_azure_justrun",
   "class": "Provider"
  }
 ]

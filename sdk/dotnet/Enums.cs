@@ -5,7 +5,7 @@ using System;
 using System.ComponentModel;
 using Pulumi;
 
-namespace Pulumi.Azwebex
+namespace Pulumi.AzureJustrun
 {
     /// <summary>
     /// Duplicates azure-native:storage:PublicAccess

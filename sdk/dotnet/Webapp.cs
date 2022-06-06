@@ -7,9 +7,9 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
-namespace Pulumi.Azwebex
+namespace Pulumi.AzureJustrun
 {
-    [AzwebexResourceType("azwebex:index:webapp")]
+    [AzureJustrunResourceType("azure-justrun:index:webapp")]
     public partial class Webapp : Pulumi.ComponentResource
     {
         [Output("url")]
@@ -24,7 +24,7 @@ namespace Pulumi.Azwebex
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
         public Webapp(string name, WebappArgs? args = null, ComponentResourceOptions? options = null)
-            : base("azwebex:index:webapp", name, args ?? new WebappArgs(), MakeResourceOptions(options, ""), remote: true)
+            : base("azure-justrun:index:webapp", name, args ?? new WebappArgs(), MakeResourceOptions(options, ""), remote: true)
         {
         }
 
@@ -59,7 +59,7 @@ namespace Pulumi.Azwebex
         /// The public access level of the BlobContainer containg the website data.
         /// </summary>
         [Input("containerPublicAccess")]
-        public Input<Pulumi.Azwebex.PublicAccess>? ContainerPublicAccess { get; set; }
+        public Input<Pulumi..Inputs.PublicAccess>? ContainerPublicAccess { get; set; }
 
         /// <summary>
         /// The relative file path to the folder containing web files.
@@ -89,7 +89,7 @@ namespace Pulumi.Azwebex
         /// The name of the SKU of the storage account created, if storageAccount is not provided
         /// </summary>
         [Input("storageSkuName")]
-        public Input<Pulumi.Azwebex.SkuName>? StorageSkuName { get; set; }
+        public Input<Pulumi..Inputs.SkuName>? StorageSkuName { get; set; }
 
         public WebappArgs()
         {
