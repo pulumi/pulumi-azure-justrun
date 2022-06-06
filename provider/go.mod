@@ -1,4 +1,4 @@
-module github.com/pulumi/pulumi-azwebex
+module github.com/pulumi/pulumi-
 
 go 1.17
 

@@ -10,8 +10,7 @@ export class WebApp extends pulumi.ComponentResource {
     public readonly url!: pulumi.Output<string>;
 
     constructor(name: string, args: WebAppArgs, opts: pulumi.ResourceOptions = {}) {
-        super("azwebex:index:webapp", name, {}, opts); // Register this component with name pulumi:examples:S3Folder
-        WebApp
+        super(":index:webapp", name, {}, opts); // Register this component with name pulumi:examples:S3Folder
         const namePrefix = args.namePrefix ?? ""
 
         const resourceGroup = args.resourceGroup ?? new resources.ResourceGroup(`${namePrefix}rg`, {}, {parent: this});

@@ -5,7 +5,7 @@ description: A minimal Azure Native Pulumi YAML program
 resources:
   # Create an Azure Resource Group
   webapp:
-    type: azwebex:index:webapp
+    type: :index:webapp
     properties:
       filePath: ./www
 

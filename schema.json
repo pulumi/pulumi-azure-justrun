@@ -1,8 +1,8 @@
 {
-    "name": "azwebex",
+    "name": "azure-justrun",
     "version": "v1.0.0",
     "types": {
-        "azwebex:index:PublicAccess":{
+        ":index:PublicAccess":{
             "type": "string",
             "description": "Duplicates azure-native:storage:PublicAccess",
             "enum": [
@@ -17,7 +17,7 @@
                 }
             ]
         },
-        "azwebex:index:SkuName":{
+        ":index:SkuName":{
             "type": "string",
             "description": "Duplicates azure-native:storage:SkuName",
             "enum": [
@@ -50,7 +50,7 @@
 
     },
     "resources": {
-        "azwebex:index:webapp":{
+        ":index:webapp":{
             "isComponent": true,
             "inputProperties": {
                 "appSkuName": {
@@ -69,11 +69,11 @@
                     "default": "wwwroot"
                 },
                 "containerPublicAccess": {
-                    "$ref": "#/types/azwebex:index:PublicAccess",
+                    "$ref": "#/types/:index:PublicAccess",
                     "description": "The public access level of the BlobContainer containg the website data."
                 },
                 "storageSkuName":{
-                    "$ref": "#/types/azwebex:index:SkuName",
+                    "$ref": "#/types/:index:SkuName",
                     "description": "The name of the SKU of the storage account created, if storageAccount is not provided"
                 },
                 "storageAccount":{
