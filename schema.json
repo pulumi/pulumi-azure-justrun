@@ -1,6 +1,6 @@
 {
     "name": "azure-justrun",
-    "version": "v0.1.5",
+    "version": "v0.1.6",
     "types": {
         "azure-justrun:index:PublicAccess":{
             "type": "string",
