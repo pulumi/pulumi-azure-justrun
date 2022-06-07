@@ -1,4 +1,4 @@
-VERSION         := 0.0.0
+VERSION         := 0.1.11
 
 PACK            := azure-justrun
 PROJECT         := github.com/pulumi/pulumi-${PACK}
