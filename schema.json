@@ -1,6 +1,6 @@
 {
     "name": "azure-justrun",
-    "version": "v0.1.6",
+    "version": "v0.1.7",
     "types": {
         "azure-justrun:index:PublicAccess":{
             "type": "string",
@@ -100,7 +100,7 @@
         "csharp": {
             "packageReferences": {
                 "Pulumi": "3.*",
-                "AzureNative": "1.*"
+                "Pulumi.AzureNative": "1.*"
             },
             "respectSchemaVersion": true
         },
