@@ -91,8 +91,6 @@ jobs:
         with:
           node-version: ${{matrix.nodeversion}}
           registry-url: ${{env.NPM_REGISTRY_URL}}
-      - name: Setup Node pt2
-        run: npm i --save-dev @types/node
       - name: Setup DotNet
         uses: actions/setup-dotnet@v1
         with:
