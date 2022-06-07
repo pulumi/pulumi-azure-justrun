@@ -7,6 +7,7 @@ import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
+from ._enums import *
 import pulumi_azure_native
 
 __all__ = ['WebappArgs', 'Webapp']
@@ -16,22 +17,22 @@ class WebappArgs:
     def __init__(__self__, *,
                  app_sku_name: Optional[pulumi.Input[str]] = None,
                  app_sku_tier: Optional[pulumi.Input[str]] = None,
-                 container_public_access: Optional[Any] = None,
+                 container_public_access: Optional[pulumi.Input['PublicAccess']] = None,
                  file_path: Optional[pulumi.Input[str]] = None,
                  name_prefix: Optional[pulumi.Input[str]] = None,
                  resource_group: Optional[pulumi.Input['pulumi_azure_native.resources.ResourceGroup']] = None,
                  storage_account: Optional[pulumi.Input['pulumi_azure_native.storage.StorageAccount']] = None,
-                 storage_sku_name: Optional[Any] = None):
+                 storage_sku_name: Optional[pulumi.Input['SkuName']] = None):
         """
         The set of arguments for constructing a Webapp resource.
         :param pulumi.Input[str] app_sku_name: The name of the compute instance running the server. Also see appSkuTier
         :param pulumi.Input[str] app_sku_tier: The tier of the compute instance running the server. Also see appSkuName
-        :param Any container_public_access: The public access level of the BlobContainer containg the website data.
+        :param pulumi.Input['PublicAccess'] container_public_access: The public access level of the BlobContainer containg the website data.
         :param pulumi.Input[str] file_path: The relative file path to the folder containing web files.
         :param pulumi.Input[str] name_prefix: The name prefix given to child resources of this component. Should not contain dashes.
         :param pulumi.Input['pulumi_azure_native.resources.ResourceGroup'] resource_group: The resource group to use. One will be created if not provided.
         :param pulumi.Input['pulumi_azure_native.storage.StorageAccount'] storage_account: The storage account to use. One will be created if not provided.
-        :param Any storage_sku_name: The name of the SKU of the storage account created, if storageAccount is not provided
+        :param pulumi.Input['SkuName'] storage_sku_name: The name of the SKU of the storage account created, if storageAccount is not provided
         """
         if app_sku_name is None:
             app_sku_name = 'B1'
@@ -82,14 +83,14 @@ class WebappArgs:
 
     @property
     @pulumi.getter(name="containerPublicAccess")
-    def container_public_access(self) -> Optional[Any]:
+    def container_public_access(self) -> Optional[pulumi.Input['PublicAccess']]:
         """
         The public access level of the BlobContainer containg the website data.
         """
         return pulumi.get(self, "container_public_access")
 
     @container_public_access.setter
-    def container_public_access(self, value: Optional[Any]):
+    def container_public_access(self, value: Optional[pulumi.Input['PublicAccess']]):
         pulumi.set(self, "container_public_access", value)
 
     @property
@@ -142,14 +143,14 @@ class WebappArgs:
 
     @property
     @pulumi.getter(name="storageSkuName")
-    def storage_sku_name(self) -> Optional[Any]:
+    def storage_sku_name(self) -> Optional[pulumi.Input['SkuName']]:
         """
         The name of the SKU of the storage account created, if storageAccount is not provided
         """
         return pulumi.get(self, "storage_sku_name")
 
     @storage_sku_name.setter
-    def storage_sku_name(self, value: Optional[Any]):
+    def storage_sku_name(self, value: Optional[pulumi.Input['SkuName']]):
         pulumi.set(self, "storage_sku_name", value)
 
 
@@ -160,12 +161,12 @@ class Webapp(pulumi.ComponentResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  app_sku_name: Optional[pulumi.Input[str]] = None,
                  app_sku_tier: Optional[pulumi.Input[str]] = None,
-                 container_public_access: Optional[Any] = None,
+                 container_public_access: Optional[pulumi.Input['PublicAccess']] = None,
                  file_path: Optional[pulumi.Input[str]] = None,
                  name_prefix: Optional[pulumi.Input[str]] = None,
                  resource_group: Optional[pulumi.Input['pulumi_azure_native.resources.ResourceGroup']] = None,
                  storage_account: Optional[pulumi.Input['pulumi_azure_native.storage.StorageAccount']] = None,
-                 storage_sku_name: Optional[Any] = None,
+                 storage_sku_name: Optional[pulumi.Input['SkuName']] = None,
                  __props__=None):
         """
         Create a Webapp resource with the given unique name, props, and options.
@@ -173,12 +174,12 @@ class Webapp(pulumi.ComponentResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] app_sku_name: The name of the compute instance running the server. Also see appSkuTier
         :param pulumi.Input[str] app_sku_tier: The tier of the compute instance running the server. Also see appSkuName
-        :param Any container_public_access: The public access level of the BlobContainer containg the website data.
+        :param pulumi.Input['PublicAccess'] container_public_access: The public access level of the BlobContainer containg the website data.
         :param pulumi.Input[str] file_path: The relative file path to the folder containing web files.
         :param pulumi.Input[str] name_prefix: The name prefix given to child resources of this component. Should not contain dashes.
         :param pulumi.Input['pulumi_azure_native.resources.ResourceGroup'] resource_group: The resource group to use. One will be created if not provided.
         :param pulumi.Input['pulumi_azure_native.storage.StorageAccount'] storage_account: The storage account to use. One will be created if not provided.
-        :param Any storage_sku_name: The name of the SKU of the storage account created, if storageAccount is not provided
+        :param pulumi.Input['SkuName'] storage_sku_name: The name of the SKU of the storage account created, if storageAccount is not provided
         """
         ...
     @overload
@@ -205,12 +206,12 @@ class Webapp(pulumi.ComponentResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  app_sku_name: Optional[pulumi.Input[str]] = None,
                  app_sku_tier: Optional[pulumi.Input[str]] = None,
-                 container_public_access: Optional[Any] = None,
+                 container_public_access: Optional[pulumi.Input['PublicAccess']] = None,
                  file_path: Optional[pulumi.Input[str]] = None,
                  name_prefix: Optional[pulumi.Input[str]] = None,
                  resource_group: Optional[pulumi.Input['pulumi_azure_native.resources.ResourceGroup']] = None,
                  storage_account: Optional[pulumi.Input['pulumi_azure_native.storage.StorageAccount']] = None,
-                 storage_sku_name: Optional[Any] = None,
+                 storage_sku_name: Optional[pulumi.Input['SkuName']] = None,
                  __props__=None):
         if opts is None:
             opts = pulumi.ResourceOptions()

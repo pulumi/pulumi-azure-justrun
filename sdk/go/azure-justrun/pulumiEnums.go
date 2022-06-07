@@ -3,6 +3,13 @@
 
 package azurejustrun
 
+import (
+	"context"
+	"reflect"
+
+	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+)
+
 // Duplicates azure-native:storage:PublicAccess
 type PublicAccess string
 
@@ -11,6 +18,163 @@ const (
 	PublicAccessBlob      = PublicAccess("Blob")
 	PublicAccessNone      = PublicAccess("None")
 )
+
+func (PublicAccess) ElementType() reflect.Type {
+	return reflect.TypeOf((*PublicAccess)(nil)).Elem()
+}
+
+func (e PublicAccess) ToPublicAccessOutput() PublicAccessOutput {
+	return pulumi.ToOutput(e).(PublicAccessOutput)
+}
+
+func (e PublicAccess) ToPublicAccessOutputWithContext(ctx context.Context) PublicAccessOutput {
+	return pulumi.ToOutputWithContext(ctx, e).(PublicAccessOutput)
+}
+
+func (e PublicAccess) ToPublicAccessPtrOutput() PublicAccessPtrOutput {
+	return e.ToPublicAccessPtrOutputWithContext(context.Background())
+}
+
+func (e PublicAccess) ToPublicAccessPtrOutputWithContext(ctx context.Context) PublicAccessPtrOutput {
+	return PublicAccess(e).ToPublicAccessOutputWithContext(ctx).ToPublicAccessPtrOutputWithContext(ctx)
+}
+
+func (e PublicAccess) ToStringOutput() pulumi.StringOutput {
+	return pulumi.ToOutput(pulumi.String(e)).(pulumi.StringOutput)
+}
+
+func (e PublicAccess) ToStringOutputWithContext(ctx context.Context) pulumi.StringOutput {
+	return pulumi.ToOutputWithContext(ctx, pulumi.String(e)).(pulumi.StringOutput)
+}
+
+func (e PublicAccess) ToStringPtrOutput() pulumi.StringPtrOutput {
+	return pulumi.String(e).ToStringPtrOutputWithContext(context.Background())
+}
+
+func (e PublicAccess) ToStringPtrOutputWithContext(ctx context.Context) pulumi.StringPtrOutput {
+	return pulumi.String(e).ToStringOutputWithContext(ctx).ToStringPtrOutputWithContext(ctx)
+}
+
+type PublicAccessOutput struct{ *pulumi.OutputState }
+
+func (PublicAccessOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*PublicAccess)(nil)).Elem()
+}
+
+func (o PublicAccessOutput) ToPublicAccessOutput() PublicAccessOutput {
+	return o
+}
+
+func (o PublicAccessOutput) ToPublicAccessOutputWithContext(ctx context.Context) PublicAccessOutput {
+	return o
+}
+
+func (o PublicAccessOutput) ToPublicAccessPtrOutput() PublicAccessPtrOutput {
+	return o.ToPublicAccessPtrOutputWithContext(context.Background())
+}
+
+func (o PublicAccessOutput) ToPublicAccessPtrOutputWithContext(ctx context.Context) PublicAccessPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v PublicAccess) *PublicAccess {
+		return &v
+	}).(PublicAccessPtrOutput)
+}
+
+func (o PublicAccessOutput) ToStringOutput() pulumi.StringOutput {
+	return o.ToStringOutputWithContext(context.Background())
+}
+
+func (o PublicAccessOutput) ToStringOutputWithContext(ctx context.Context) pulumi.StringOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, e PublicAccess) string {
+		return string(e)
+	}).(pulumi.StringOutput)
+}
+
+func (o PublicAccessOutput) ToStringPtrOutput() pulumi.StringPtrOutput {
+	return o.ToStringPtrOutputWithContext(context.Background())
+}
+
+func (o PublicAccessOutput) ToStringPtrOutputWithContext(ctx context.Context) pulumi.StringPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, e PublicAccess) *string {
+		v := string(e)
+		return &v
+	}).(pulumi.StringPtrOutput)
+}
+
+type PublicAccessPtrOutput struct{ *pulumi.OutputState }
+
+func (PublicAccessPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**PublicAccess)(nil)).Elem()
+}
+
+func (o PublicAccessPtrOutput) ToPublicAccessPtrOutput() PublicAccessPtrOutput {
+	return o
+}
+
+func (o PublicAccessPtrOutput) ToPublicAccessPtrOutputWithContext(ctx context.Context) PublicAccessPtrOutput {
+	return o
+}
+
+func (o PublicAccessPtrOutput) Elem() PublicAccessOutput {
+	return o.ApplyT(func(v *PublicAccess) PublicAccess {
+		if v != nil {
+			return *v
+		}
+		var ret PublicAccess
+		return ret
+	}).(PublicAccessOutput)
+}
+
+func (o PublicAccessPtrOutput) ToStringPtrOutput() pulumi.StringPtrOutput {
+	return o.ToStringPtrOutputWithContext(context.Background())
+}
+
+func (o PublicAccessPtrOutput) ToStringPtrOutputWithContext(ctx context.Context) pulumi.StringPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, e *PublicAccess) *string {
+		if e == nil {
+			return nil
+		}
+		v := string(*e)
+		return &v
+	}).(pulumi.StringPtrOutput)
+}
+
+// PublicAccessInput is an input type that accepts PublicAccessArgs and PublicAccessOutput values.
+// You can construct a concrete instance of `PublicAccessInput` via:
+//
+//          PublicAccessArgs{...}
+type PublicAccessInput interface {
+	pulumi.Input
+
+	ToPublicAccessOutput() PublicAccessOutput
+	ToPublicAccessOutputWithContext(context.Context) PublicAccessOutput
+}
+
+var publicAccessPtrType = reflect.TypeOf((**PublicAccess)(nil)).Elem()
+
+type PublicAccessPtrInput interface {
+	pulumi.Input
+
+	ToPublicAccessPtrOutput() PublicAccessPtrOutput
+	ToPublicAccessPtrOutputWithContext(context.Context) PublicAccessPtrOutput
+}
+
+type publicAccessPtr string
+
+func PublicAccessPtr(v string) PublicAccessPtrInput {
+	return (*publicAccessPtr)(&v)
+}
+
+func (*publicAccessPtr) ElementType() reflect.Type {
+	return publicAccessPtrType
+}
+
+func (in *publicAccessPtr) ToPublicAccessPtrOutput() PublicAccessPtrOutput {
+	return pulumi.ToOutput(in).(PublicAccessPtrOutput)
+}
+
+func (in *publicAccessPtr) ToPublicAccessPtrOutputWithContext(ctx context.Context) PublicAccessPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, in).(PublicAccessPtrOutput)
+}
 
 // Duplicates azure-native:storage:SkuName
 type SkuName string
@@ -26,5 +190,170 @@ const (
 	SkuName_Standard_RAGZRS = SkuName("Standard_RAGZRS")
 )
 
+func (SkuName) ElementType() reflect.Type {
+	return reflect.TypeOf((*SkuName)(nil)).Elem()
+}
+
+func (e SkuName) ToSkuNameOutput() SkuNameOutput {
+	return pulumi.ToOutput(e).(SkuNameOutput)
+}
+
+func (e SkuName) ToSkuNameOutputWithContext(ctx context.Context) SkuNameOutput {
+	return pulumi.ToOutputWithContext(ctx, e).(SkuNameOutput)
+}
+
+func (e SkuName) ToSkuNamePtrOutput() SkuNamePtrOutput {
+	return e.ToSkuNamePtrOutputWithContext(context.Background())
+}
+
+func (e SkuName) ToSkuNamePtrOutputWithContext(ctx context.Context) SkuNamePtrOutput {
+	return SkuName(e).ToSkuNameOutputWithContext(ctx).ToSkuNamePtrOutputWithContext(ctx)
+}
+
+func (e SkuName) ToStringOutput() pulumi.StringOutput {
+	return pulumi.ToOutput(pulumi.String(e)).(pulumi.StringOutput)
+}
+
+func (e SkuName) ToStringOutputWithContext(ctx context.Context) pulumi.StringOutput {
+	return pulumi.ToOutputWithContext(ctx, pulumi.String(e)).(pulumi.StringOutput)
+}
+
+func (e SkuName) ToStringPtrOutput() pulumi.StringPtrOutput {
+	return pulumi.String(e).ToStringPtrOutputWithContext(context.Background())
+}
+
+func (e SkuName) ToStringPtrOutputWithContext(ctx context.Context) pulumi.StringPtrOutput {
+	return pulumi.String(e).ToStringOutputWithContext(ctx).ToStringPtrOutputWithContext(ctx)
+}
+
+type SkuNameOutput struct{ *pulumi.OutputState }
+
+func (SkuNameOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SkuName)(nil)).Elem()
+}
+
+func (o SkuNameOutput) ToSkuNameOutput() SkuNameOutput {
+	return o
+}
+
+func (o SkuNameOutput) ToSkuNameOutputWithContext(ctx context.Context) SkuNameOutput {
+	return o
+}
+
+func (o SkuNameOutput) ToSkuNamePtrOutput() SkuNamePtrOutput {
+	return o.ToSkuNamePtrOutputWithContext(context.Background())
+}
+
+func (o SkuNameOutput) ToSkuNamePtrOutputWithContext(ctx context.Context) SkuNamePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v SkuName) *SkuName {
+		return &v
+	}).(SkuNamePtrOutput)
+}
+
+func (o SkuNameOutput) ToStringOutput() pulumi.StringOutput {
+	return o.ToStringOutputWithContext(context.Background())
+}
+
+func (o SkuNameOutput) ToStringOutputWithContext(ctx context.Context) pulumi.StringOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, e SkuName) string {
+		return string(e)
+	}).(pulumi.StringOutput)
+}
+
+func (o SkuNameOutput) ToStringPtrOutput() pulumi.StringPtrOutput {
+	return o.ToStringPtrOutputWithContext(context.Background())
+}
+
+func (o SkuNameOutput) ToStringPtrOutputWithContext(ctx context.Context) pulumi.StringPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, e SkuName) *string {
+		v := string(e)
+		return &v
+	}).(pulumi.StringPtrOutput)
+}
+
+type SkuNamePtrOutput struct{ *pulumi.OutputState }
+
+func (SkuNamePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**SkuName)(nil)).Elem()
+}
+
+func (o SkuNamePtrOutput) ToSkuNamePtrOutput() SkuNamePtrOutput {
+	return o
+}
+
+func (o SkuNamePtrOutput) ToSkuNamePtrOutputWithContext(ctx context.Context) SkuNamePtrOutput {
+	return o
+}
+
+func (o SkuNamePtrOutput) Elem() SkuNameOutput {
+	return o.ApplyT(func(v *SkuName) SkuName {
+		if v != nil {
+			return *v
+		}
+		var ret SkuName
+		return ret
+	}).(SkuNameOutput)
+}
+
+func (o SkuNamePtrOutput) ToStringPtrOutput() pulumi.StringPtrOutput {
+	return o.ToStringPtrOutputWithContext(context.Background())
+}
+
+func (o SkuNamePtrOutput) ToStringPtrOutputWithContext(ctx context.Context) pulumi.StringPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, e *SkuName) *string {
+		if e == nil {
+			return nil
+		}
+		v := string(*e)
+		return &v
+	}).(pulumi.StringPtrOutput)
+}
+
+// SkuNameInput is an input type that accepts SkuNameArgs and SkuNameOutput values.
+// You can construct a concrete instance of `SkuNameInput` via:
+//
+//          SkuNameArgs{...}
+type SkuNameInput interface {
+	pulumi.Input
+
+	ToSkuNameOutput() SkuNameOutput
+	ToSkuNameOutputWithContext(context.Context) SkuNameOutput
+}
+
+var skuNamePtrType = reflect.TypeOf((**SkuName)(nil)).Elem()
+
+type SkuNamePtrInput interface {
+	pulumi.Input
+
+	ToSkuNamePtrOutput() SkuNamePtrOutput
+	ToSkuNamePtrOutputWithContext(context.Context) SkuNamePtrOutput
+}
+
+type skuNamePtr string
+
+func SkuNamePtr(v string) SkuNamePtrInput {
+	return (*skuNamePtr)(&v)
+}
+
+func (*skuNamePtr) ElementType() reflect.Type {
+	return skuNamePtrType
+}
+
+func (in *skuNamePtr) ToSkuNamePtrOutput() SkuNamePtrOutput {
+	return pulumi.ToOutput(in).(SkuNamePtrOutput)
+}
+
+func (in *skuNamePtr) ToSkuNamePtrOutputWithContext(ctx context.Context) SkuNamePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, in).(SkuNamePtrOutput)
+}
+
 func init() {
+	pulumi.RegisterInputType(reflect.TypeOf((*PublicAccessInput)(nil)).Elem(), PublicAccess("Container"))
+	pulumi.RegisterInputType(reflect.TypeOf((*PublicAccessPtrInput)(nil)).Elem(), PublicAccess("Container"))
+	pulumi.RegisterInputType(reflect.TypeOf((*SkuNameInput)(nil)).Elem(), SkuName("Standard_LRS"))
+	pulumi.RegisterInputType(reflect.TypeOf((*SkuNamePtrInput)(nil)).Elem(), SkuName("Standard_LRS"))
+	pulumi.RegisterOutputType(PublicAccessOutput{})
+	pulumi.RegisterOutputType(PublicAccessPtrOutput{})
+	pulumi.RegisterOutputType(SkuNameOutput{})
+	pulumi.RegisterOutputType(SkuNamePtrOutput{})
 }

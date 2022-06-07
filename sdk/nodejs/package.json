@@ -1,11 +1,12 @@
 {
     "name": "@pulumi/azure-justrun",
-    "version": "0.1.4",
+    "version": "0.1.5",
     "scripts": {
         "build": "tsc",
-        "install": "node scripts/install-pulumi-plugin.js resource azure-justrun 0.1.4"
+        "install": "node scripts/install-pulumi-plugin.js resource azure-justrun 0.1.5"
     },
     "dependencies": {
+        "@pulumi/azure-native": "^1.0.0",
         "@pulumi/pulumi": "^3.0.0"
     },
     "devDependencies": {
@@ -13,6 +14,6 @@
     },
     "pulumi": {
         "resource": true,
-        "version": "0.1.4"
+        "version": "0.1.5"
     }
 }

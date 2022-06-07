@@ -8,8 +8,8 @@ from setuptools.command.install import install
 from subprocess import check_call
 
 
-VERSION = "0.1.4"
-PLUGIN_VERSION = "0.1.4"
+VERSION = "0.1.5"
+PLUGIN_VERSION = "0.1.5"
 
 class InstallPluginCommand(install):
     def run(self):
@@ -54,6 +54,7 @@ setup(name='pulumi_azure_justrun',
       install_requires=[
           'parver>=0.2.1',
           'pulumi>=3.0.0,<4.0.0',
+          'pulumi-azure-native>=1.0.0,<2.0.0',
           'semver>=2.8.1'
       ],
       zip_safe=False)

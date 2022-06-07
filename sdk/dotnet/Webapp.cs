@@ -59,7 +59,7 @@ namespace Pulumi.AzureJustrun
         /// The public access level of the BlobContainer containg the website data.
         /// </summary>
         [Input("containerPublicAccess")]
-        public Input<Pulumi..Inputs.PublicAccess>? ContainerPublicAccess { get; set; }
+        public Input<Pulumi.AzureJustrun.PublicAccess>? ContainerPublicAccess { get; set; }
 
         /// <summary>
         /// The relative file path to the folder containing web files.
@@ -89,7 +89,7 @@ namespace Pulumi.AzureJustrun
         /// The name of the SKU of the storage account created, if storageAccount is not provided
         /// </summary>
         [Input("storageSkuName")]
-        public Input<Pulumi..Inputs.SkuName>? StorageSkuName { get; set; }
+        public Input<Pulumi.AzureJustrun.SkuName>? StorageSkuName { get; set; }
 
         public WebappArgs()
         {
