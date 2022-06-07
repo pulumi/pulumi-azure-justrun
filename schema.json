@@ -1,6 +1,6 @@
 {
     "name": "azure-justrun",
-    "version": "v0.1.2",
+    "version": "v0.1.3",
     "types": {
         "azure-justrun:index:PublicAccess":{
             "type": "string",
@@ -100,21 +100,25 @@
         "csharp": {
             "packageReferences": {
                 "Pulumi": "3.*"
-            }
+            },
+            "respectSchemaVersion": true
         },
         "go": {
             "generateResourceContainerTypes": true,
-            "importBasePath": "github.com/pulumi/pulumi-azure-justrun/sdk/go/azure-justrun"
+            "importBasePath": "github.com/pulumi/pulumi-azure-justrun/sdk/go/azure-justrun",
+            "respectSchemaVersion": true
         },
         "nodejs": {
             "dependencies": {
                 "@pulumi/pulumi": "^3.0.0"
-            }
+            },
+            "respectSchemaVersion": true
         },
         "python": {
             "requires": {
                 "pulumi": ">=3.0.0,<4.0.0"
-            }
+            },
+            "respectSchemaVersion": true
         }
     }
 }
