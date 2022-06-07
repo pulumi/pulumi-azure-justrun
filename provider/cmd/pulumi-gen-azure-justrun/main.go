@@ -26,7 +26,6 @@ import (
 	gogen "github.com/pulumi/pulumi/pkg/v3/codegen/go"
 	nodejsgen "github.com/pulumi/pulumi/pkg/v3/codegen/nodejs"
 	pygen "github.com/pulumi/pulumi/pkg/v3/codegen/python"
-	"github.com/pulumi/pulumi/sdk/v3/go/common/util/contract"
 	"github.com/pulumi/pulumi/pkg/v3/codegen/schema"
 )
 
@@ -49,11 +48,7 @@ func emitSDK(language, outdir, schemaPath string) error {
 	if err != nil {
 		return err
 	}
-
-	pkg.Language["csharp"] = rawMessage(map[string]interface{}{
-		"packageReferences": map[string]string{
-			"Pulumi": "3.*"}})
-
+	
 	tool := "Pulumi SDK Generator"
 	extraFiles := map[string][]byte{}
 
@@ -112,11 +107,4 @@ func emitFile(rootDir, filename string, contents []byte) error {
 		return err
 	}
 	return nil
-}
-
-
-func rawMessage(v interface{}) schema.RawMessage {
-	bytes, err := json.Marshal(v)
-	contract.Assert(err == nil)
-	return bytes
 }
