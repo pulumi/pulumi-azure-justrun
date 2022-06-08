@@ -69,7 +69,7 @@ jobs:
           - 14.x
   publish_sdk:
     name: Publish SDKs
-    runs-on: ${{ matrix.language == 'nodejs' && 'macos-latest' || 'ubuntu-latest' }}
+    runs-on: 'ubuntu-latest'
     needs: publish_binary
     steps:
       - name: Checkout Repo

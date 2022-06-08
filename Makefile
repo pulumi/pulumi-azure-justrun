@@ -1,4 +1,4 @@
-VERSION         := 0.1.11
+VERSION         := 0.1.12
 
 PACK            := azure-justrun
 PROJECT         := github.com/pulumi/pulumi-${PACK}
@@ -88,8 +88,7 @@ gen_nodejs_sdk::
 build_nodejs_sdk:: gen_nodejs_sdk
 	cd sdk/nodejs/ && \
 		yarn install && \
-		yarn run tsc --version && \
-		yarn run tsc && \
+		NODE_OPTIONS=--max-old-space-size=8192 yarn run tsc --diagnostics \
 		cp -R scripts/ bin && \
 		cp ../../README.md ../../LICENSE package.json yarn.lock ./bin/ && \
 		sed -i.bak -e "s/\$${VERSION}/$(VERSION)/g" ./bin/package.json && \
