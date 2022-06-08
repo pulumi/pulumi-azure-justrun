@@ -2,15 +2,9 @@
     "name": "azure-justrun",
     "version": "v0.1.14",
     "types": {
-        "azure-justrun:index:sampleType":{
+        "azure-justrun:index:emptyType":{
             "type": "object",
             "properties": {
-                "name": {
-                    "type": "string"
-                },
-                "age": {
-                    "type": "integer"
-                }
             }
         },
         "azure-justrun:index:PublicAccess":{
