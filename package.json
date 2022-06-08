@@ -1,6 +1,6 @@
 {
   "name": "@pulumi/azure-justrun",
-  "version": "0.1.12",
+  "version": "0.1.13",
   "devDependencies": {
     "@types/node": "^17.0.40",
     "@vercel/ncc": "^0.28.6",
