@@ -1,7 +1,18 @@
 {
     "name": "azure-justrun",
-    "version": "v0.1.13",
+    "version": "v0.1.14",
     "types": {
+        "azure-justrun:index:sampleType":{
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "age": {
+                    "type": "integer"
+                }
+            }
+        },
         "azure-justrun:index:PublicAccess":{
             "type": "string",
             "description": "Duplicates azure-native:storage:PublicAccess",
