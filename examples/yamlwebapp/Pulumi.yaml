@@ -1,0 +1,14 @@
+name: yamlwebapp
+runtime: yaml
+description: A minimal Azure Native Pulumi YAML program
+
+resources:
+  # Create an Azure Resource Group
+  webApp:
+    type: azure-justrun:index:webapp
+    properties: 
+      filePath: ./www
+
+outputs:
+  # Export the primary key of the Storage Account
+  url: ${webApp.url}
