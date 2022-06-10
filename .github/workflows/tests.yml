@@ -1,4 +1,4 @@
-name: release
+name: tests
 on:
   push:
     branches:
@@ -31,8 +31,8 @@ env:
   PYPI_REPOSITORY_URL: ""
   PUBLISH_PYPI: true
 jobs:
-  publish_binary:
-    name: publish
+  build-provider:
+    name: build-provider
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
@@ -55,19 +55,12 @@ jobs:
       - run: make build_provider
       - name: Create Provider Binaries
         run: make dist
-      - name: Create GH Release
-        uses: softprops/action-gh-release@v1
-        with:
-          files: |
-            dist/*.tar.gz
-        env:
-          GITHUB_TOKEN: ${{ secrets.PULUMI_BOT_TOKEN }}
     strategy:
       fail-fast: true
       matrix:
         nodeversion:
           - 16.x
- acceptance-test:
+  acceptance-test:
     needs: build-provider
     runs-on: ubuntu-latest
     steps:
