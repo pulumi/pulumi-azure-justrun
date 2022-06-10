@@ -90,7 +90,7 @@ jobs:
       - name: Install gotestfmt
         uses: jaxxstorm/action-install-gh-release@v1.2.0
         with:
-          repo: haveyoudebuggedit/gotestfm
+          repo: haveyoudebuggedit/gotestfmt
       - name: Install Go
         uses: actions/setup-go@v2
         with:
