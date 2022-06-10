@@ -118,7 +118,7 @@ jobs:
           chmod +x bin/*
           make provider --touch
       - name: Build SDK
-        run: make build_${{ matrix.language }}
+        run: make build_${{ matrix.language }}_sdk
       - name: Check worktree clean
         run: ./ci-scripts/ci/check-worktree-is-clean
       - name: Compress SDK folder
