@@ -99,10 +99,6 @@ jobs:
         uses: actions/setup-python@v1
         with:
           python-version: ${{matrix.pythonversion}}
-      - name: Install gotestfmt
-        uses: jaxxstorm/action-install-gh-release@v1.2.0
-        with:
-          repo: haveyoudebuggedit/gotestfm
       - name: Build SDK
         run: make build_${{ matrix.language }}_sdk
       - name: Check worktree clean

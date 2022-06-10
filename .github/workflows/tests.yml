@@ -87,6 +87,10 @@ jobs:
       - uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_RBAC_SERVICE_PRINCIPAL }}
+      - name: Install gotestfmt
+        uses: jaxxstorm/action-install-gh-release@v1.2.0
+        with:
+          repo: haveyoudebuggedit/gotestfm
       - name: Install Go
         uses: actions/setup-go@v2
         with:
