@@ -84,8 +84,6 @@ jobs:
           repo: pulumi/pulumictl
       - name: Install Pulumi CLI
         uses: pulumi/action-install-pulumi-cli@v1.0.1
-      - name: Install Azure CLI
-        run: curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
       - uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_RBAC_SERVICE_PRINCIPAL }}
