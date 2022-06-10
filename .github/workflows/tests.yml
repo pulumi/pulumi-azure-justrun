@@ -55,6 +55,11 @@ jobs:
       - run: make build_provider
       - name: Create Provider Binaries
         run: make dist
+      - name: Upload bin
+        uses: actions/upload-artifact@v3
+        with:
+          name: bin
+          path: bin
     strategy:
       fail-fast: true
       matrix:
