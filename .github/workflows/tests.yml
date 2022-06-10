@@ -131,8 +131,6 @@ jobs:
       - name: Compress SDK folder
         run: tar -zcf sdk/${{ matrix.language }}.tar.gz -C sdk/${{ matrix.language }}
           .
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v2
       - name: Run tests
         run: make test_${{ matrix.language }}
     strategy:
