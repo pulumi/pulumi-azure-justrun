@@ -30,7 +30,6 @@ env:
   PYPI_USERNAME: "pulumi"
   PYPI_REPOSITORY_URL: ""
   PUBLISH_PYPI: true
-
   PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
 jobs:
   build-provider:
