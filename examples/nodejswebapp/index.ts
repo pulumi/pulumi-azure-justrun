@@ -2,9 +2,8 @@ import * as pulumi from "@pulumi/pulumi";
 import * as justrun from "@pulumi/azure-justrun"
 
 // Create an Azure Resource Group
-const webapp = new justrun.WebApp("webapp", {
+const webapp = new justrun.Webapp("webapp", {
     "filePath": "./www",
 })
 
-const url = webapp.url
-export url
+export const url = webapp.url

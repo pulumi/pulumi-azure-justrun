@@ -30,7 +30,8 @@ env:
   PYPI_USERNAME: "pulumi"
   PYPI_REPOSITORY_URL: ""
   PUBLISH_PYPI: true
-  PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
+  PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }} #Necessary for Testing
+  PULUMI_API: https://api.pulumi-staging.io #Necessary for Testing
 jobs:
   build-provider:
     name: build-provider
