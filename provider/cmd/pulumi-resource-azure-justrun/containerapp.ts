@@ -4,7 +4,7 @@ import * as pulumi from "@pulumi/pulumi";
 import * as containerregistry from "@pulumi/azure-native/containerregistry";
 import * as operationalinsights from "@pulumi/azure-native/operationalinsights";
 import * as resources from "@pulumi/azure-native/resources";
-import * as web from "@pulumi/azure-native/web/v20210301";
+import * as app from "@pulumi/azure-native/app";
 
 
 // Define a component for serving a static website on S3
@@ -31,8 +31,9 @@ export class ContainerApp extends pulumi.ComponentResource {
             workspaceName: workspace.name,
         });
 
-        const kubeEnv = new web.KubeEnvironment("env", {
+        const managedEnv = new app.ManagedEnvironment("env", {
             resourceGroupName: resourceGroup.name,
+            type: "Managed",
             appLogsConfiguration: {
                 destination: "log-analytics",
                 logAnalyticsConfiguration: {
@@ -68,9 +69,9 @@ export class ContainerApp extends pulumi.ComponentResource {
             },
         });
 
-        const containerApp = new web.ContainerApp("app", {
+        const containerApp = new app.ContainerApp("app", {
             resourceGroupName: resourceGroup.name,
-            kubeEnvironmentId: kubeEnv.id,
+            managedEnvironmentId: managedEnv.id,
             configuration: {
                 ingress: {
                     external: true,
