@@ -28,3 +28,18 @@ func TestWebAppPython(t *testing.T) {
 
 	integration.ProgramTest(t, &test)
 }
+
+func getPythonBaseOptions(t *testing.T) integration.ProgramTestOptions {
+	envRegion := getEnvRegion(t)
+	base := getBaseOptions()
+	pythonBase := base.With(integration.ProgramTestOptions{
+		Config: map[string]string{
+			"azure-native:location": envRegion,
+		},
+		Dependencies: []string{
+			filepath.Join("..", "sdk", "python"),
+		},
+	})
+
+	return pythonBase
+}
