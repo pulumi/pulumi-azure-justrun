@@ -93,7 +93,6 @@ jobs:
           repo: pulumi/pulumictl
       - name: Install Pulumi CLI
         uses: pulumi/action-install-pulumi-cli@v1.0.1
-      - uses: azure/login@v1
       - name: Install gotestfmt
         uses: jaxxstorm/action-install-gh-release@v1.2.0
         with:
