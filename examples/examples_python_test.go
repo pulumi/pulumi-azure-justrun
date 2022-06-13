@@ -7,6 +7,7 @@ import (
     "os"
     "path"
     "testing"
+	"path/filepath"
 
     "github.com/pulumi/pulumi/pkg/v2/testing/integration"
 )
