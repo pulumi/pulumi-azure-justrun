@@ -38,7 +38,7 @@ func getPythonBaseOptions(t *testing.T) integration.ProgramTestOptions {
 			"azure-native:location": envRegion,
 		},
 		Dependencies: []string{
-			filepath.Join("..", "sdk", "python"),
+			filepath.Join("..", "sdk", "python", "pulumi_azure_justrun"),
 		},
 	})
 
