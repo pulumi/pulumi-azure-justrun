@@ -12,13 +12,11 @@ export class ContainerApp extends pulumi.ComponentResource {
 
     public readonly url!: pulumi.Output<string>;
 
-    constructor(name: string, args: WebAppArgs, opts: pulumi.ResourceOptions = {}) {
+    constructor(name: string, args: ContainerAppArgs, opts: pulumi.ResourceOptions = {}) {
         super("azure-justrun:index:containerapp", name, {}, opts); // Register this component with name pulumi:examples:S3Folder
         const namePrefix = args.namePrefix ?? ""
 
-        const resourceGroup = args.resourceGroup ?? new resources.ResourceGroup(`${namePrefix}rg`, {}, {parent: this});
-
-        const resourceGroup = new resources.ResourceGroup("rg");
+        const resourceGroup = args.resourceGroup ?? new resources.ResourceGroup(`${namePrefix}rg`, {}, {parent: this});;
 
         const workspace = new operationalinsights.Workspace("loganalytics", {
             resourceGroupName: resourceGroup.name,
@@ -35,7 +33,6 @@ export class ContainerApp extends pulumi.ComponentResource {
 
         const kubeEnv = new web.KubeEnvironment("env", {
             resourceGroupName: resourceGroup.name,
-            type: "Managed",
             appLogsConfiguration: {
                 destination: "log-analytics",
                 logAnalyticsConfiguration: {
@@ -96,13 +93,10 @@ export class ContainerApp extends pulumi.ComponentResource {
                 }],
             },
         });
-
-        export const url = pulumi.interpolate`https://${containerApp.configuration.apply(c => c?.ingress?.fqdn)}`;
-
+        this.url = pulumi.interpolate`https://${containerApp.configuration.apply(c => c?.ingress?.fqdn)}`;
+        this.registerOutputs();
      }
 }
-
-
 
 export interface ContainerAppArgs extends pulumi.ComponentResourceOptions{
     namePrefix?: string;
