@@ -115,6 +115,11 @@ build_python_sdk:: gen_python_sdk
 		rm ./bin/setup.py.bak && \
 		cd ./bin && python3 setup.py build sdist
 
+configure_venv_for_test::  pip install --upgrade pip && \
+          python3.8 -m venv env && \
+          source env/bin/activate && \
+          pip3 install -e ./sdk/bin
+
 test_nodejs:: PATH := $(WORKING_DIR)/bin:$(PATH)
 test_nodejs:: ./bin install_nodejs_sdk
 	@export PATH
