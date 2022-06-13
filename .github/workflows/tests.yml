@@ -124,10 +124,8 @@ jobs:
         with:
           name: bin
           path: bin
-      - name: Restore bin and avoid rebuilding
-        run: |
-          chmod +x bin/*
-          make provider --touch
+      - name: Update path
+        run: echo "${{ github.workspace }}/bin" >> $GITHUB_PATH
       - name: Build SDK
         run: make build_${{ matrix.language }}_sdk
       - name: Check worktree clean

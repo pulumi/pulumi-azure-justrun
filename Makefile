@@ -120,7 +120,7 @@ test_nodejs:: ./bin install_nodejs_sdk
 	@export PATH
 	cd examples && go test -tags=nodejs -v -json -count=1 -cover -timeout 3h -parallel ${TESTPARALLELISM} . 2>&1 | tee /tmp/gotest.log | gotestfmt
 
-test_python:: PATH := $(WORKING_DIR)/bin:$(PATH)
+test_python:: PATH := $(WORKING_DIR)/bin/python:$(PATH)
 test_python:: ./bin
 	@export PATH
 	cd examples && go test -tags=python -v -json -count=1 -cover -timeout 3h -parallel ${TESTPARALLELISM} . 2>&1 | tee /tmp/gotest.log | gotestfmt
