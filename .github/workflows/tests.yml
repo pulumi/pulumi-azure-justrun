@@ -75,7 +75,7 @@ jobs:
         if: steps.cache.ouputs.cache-hit != 'true'
       - name: Create Provider Binaries
         if: steps.cache.ouputs.cache-hit != 'true'
-          run: make dist
+        run: make dist
       - name: Upload bin
         uses: actions/upload-artifact@v3
         with:
