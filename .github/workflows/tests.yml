@@ -141,7 +141,6 @@ jobs:
           .
       - name: Configure venv
         run: |
-          python3.8 -m pip install --upgrade pip
           python3.8 -m venv env
           source env/bin/activate
           pip3 install -e ./sdk
