@@ -11,7 +11,7 @@ import (
 
 func TestWebAppPython(t *testing.T) {
 	test := getPythonBaseOptions(t).With(integration.ProgramTestOptions{
-		Dir: filepath.Join(getCwd(), "pythonwebapp"),
+		Dir: filepath.Join(getCwd(t), "pythonwebapp"),
 	})
 	integration.ProgramTest(t, &test)
 }

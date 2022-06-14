@@ -34,7 +34,7 @@ func getEnvRegion(t *testing.T) string {
 	return "WestUS"
 }
 
-func getCwd() string {
+func getCwd(t *testing.T) string {
 	cwd, err := os.Getwd()
 	if err != nil {
 		t.FailNow()
