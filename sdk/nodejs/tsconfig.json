@@ -13,7 +13,6 @@
         "strict": true
     },
     "files": [
-        "containerapp.ts",
         "index.ts",
         "provider.ts",
         "types/enums/index.ts",

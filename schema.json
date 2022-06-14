@@ -99,35 +99,6 @@
                     "type": "string"
                 }
             }
-        },
-        "azure-justrun:index:containerapp":{
-            "isComponent": true,
-            "inputProperties": {
-                "namePrefix": {
-                    "type": "string",
-                    "description": "The name prefix given to child resources of this component. Should not contain dashes."
-                },
-                "resourceGroup": {
-                    "$ref": "/azure-native/v1.64.1/schema.json#/resources/azure-native:resources:ResourceGroup",
-                    "description": "The resource group to use. One will be created if not provided."
-                },
-                "registry": {
-                    "$ref": "/azure-native/v1.64.1/schema.json#/resources/azure-native:containerregistry:Registry",
-                    "description": "The container registry to use. One will be created if not provided."
-                },
-                "dockerImageName": {
-                    "type": "string",
-                    "description": "The name of the docker image to use. Required."
-                }
-            },
-            "properties":{
-                "url": {
-                    "type": "string"
-                }
-            },
-            "requiredInputs": [
-                "dockerImageName"
-            ]
         }
     },
     "language": {

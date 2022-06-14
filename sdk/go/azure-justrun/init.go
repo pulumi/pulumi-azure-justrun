@@ -20,8 +20,6 @@ func (m *module) Version() semver.Version {
 
 func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi.Resource, err error) {
 	switch typ {
-	case "azure-justrun:index:containerapp":
-		r = &Containerapp{}
 	case "azure-justrun:index:webapp":
 		r = &Webapp{}
 	default:
