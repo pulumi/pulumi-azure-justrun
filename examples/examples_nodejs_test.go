@@ -4,16 +4,14 @@
 package examples
 
 import (
-	"cwd"
 	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
-	"path"
 	"path/filepath"
 	"testing"
 )
 
 func TestWebAppNodeJS(t *testing.T) {
 	test := getJSBaseOptions(t).With(integration.ProgramTestOptions{
-		Dir: path.Join(cwd, "nodejswebapp"),
+		Dir: filepath.Join(getCwd(), "nodejswebapp"),
 	})
 
 	integration.ProgramTest(t, &test)

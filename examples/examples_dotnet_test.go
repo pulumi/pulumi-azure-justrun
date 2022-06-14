@@ -4,16 +4,14 @@
 package examples
 
 import (
-	"cwd"
 	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
-	"path"
 	"path/filepath"
 	"testing"
 )
 
 func TestWebAppDotNet(t *testing.T) {
 	test := getCsharpBaseOptions(t).With(integration.ProgramTestOptions{
-		Dir: path.Join(cwd, "cswebapp"),
+		Dir: filepath.Join(getCwd(),, "cswebapp"),
 	})
 	integration.ProgramTest(t, &test)
 }

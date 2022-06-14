@@ -4,16 +4,14 @@
 package examples
 
 import (
-	"cwd"
 	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
-	"path"
 	"path/filepath"
 	"testing"
 )
 
 func TestWebAppGo(t *testing.T) {
 	test := getGoBaseOptions(t).With(integration.ProgramTestOptions{
-		Dir: path.Join(cwd, "golangwebapp"),
+		Dir: filepath.Join(getCwd(),, "golangwebapp"),
 	})
 	integration.ProgramTest(t, &test)
 }

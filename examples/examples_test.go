@@ -11,7 +11,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-    "github.com/pulumi/pulumi/pkg/v2/testing/integration"
+	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
 )
 
 func createEditDir(dir string) integration.EditDir {
@@ -26,15 +26,15 @@ func skipIfShort(t *testing.T) {
 
 func getEnvRegion(t *testing.T) string {
 	/*
-	envRegion := os.Getenv("AWS_REGION")
-	if envRegion == "" {
-		t.Skipf("Skipping test due to missing AWS_REGION environment variable")
-	}*/
+		envRegion := os.Getenv("AWS_REGION")
+		if envRegion == "" {
+			t.Skipf("Skipping test due to missing AWS_REGION environment variable")
+		}*/
 
 	return "WestUS"
 }
 
-func getCwd(t *testing.T) string {
+func getCwd() string {
 	cwd, err := os.Getwd()
 	if err != nil {
 		t.FailNow()
