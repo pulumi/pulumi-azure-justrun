@@ -30,13 +30,10 @@ export class Containerapp extends pulumi.ComponentResource {
      * @param args The arguments to use to populate this resource's properties.
      * @param opts A bag of options that control this resource's behavior.
      */
-    constructor(name: string, args: ContainerappArgs, opts?: pulumi.ComponentResourceOptions) {
+    constructor(name: string, args?: ContainerappArgs, opts?: pulumi.ComponentResourceOptions) {
         let resourceInputs: pulumi.Inputs = {};
         opts = opts || {};
         if (!opts.id) {
-            if ((!args || args.dockerImageName === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'dockerImageName'");
-            }
             resourceInputs["dockerImageName"] = args ? args.dockerImageName : undefined;
             resourceInputs["imageDirectory"] = args ? args.imageDirectory : undefined;
             resourceInputs["namePrefix"] = args ? args.namePrefix : undefined;
@@ -59,7 +56,7 @@ export interface ContainerappArgs {
     /**
      * The name of the docker image to use. Required. Either this or imageDirectory must be provided. A docker image will be created if this is not provided.
      */
-    dockerImageName: pulumi.Input<string>;
+    dockerImageName?: pulumi.Input<string>;
     /**
      * The relative directory path to the folder containing the docker image. Either this or dockerImageName must be provided.
      */

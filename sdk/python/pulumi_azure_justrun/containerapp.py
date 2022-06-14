@@ -14,7 +14,7 @@ __all__ = ['ContainerappArgs', 'Containerapp']
 @pulumi.input_type
 class ContainerappArgs:
     def __init__(__self__, *,
-                 docker_image_name: pulumi.Input[str],
+                 docker_image_name: Optional[pulumi.Input[str]] = None,
                  image_directory: Optional[pulumi.Input[str]] = None,
                  name_prefix: Optional[pulumi.Input[str]] = None,
                  registry: Optional[pulumi.Input['pulumi_azure_native.containerregistry.Registry']] = None,
@@ -29,7 +29,8 @@ class ContainerappArgs:
         :param pulumi.Input['pulumi_azure_native.resources.ResourceGroup'] resource_group: The resource group to use. One will be created if not provided.
         :param pulumi.Input[str] version: The version of the docker image created, if not provided
         """
-        pulumi.set(__self__, "docker_image_name", docker_image_name)
+        if docker_image_name is not None:
+            pulumi.set(__self__, "docker_image_name", docker_image_name)
         if image_directory is not None:
             pulumi.set(__self__, "image_directory", image_directory)
         if name_prefix is not None:
@@ -43,14 +44,14 @@ class ContainerappArgs:
 
     @property
     @pulumi.getter(name="dockerImageName")
-    def docker_image_name(self) -> pulumi.Input[str]:
+    def docker_image_name(self) -> Optional[pulumi.Input[str]]:
         """
         The name of the docker image to use. Required. Either this or imageDirectory must be provided. A docker image will be created if this is not provided.
         """
         return pulumi.get(self, "docker_image_name")
 
     @docker_image_name.setter
-    def docker_image_name(self, value: pulumi.Input[str]):
+    def docker_image_name(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "docker_image_name", value)
 
     @property
@@ -141,7 +142,7 @@ class Containerapp(pulumi.ComponentResource):
     @overload
     def __init__(__self__,
                  resource_name: str,
-                 args: ContainerappArgs,
+                 args: Optional[ContainerappArgs] = None,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         Create a Containerapp resource with the given unique name, props, and options.
@@ -180,8 +181,6 @@ class Containerapp(pulumi.ComponentResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = ContainerappArgs.__new__(ContainerappArgs)
 
-            if docker_image_name is None and not opts.urn:
-                raise TypeError("Missing required property 'docker_image_name'")
             __props__.__dict__["docker_image_name"] = docker_image_name
             __props__.__dict__["image_directory"] = image_directory
             __props__.__dict__["name_prefix"] = name_prefix

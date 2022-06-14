@@ -23,7 +23,7 @@ namespace Pulumi.AzureJustrun
         /// <param name="name">The unique name of the resource</param>
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
-        public Containerapp(string name, ContainerappArgs args, ComponentResourceOptions? options = null)
+        public Containerapp(string name, ContainerappArgs? args = null, ComponentResourceOptions? options = null)
             : base("azure-justrun:index:containerapp", name, args ?? new ContainerappArgs(), MakeResourceOptions(options, ""), remote: true)
         {
         }
@@ -46,8 +46,8 @@ namespace Pulumi.AzureJustrun
         /// <summary>
         /// The name of the docker image to use. Required. Either this or imageDirectory must be provided. A docker image will be created if this is not provided.
         /// </summary>
-        [Input("dockerImageName", required: true)]
-        public Input<string> DockerImageName { get; set; } = null!;
+        [Input("dockerImageName")]
+        public Input<string>? DockerImageName { get; set; }
 
         /// <summary>
         /// The relative directory path to the folder containing the docker image. Either this or dockerImageName must be provided.

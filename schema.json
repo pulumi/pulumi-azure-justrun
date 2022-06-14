@@ -130,10 +130,7 @@
                 "url": {
                     "type": "string"
                 }
-            },
-            "requiredInputs": [
-                "dockerImageName"
-            ]
+            }
         }
     },
     "language": {

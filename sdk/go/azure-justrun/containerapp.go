@@ -7,7 +7,6 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
 	containerregistry "github.com/pulumi/pulumi-azure-native/sdk/go/azure/containerregistry"
 	resources "github.com/pulumi/pulumi-azure-native/sdk/go/azure/resources"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
@@ -23,12 +22,9 @@ type Containerapp struct {
 func NewContainerapp(ctx *pulumi.Context,
 	name string, args *ContainerappArgs, opts ...pulumi.ResourceOption) (*Containerapp, error) {
 	if args == nil {
-		return nil, errors.New("missing one or more required arguments")
+		args = &ContainerappArgs{}
 	}
 
-	if args.DockerImageName == nil {
-		return nil, errors.New("invalid value for required argument 'DockerImageName'")
-	}
 	var resource Containerapp
 	err := ctx.RegisterRemoteComponentResource("azure-justrun:index:containerapp", name, args, &resource, opts...)
 	if err != nil {
@@ -39,7 +35,7 @@ func NewContainerapp(ctx *pulumi.Context,
 
 type containerappArgs struct {
 	// The name of the docker image to use. Required. Either this or imageDirectory must be provided. A docker image will be created if this is not provided.
-	DockerImageName string `pulumi:"dockerImageName"`
+	DockerImageName *string `pulumi:"dockerImageName"`
 	// The relative directory path to the folder containing the docker image. Either this or dockerImageName must be provided.
 	ImageDirectory *string `pulumi:"imageDirectory"`
 	// The name prefix given to child resources of this component. Should not contain dashes.
@@ -55,7 +51,7 @@ type containerappArgs struct {
 // The set of arguments for constructing a Containerapp resource.
 type ContainerappArgs struct {
 	// The name of the docker image to use. Required. Either this or imageDirectory must be provided. A docker image will be created if this is not provided.
-	DockerImageName pulumi.StringInput
+	DockerImageName pulumi.StringPtrInput
 	// The relative directory path to the folder containing the docker image. Either this or dockerImageName must be provided.
 	ImageDirectory pulumi.StringPtrInput
 	// The name prefix given to child resources of this component. Should not contain dashes.

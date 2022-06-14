@@ -3,8 +3,6 @@ import * as storage from "@pulumi/azure-native/storage";
 import * as resources from "@pulumi/azure-native/resources";
 import * as web from "@pulumi/azure-native/web";
 
-
-// Define a component for serving a static website on S3
 export class WebApp extends pulumi.ComponentResource {
 
     public readonly url!: pulumi.Output<string>;
