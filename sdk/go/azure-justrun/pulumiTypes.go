@@ -3,9 +3,7 @@
 
 package azurejustrun
 
-type SampleType struct {
-	Age  *int    `pulumi:"age"`
-	Name *string `pulumi:"name"`
+type EmptyType struct {
 }
 
 func init() {

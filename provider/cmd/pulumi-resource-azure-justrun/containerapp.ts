@@ -18,7 +18,7 @@ export class ContainerApp extends pulumi.ComponentResource {
 
         const resourceGroup = args.resourceGroup ?? new resources.ResourceGroup(`${namePrefix}rg`, {}, {parent: this});;
 
-        const workspace = new operationalinsights.Workspace("loganalytics", {
+        const workspace = new operationalinsights.Workspace("${namePrefix}loganalytics", {
             resourceGroupName: resourceGroup.name,
             sku: {
                 name: "PerGB2018",
@@ -31,7 +31,7 @@ export class ContainerApp extends pulumi.ComponentResource {
             workspaceName: workspace.name,
         });
 
-        const managedEnv = new app.ManagedEnvironment("env", {
+        const managedEnv = new app.ManagedEnvironment("${namePrefix}env", {
             resourceGroupName: resourceGroup.name,
             type: "Managed",
             appLogsConfiguration: {
@@ -43,7 +43,7 @@ export class ContainerApp extends pulumi.ComponentResource {
             },
         });
 
-        const registry = args.registry ?? new containerregistry.Registry("registry", {
+        const registry = args.registry ?? new containerregistry.Registry("${namePrefix}registry", {
             resourceGroupName: resourceGroup.name,
             sku: {
                 name: "Basic",
@@ -58,18 +58,7 @@ export class ContainerApp extends pulumi.ComponentResource {
         const adminUsername = credentials.apply(c => c.username!);
         const adminPassword = credentials.apply(c => c.passwords![0].value!);
 
-        const customImage = "node-app";
-        const myImage = args.dockerImage ?? new docker.Image(customImage, {
-            imageName: pulumi.interpolate`${registry.loginServer}/${customImage}:v1.0.0`,
-            build: { context: `./${customImage}` },
-            registry: {
-                server: registry.loginServer,
-                username: adminUsername,
-                password: adminPassword,
-            },
-        });
-
-        const containerApp = new app.ContainerApp("app", {
+        const containerApp = new app.ContainerApp("${namePrefix}app", {
             resourceGroupName: resourceGroup.name,
             managedEnvironmentId: managedEnv.id,
             configuration: {
@@ -89,8 +78,8 @@ export class ContainerApp extends pulumi.ComponentResource {
             },
             template: {
                 containers: [{
-                    name: "myapp",
-                    image: myImage.imageName,
+                    name: "myapp", //Should this be configurable?
+                    image: args.dockerImageName,
                 }],
             },
         });
@@ -103,6 +92,6 @@ export interface ContainerAppArgs extends pulumi.ComponentResourceOptions{
     namePrefix?: string;
     resourceGroup?: resources.ResourceGroup;
     registry?: containerregistry.Registry;
-    dockerImage?: docker.Image;
+    dockerImageName: string;
 }
 

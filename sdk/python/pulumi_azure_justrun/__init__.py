@@ -6,6 +6,7 @@ from . import _utilities
 import typing
 # Export this package's modules as members:
 from ._enums import *
+from .containerapp import *
 from .provider import *
 from .webapp import *
 _utilities.register(
@@ -16,6 +17,7 @@ _utilities.register(
   "mod": "index",
   "fqn": "pulumi_azure_justrun",
   "classes": {
+   "azure-justrun:index:containerapp": "Containerapp",
    "azure-justrun:index:webapp": "Webapp"
   }
  }
