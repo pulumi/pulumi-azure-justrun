@@ -4,10 +4,11 @@
 package examples
 
 import (
+	"cwd"
+	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
+	"path"
 	"path/filepath"
 	"testing"
-
-	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
 )
 
 func TestWebAppDotNet(t *testing.T) {
