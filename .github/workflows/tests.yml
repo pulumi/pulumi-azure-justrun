@@ -77,6 +77,7 @@ jobs:
         if: steps.cache.outputs.cache-hit != 'true'
         run: make dist
       - name: Upload bin
+        if: steps.cache.outputs.cache-hit != 'true'
         uses: actions/upload-artifact@v3
         with:
           name: bin
@@ -127,7 +128,14 @@ jobs:
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: ${{matrix.dotnetversion}}
+      - name: Cache Provider Binaries
+        id: cache
+        uses: actions/cache@v3
+        with:
+          path: bin
+          key: ${{ runner.os }}-${{ hashFiles('provider/**') }}
       - name: Download bin
+        if: steps.cache.outputs.cache-hit != 'true'
         uses: actions/download-artifact@v3
         with:
           name: bin
