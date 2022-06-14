@@ -139,11 +139,6 @@ jobs:
       - name: Compress SDK folder
         run: tar -zcf sdk/${{ matrix.language }}.tar.gz -C sdk/${{ matrix.language }}
           .
-      - name: Configure venv
-        run: pip3 install --upgrade pip
-          python3.8 -m venv env
-          source env/bin/activate
-          pip3 install -e ./sdk/bin
         if: matrix.language == 'python'
       - name: Run tests
         run: make test_${{ matrix.language }}
