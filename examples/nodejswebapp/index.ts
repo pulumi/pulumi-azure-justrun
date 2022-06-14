@@ -7,7 +7,7 @@ import * as storage from "@pulumi/azure-native/storage";
 const rg = new resources.ResourceGroup("rg", {
 })
 
-const storageAccount = new storage.StorageAccount(`${namePrefix}sa`, {
+const storageAccount = new storage.StorageAccount("sa", {
     resourceGroupName: rg.name,
     kind: storage.Kind.StorageV2,
     sku: {
