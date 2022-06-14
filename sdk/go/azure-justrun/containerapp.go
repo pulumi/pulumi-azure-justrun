@@ -38,26 +38,34 @@ func NewContainerapp(ctx *pulumi.Context,
 }
 
 type containerappArgs struct {
-	// The name of the docker image to use. Required.
+	// The name of the docker image to use. Required. Either this or imageDirectory must be provided. A docker image will be created if this is not provided.
 	DockerImageName string `pulumi:"dockerImageName"`
+	// The relative directory path to the folder containing the docker image. Either this or dockerImageName must be provided.
+	ImageDirectory *string `pulumi:"imageDirectory"`
 	// The name prefix given to child resources of this component. Should not contain dashes.
 	NamePrefix *string `pulumi:"namePrefix"`
 	// The container registry to use. One will be created if not provided.
 	Registry *containerregistry.Registry `pulumi:"registry"`
 	// The resource group to use. One will be created if not provided.
 	ResourceGroup *resources.ResourceGroup `pulumi:"resourceGroup"`
+	// The version of the docker image created, if not provided
+	Version *string `pulumi:"version"`
 }
 
 // The set of arguments for constructing a Containerapp resource.
 type ContainerappArgs struct {
-	// The name of the docker image to use. Required.
+	// The name of the docker image to use. Required. Either this or imageDirectory must be provided. A docker image will be created if this is not provided.
 	DockerImageName pulumi.StringInput
+	// The relative directory path to the folder containing the docker image. Either this or dockerImageName must be provided.
+	ImageDirectory pulumi.StringPtrInput
 	// The name prefix given to child resources of this component. Should not contain dashes.
 	NamePrefix pulumi.StringPtrInput
 	// The container registry to use. One will be created if not provided.
 	Registry containerregistry.RegistryInput
 	// The resource group to use. One will be created if not provided.
 	ResourceGroup resources.ResourceGroupInput
+	// The version of the docker image created, if not provided
+	Version pulumi.StringPtrInput
 }
 
 func (ContainerappArgs) ElementType() reflect.Type {

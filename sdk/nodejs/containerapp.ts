@@ -38,9 +38,11 @@ export class Containerapp extends pulumi.ComponentResource {
                 throw new Error("Missing required property 'dockerImageName'");
             }
             resourceInputs["dockerImageName"] = args ? args.dockerImageName : undefined;
+            resourceInputs["imageDirectory"] = args ? args.imageDirectory : undefined;
             resourceInputs["namePrefix"] = args ? args.namePrefix : undefined;
             resourceInputs["registry"] = args ? args.registry : undefined;
             resourceInputs["resourceGroup"] = args ? args.resourceGroup : undefined;
+            resourceInputs["version"] = args ? args.version : undefined;
             resourceInputs["url"] = undefined /*out*/;
         } else {
             resourceInputs["url"] = undefined /*out*/;
@@ -55,9 +57,13 @@ export class Containerapp extends pulumi.ComponentResource {
  */
 export interface ContainerappArgs {
     /**
-     * The name of the docker image to use. Required.
+     * The name of the docker image to use. Required. Either this or imageDirectory must be provided. A docker image will be created if this is not provided.
      */
     dockerImageName: pulumi.Input<string>;
+    /**
+     * The relative directory path to the folder containing the docker image. Either this or dockerImageName must be provided.
+     */
+    imageDirectory?: pulumi.Input<string>;
     /**
      * The name prefix given to child resources of this component. Should not contain dashes.
      */
@@ -70,4 +76,8 @@ export interface ContainerappArgs {
      * The resource group to use. One will be created if not provided.
      */
     resourceGroup?: pulumi.Input<pulumiAzureNative.resources.ResourceGroup>;
+    /**
+     * The version of the docker image created, if not provided
+     */
+    version?: pulumi.Input<string>;
 }

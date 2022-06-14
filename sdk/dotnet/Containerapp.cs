@@ -44,10 +44,16 @@ namespace Pulumi.AzureJustrun
     public sealed class ContainerappArgs : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The name of the docker image to use. Required.
+        /// The name of the docker image to use. Required. Either this or imageDirectory must be provided. A docker image will be created if this is not provided.
         /// </summary>
         [Input("dockerImageName", required: true)]
         public Input<string> DockerImageName { get; set; } = null!;
+
+        /// <summary>
+        /// The relative directory path to the folder containing the docker image. Either this or dockerImageName must be provided.
+        /// </summary>
+        [Input("imageDirectory")]
+        public Input<string>? ImageDirectory { get; set; }
 
         /// <summary>
         /// The name prefix given to child resources of this component. Should not contain dashes.
@@ -66,6 +72,12 @@ namespace Pulumi.AzureJustrun
         /// </summary>
         [Input("resourceGroup")]
         public Input<Pulumi.AzureNative.Resources.ResourceGroup>? ResourceGroup { get; set; }
+
+        /// <summary>
+        /// The version of the docker image created, if not provided
+        /// </summary>
+        [Input("version")]
+        public Input<string>? Version { get; set; }
 
         public ContainerappArgs()
         {

@@ -15,35 +15,55 @@ __all__ = ['ContainerappArgs', 'Containerapp']
 class ContainerappArgs:
     def __init__(__self__, *,
                  docker_image_name: pulumi.Input[str],
+                 image_directory: Optional[pulumi.Input[str]] = None,
                  name_prefix: Optional[pulumi.Input[str]] = None,
                  registry: Optional[pulumi.Input['pulumi_azure_native.containerregistry.Registry']] = None,
-                 resource_group: Optional[pulumi.Input['pulumi_azure_native.resources.ResourceGroup']] = None):
+                 resource_group: Optional[pulumi.Input['pulumi_azure_native.resources.ResourceGroup']] = None,
+                 version: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a Containerapp resource.
-        :param pulumi.Input[str] docker_image_name: The name of the docker image to use. Required.
+        :param pulumi.Input[str] docker_image_name: The name of the docker image to use. Required. Either this or imageDirectory must be provided. A docker image will be created if this is not provided.
+        :param pulumi.Input[str] image_directory: The relative directory path to the folder containing the docker image. Either this or dockerImageName must be provided.
         :param pulumi.Input[str] name_prefix: The name prefix given to child resources of this component. Should not contain dashes.
         :param pulumi.Input['pulumi_azure_native.containerregistry.Registry'] registry: The container registry to use. One will be created if not provided.
         :param pulumi.Input['pulumi_azure_native.resources.ResourceGroup'] resource_group: The resource group to use. One will be created if not provided.
+        :param pulumi.Input[str] version: The version of the docker image created, if not provided
         """
         pulumi.set(__self__, "docker_image_name", docker_image_name)
+        if image_directory is not None:
+            pulumi.set(__self__, "image_directory", image_directory)
         if name_prefix is not None:
             pulumi.set(__self__, "name_prefix", name_prefix)
         if registry is not None:
             pulumi.set(__self__, "registry", registry)
         if resource_group is not None:
             pulumi.set(__self__, "resource_group", resource_group)
+        if version is not None:
+            pulumi.set(__self__, "version", version)
 
     @property
     @pulumi.getter(name="dockerImageName")
     def docker_image_name(self) -> pulumi.Input[str]:
         """
-        The name of the docker image to use. Required.
+        The name of the docker image to use. Required. Either this or imageDirectory must be provided. A docker image will be created if this is not provided.
         """
         return pulumi.get(self, "docker_image_name")
 
     @docker_image_name.setter
     def docker_image_name(self, value: pulumi.Input[str]):
         pulumi.set(self, "docker_image_name", value)
+
+    @property
+    @pulumi.getter(name="imageDirectory")
+    def image_directory(self) -> Optional[pulumi.Input[str]]:
+        """
+        The relative directory path to the folder containing the docker image. Either this or dockerImageName must be provided.
+        """
+        return pulumi.get(self, "image_directory")
+
+    @image_directory.setter
+    def image_directory(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "image_directory", value)
 
     @property
     @pulumi.getter(name="namePrefix")
@@ -81,6 +101,18 @@ class ContainerappArgs:
     def resource_group(self, value: Optional[pulumi.Input['pulumi_azure_native.resources.ResourceGroup']]):
         pulumi.set(self, "resource_group", value)
 
+    @property
+    @pulumi.getter
+    def version(self) -> Optional[pulumi.Input[str]]:
+        """
+        The version of the docker image created, if not provided
+        """
+        return pulumi.get(self, "version")
+
+    @version.setter
+    def version(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "version", value)
+
 
 class Containerapp(pulumi.ComponentResource):
     @overload
@@ -88,18 +120,22 @@ class Containerapp(pulumi.ComponentResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  docker_image_name: Optional[pulumi.Input[str]] = None,
+                 image_directory: Optional[pulumi.Input[str]] = None,
                  name_prefix: Optional[pulumi.Input[str]] = None,
                  registry: Optional[pulumi.Input['pulumi_azure_native.containerregistry.Registry']] = None,
                  resource_group: Optional[pulumi.Input['pulumi_azure_native.resources.ResourceGroup']] = None,
+                 version: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
         Create a Containerapp resource with the given unique name, props, and options.
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] docker_image_name: The name of the docker image to use. Required.
+        :param pulumi.Input[str] docker_image_name: The name of the docker image to use. Required. Either this or imageDirectory must be provided. A docker image will be created if this is not provided.
+        :param pulumi.Input[str] image_directory: The relative directory path to the folder containing the docker image. Either this or dockerImageName must be provided.
         :param pulumi.Input[str] name_prefix: The name prefix given to child resources of this component. Should not contain dashes.
         :param pulumi.Input['pulumi_azure_native.containerregistry.Registry'] registry: The container registry to use. One will be created if not provided.
         :param pulumi.Input['pulumi_azure_native.resources.ResourceGroup'] resource_group: The resource group to use. One will be created if not provided.
+        :param pulumi.Input[str] version: The version of the docker image created, if not provided
         """
         ...
     @overload
@@ -125,9 +161,11 @@ class Containerapp(pulumi.ComponentResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  docker_image_name: Optional[pulumi.Input[str]] = None,
+                 image_directory: Optional[pulumi.Input[str]] = None,
                  name_prefix: Optional[pulumi.Input[str]] = None,
                  registry: Optional[pulumi.Input['pulumi_azure_native.containerregistry.Registry']] = None,
                  resource_group: Optional[pulumi.Input['pulumi_azure_native.resources.ResourceGroup']] = None,
+                 version: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         if opts is None:
             opts = pulumi.ResourceOptions()
@@ -145,9 +183,11 @@ class Containerapp(pulumi.ComponentResource):
             if docker_image_name is None and not opts.urn:
                 raise TypeError("Missing required property 'docker_image_name'")
             __props__.__dict__["docker_image_name"] = docker_image_name
+            __props__.__dict__["image_directory"] = image_directory
             __props__.__dict__["name_prefix"] = name_prefix
             __props__.__dict__["registry"] = registry
             __props__.__dict__["resource_group"] = resource_group
+            __props__.__dict__["version"] = version
             __props__.__dict__["url"] = None
         super(Containerapp, __self__).__init__(
             'azure-justrun:index:containerapp',
