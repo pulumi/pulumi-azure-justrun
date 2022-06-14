@@ -11,6 +11,7 @@ env:
   ARM_LOCATION: westus
   ARM_SUBSCRIPTION_ID: 0282681f-7a9e-424b-80b2-96babd57a8a1
   ARM_TENANT_ID: 706143bc-e1d4-4593-aee2-c9dc60ab9be7
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }} #Necessary for Testing
   PULUMI_API: https://api.pulumi-staging.io #Necessary for Testing
 
