@@ -4,10 +4,9 @@
 package examples
 
 import (
-    "testing"
-    "github.com/pulumi/pulumi/pkg/v2/testing/integration"
+	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
+	"testing"
 )
-
 
 func TestWebAppPython(t *testing.T) {
 	test := getPythonBaseOptions(t)
@@ -22,7 +21,7 @@ func getPythonBaseOptions(t *testing.T) integration.ProgramTestOptions {
 			"azure-native:location": envRegion,
 		},
 		Dependencies: []string{
-			filepath.Join(".","sdk", "python"),
+			filepath.Join("..", "sdk", "python"),
 		},
 	})
 

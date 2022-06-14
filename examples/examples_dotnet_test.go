@@ -18,7 +18,7 @@ func getCsharpBaseOptions(t *testing.T) integration.ProgramTestOptions {
 	base := getBaseOptions()
 	baseCsharp := base.With(integration.ProgramTestOptions{
 		Dependencies: []string{
-			filepath.Join(".", "sdk", "dotnet"),
+			filepath.Join("..", "sdk", "dotnet"),
 		},
 	})
 

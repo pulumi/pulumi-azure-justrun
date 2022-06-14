@@ -3,7 +3,7 @@ module golangwebapp
 go 1.17
 
 require (
-	github.com/pulumi/pulumi-azure-native/sdk v1.65.0
+	github.com/pulumi/pulumi-azure-justrun v0.1.14
 	github.com/pulumi/pulumi/sdk/v3 v3.34.1
 )
 
@@ -30,7 +30,7 @@ require (
 	github.com/opentracing/opentracing-go v1.1.0 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/pkg/term v1.1.0 // indirect
-	github.com/pulumi/pulumi-azure-justrun v0.1.14 // indirect
+	github.com/pulumi/pulumi-azure-native/sdk v1.65.0 // indirect
 	github.com/rivo/uniseg v0.2.0 // indirect
 	github.com/rogpeppe/go-internal v1.8.1 // indirect
 	github.com/sabhiram/go-gitignore v0.0.0-20180611051255-d3107576ba94 // indirect
