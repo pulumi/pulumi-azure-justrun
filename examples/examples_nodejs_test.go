@@ -4,21 +4,24 @@
 package examples
 
 import (
-    "testing"
+	"testing"
 
-    "github.com/pulumi/pulumi/pkg/v2/testing/integration"
+	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
 )
 
-
 func TestWebAppNodeJS(t *testing.T) {
-	test := integration.ProgramTestOptions{
-		Quick:       true,
-        SkipRefresh: true,
-        Dir:         path.Join(cwd, "nodejswebapp"),
-        Config: map[string]string{
-            "azure-native:location": "WestUS",
-        },
-	}
+	test := getJSBaseOptions(t)
 
 	integration.ProgramTest(t, &test)
+}
+
+func getJSBaseOptions(t *testing.T) integration.ProgramTestOptions {
+	base := getBaseOptions()
+	baseJS := base.With(integration.ProgramTestOptions{
+		Dependencies: []string{
+			"@pulumi/azure-native",
+		},
+	})
+
+	return baseJS
 }

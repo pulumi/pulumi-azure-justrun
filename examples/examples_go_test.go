@@ -4,7 +4,6 @@
 package examples
 
 import (
-	"path/filepath"
 	"testing"
 
 	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
@@ -17,7 +16,7 @@ func TestWebAppGo(t *testing.T) {
 }
 
 func getGoBaseOptions(t *testing.T) integration.ProgramTestOptions {
-	base := getBaseOptions(t)
+	base := getBaseOptions()
 	baseGo := base.With(integration.ProgramTestOptions{
 		Dependencies: []string{
 			"github.com/pulumi/pulumi-azure-native/sdk/go",

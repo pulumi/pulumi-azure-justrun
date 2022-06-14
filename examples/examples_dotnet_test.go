@@ -4,21 +4,23 @@
 package examples
 
 import (
-    "testing"
+	"testing"
 
-    "github.com/pulumi/pulumi/pkg/v2/testing/integration"
+	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
 )
 
-
 func TestWebAppDotNet(t *testing.T) {
-	test := integration.ProgramTestOptions{
-		Quick:       true,
-        SkipRefresh: true,
-        Dir:         path.Join(cwd, "cswebapp"),
-        Config: map[string]string{
-            "azure-native:location": "WestUS",
-        },
-	}
-
+	test := getCsharpBaseOptions(t)
 	integration.ProgramTest(t, &test)
+}
+
+func getCsharpBaseOptions(t *testing.T) integration.ProgramTestOptions {
+	base := getBaseOptions()
+	baseCsharp := base.With(integration.ProgramTestOptions{
+		Dependencies: []string{
+			"Pulumi.AzureNative",
+		},
+	})
+
+	return baseCsharp
 }
