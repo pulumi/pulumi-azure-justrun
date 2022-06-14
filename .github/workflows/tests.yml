@@ -1,0 +1,155 @@
+name: acceptance-tests
+on:
+  pull_request:
+    branches:
+      - main
+    
+env:
+  ARM_CLIENT_ID: 6c2c6744-1e33-4ee0-b50a-2fdce243491e
+  ARM_CLIENT_SECRET: ${{ secrets.AZ_CLIENTSECRET_EXP_JUN2024 }}
+  ARM_ENVIRONMENT: public
+  ARM_LOCATION: westus
+  ARM_SUBSCRIPTION_ID: 0282681f-7a9e-424b-80b2-96babd57a8a1
+  ARM_TENANT_ID: 706143bc-e1d4-4593-aee2-c9dc60ab9be7
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }} #Necessary for Testing
+  PULUMI_API: https://api.pulumi-staging.io #Necessary for Testing
+
+jobs:
+  build-provider:
+    name: build-provider
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v2
+      - name: Unshallow clone for tags
+        run: git fetch --prune --unshallow --tags
+      - name: Cache Provider Binaries
+        id: cache
+        uses: actions/cache@v3
+        with:
+          path: bin
+          key: ${{ runner.os }}-${{ hashFiles('provider/**') }}
+      - name: Setup Node
+        if: steps.cache.outputs.cache-hit != 'true'
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{matrix.nodeversion}}
+      - uses: MOZGIII/install-ldid-action@v1
+        if: steps.cache.outputs.cache-hit != 'true'
+        with:
+          tag: v2.1.5-procursus2
+      - name: Install pulumictl
+        if: steps.cache.outputs.cache-hit != 'true'
+        uses: jaxxstorm/action-install-gh-release@v1.5.0
+        with:
+          repo: pulumi/pulumictl
+      - name: Install Pulumi CLI
+        if: steps.cache.outputs.cache-hit != 'true'
+        uses: pulumi/action-install-pulumi-cli@v1.0.1
+      - run: make build_provider
+        if: steps.cache.outputs.cache-hit != 'true'
+      - name: Create Provider Binaries
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: make dist
+      - name: Upload bin
+        if: steps.cache.outputs.cache-hit != 'true'
+        uses: actions/upload-artifact@v3
+        with:
+          name: bin
+          path: bin
+
+    strategy:
+      fail-fast: true
+      matrix:
+        nodeversion:
+          - 16.x
+  acceptance-test:
+    needs: build-provider
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v2
+      - name: Checkout Scripts Repo
+        uses: actions/checkout@v2
+        with:
+          path: ci-scripts
+          repository: pulumi/scripts
+      - name: Unshallow clone for tags
+        run: git fetch --prune --unshallow --tags
+      - name: Install pulumictl
+        uses: jaxxstorm/action-install-gh-release@v1.1.0
+        with:
+          repo: pulumi/pulumictl
+      - name: Install Pulumi CLI
+        uses: pulumi/action-install-pulumi-cli@v1.0.1
+      - name: Install gotestfmt
+        uses: jaxxstorm/action-install-gh-release@v1.2.0
+        with:
+          repo: haveyoudebuggedit/gotestfmt
+      - name: Install Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: ${{ matrix.goversion }}
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{matrix.nodeversion}}
+          registry-url: https://registry.npmjs.org
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{matrix.pythonversion}}
+      - name: Setup DotNet
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: ${{matrix.dotnetversion}}
+      - name: Cache Provider Binaries
+        id: cache
+        uses: actions/cache@v3
+        with:
+          path: bin
+          key: ${{ runner.os }}-${{ hashFiles('provider/**') }}
+      - name: Download bin
+        if: steps.cache.outputs.cache-hit != 'true'
+        uses: actions/download-artifact@v3
+        with:
+          name: bin
+          path: bin
+      - name: Install Python deps
+        run: |-
+          pip3 install virtualenv==20.0.23
+          pip3 install pipenv
+      - name: Update path
+        run: echo "${{ github.workspace }}/bin" >> $GITHUB_PATH
+      - name: Build SDK
+        run: make build_${{ matrix.language }}_sdk
+      - name: Check worktree clean
+        run: |
+          git update-index -q --refresh
+          if ! git diff-files --quiet; then
+              >&2 echo "error: working tree is not clean, aborting!"
+              git status
+              git diff
+              exit 1
+          fi
+      - name: Compress SDK folder
+        run: tar -zcf sdk/${{ matrix.language }}.tar.gz -C sdk/${{ matrix.language }}
+          .
+        if: matrix.language == 'python'
+      - name: Run tests
+        run: make test_${{ matrix.language }}
+    strategy:
+      fail-fast: false
+      matrix:
+        goversion:
+          - 1.18.x
+        pythonversion:
+          - 3.8
+        nodeversion:
+          - 16.x
+        language:
+          - nodejs
+          - python
+          - dotnet
+          - go
