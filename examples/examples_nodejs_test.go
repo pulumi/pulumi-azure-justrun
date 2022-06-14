@@ -4,8 +4,6 @@
 package examples
 
 import (
-    "os"
-    "path"
     "testing"
 
     "github.com/pulumi/pulumi/pkg/v2/testing/integration"
@@ -13,10 +11,6 @@ import (
 
 
 func TestWebAppNodeJS(t *testing.T) {
-	cwd, err := os.Getwd()
-	if err != nil {
-		t.FailNow()
-	}
 	test := integration.ProgramTestOptions{
 		Quick:       true,
         SkipRefresh: true,

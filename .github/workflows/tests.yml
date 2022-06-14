@@ -3,6 +3,9 @@ on:
   push:
     branches:
       - dev-*
+  pull_request:
+    branches:
+      - main
     
 env:
   ARM_CLIENT_ID: 6c2c6744-1e33-4ee0-b50a-2fdce243491e
