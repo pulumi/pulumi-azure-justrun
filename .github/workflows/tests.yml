@@ -55,26 +55,26 @@ jobs:
           path: bin
           key: ${{ runner.os }}-${{ hashFiles('provider/**') }}
       - name: Setup Node
-        if: steps.cache.ouputs.cache-hit != 'true'
+        if: steps.cache.outputs.cache-hit != 'true'
         uses: actions/setup-node@v1
         with:
           node-version: ${{matrix.nodeversion}}
       - uses: MOZGIII/install-ldid-action@v1
-        if: steps.cache.ouputs.cache-hit != 'true'
+        if: steps.cache.outputs.cache-hit != 'true'
         with:
           tag: v2.1.5-procursus2
       - name: Install pulumictl
-        if: steps.cache.ouputs.cache-hit != 'true'
+        if: steps.cache.outputs.cache-hit != 'true'
         uses: jaxxstorm/action-install-gh-release@v1.5.0
         with:
           repo: pulumi/pulumictl
       - name: Install Pulumi CLI
-        if: steps.cache.ouputs.cache-hit != 'true'
+        if: steps.cache.outputs.cache-hit != 'true'
         uses: pulumi/action-install-pulumi-cli@v1.0.1
       - run: make build_provider
-        if: steps.cache.ouputs.cache-hit != 'true'
+        if: steps.cache.outputs.cache-hit != 'true'
       - name: Create Provider Binaries
-        if: steps.cache.ouputs.cache-hit != 'true'
+        if: steps.cache.outputs.cache-hit != 'true'
         run: make dist
       - name: Upload bin
         uses: actions/upload-artifact@v3
