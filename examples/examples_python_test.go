@@ -24,7 +24,7 @@ func getPythonBaseOptions(t *testing.T) integration.ProgramTestOptions {
 			"azure-native:location": envRegion,
 		},
 		Dependencies: []string{
-			filepath.Join(getCwd(t), "..", "sdk", "python"),
+			filepath.Join("..", "sdk", "python", "bin"),
 		},
 	})
 
