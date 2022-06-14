@@ -11,7 +11,9 @@ import (
 )
 
 func TestWebAppGo(t *testing.T) {
-	test := getGoBaseOptions(t)
+	test := getGoBaseOptions(t).With(integration.ProgramTestOptions{
+		Dir: path.Join(cwd, "golangwebapp"),
+	})
 	integration.ProgramTest(t, &test)
 }
 

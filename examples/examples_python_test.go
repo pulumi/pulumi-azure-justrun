@@ -9,7 +9,9 @@ import (
 )
 
 func TestWebAppPython(t *testing.T) {
-	test := getPythonBaseOptions(t)
+	test := getPythonBaseOptions(t).With(integration.ProgramTestOptions{
+		Dir: path.Join(cwd, "pythonwebapp"),
+	})
 	integration.ProgramTest(t, &test)
 }
 

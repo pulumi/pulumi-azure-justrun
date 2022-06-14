@@ -11,7 +11,9 @@ import (
 )
 
 func TestWebAppDotNet(t *testing.T) {
-	test := getCsharpBaseOptions(t)
+	test := getCsharpBaseOptions(t).With(integration.ProgramTestOptions{
+		Dir: path.Join(cwd, "cswebapp"),
+	})
 	integration.ProgramTest(t, &test)
 }
 

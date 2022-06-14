@@ -11,7 +11,9 @@ import (
 )
 
 func TestWebAppNodeJS(t *testing.T) {
-	test := getJSBaseOptions(t)
+	test := getJSBaseOptions(t).With(integration.ProgramTestOptions{
+		Dir: path.Join(cwd, "nodejswebapp"),
+	})
 
 	integration.ProgramTest(t, &test)
 }
