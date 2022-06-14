@@ -17,6 +17,9 @@ const storageAccount = new storage.StorageAccount(`${namePrefix}sa`, {
 
 const webapp = new justrun.Webapp("webapp", {
     "filePath": "./www",
+    "storageAccount": storageAccount,
+    "resourceGroup": rg,
+    "namePrefix": "pref"
 })
 
 export const url = webapp.url
