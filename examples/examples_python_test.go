@@ -5,6 +5,7 @@ package examples
 
 import (
 	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
+	"path/filepath"
 	"testing"
 )
 
