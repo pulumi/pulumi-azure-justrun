@@ -13,7 +13,6 @@ func TestWebAppNodeJS(t *testing.T) {
 	test := getJSBaseOptions(t).With(integration.ProgramTestOptions{
 		Dir: filepath.Join(getCwd(t), "nodejswebapp"),
 	})
-
 	integration.ProgramTest(t, &test)
 }
 

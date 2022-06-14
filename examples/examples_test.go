@@ -24,7 +24,7 @@ func skipIfShort(t *testing.T) {
 	}
 }
 
-func getEnvRegion(t *testing.T) string {
+func getEnvRegion() string {
 	/*
 		envRegion := os.Getenv("AWS_REGION")
 		if envRegion == "" {
@@ -48,6 +48,9 @@ func getBaseOptions() integration.ProgramTestOptions {
 		ExpectRefreshChanges: true,
 		SkipRefresh:          true,
 		Quick:                true,
+		Config: map[string]string{
+			"azure-native:location": getEnvRegion(),
+		},
 	}
 }
 
