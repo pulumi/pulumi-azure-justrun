@@ -3,8 +3,9 @@
     "version": "v1.0.0",
     "bin": "bin/index.js",
     "dependencies": {
-        "@pulumi/pulumi": "^3.0.0",
-        "@pulumi/azure-native": "^1.0.0"
+        "@pulumi/azure-native": "^1.0.0",
+        "@pulumi/docker": "^3.2.0",
+        "@pulumi/pulumi": "^3.0.0"
     },
     "devDependencies": {
         "@types/node": "^10.0.0",

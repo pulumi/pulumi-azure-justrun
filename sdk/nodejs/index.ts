@@ -5,6 +5,7 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
 // Export members:
+export * from "./containerapp";
 export * from "./provider";
 export * from "./webapp";
 
@@ -19,12 +20,15 @@ export {
 };
 
 // Import resources to register:
+import { Containerapp } from "./containerapp";
 import { Webapp } from "./webapp";
 
 const _module = {
     version: utilities.getVersion(),
     construct: (name: string, type: string, urn: string): pulumi.Resource => {
         switch (type) {
+            case "azure-justrun:index:containerapp":
+                return new Containerapp(name, <any>undefined, { urn })
             case "azure-justrun:index:webapp":
                 return new Webapp(name, <any>undefined, { urn })
             default:
