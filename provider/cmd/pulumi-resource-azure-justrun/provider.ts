@@ -14,7 +14,6 @@
 
 import * as pulumi from "@pulumi/pulumi";
 import * as provider from "@pulumi/pulumi/provider";
-
 import {WebApp, WebAppArgs} from "./webapp";
 
 export class Provider implements provider.Provider {
@@ -33,8 +32,7 @@ export class Provider implements provider.Provider {
     }
 }
 
-async function constructWebApp(name: string, inputs: pulumi.Inputs,
-    options: pulumi.ComponentResourceOptions): Promise<provider.ConstructResult> {
+async function constructWebApp(name: string, inputs: pulumi.Inputs, options: pulumi.ComponentResourceOptions): Promise<provider.ConstructResult> {
 
     // Create the component resource.
     const staticPage = new WebApp(name, inputs as WebAppArgs, options);
