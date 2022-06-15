@@ -15,7 +15,7 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as provider from "@pulumi/pulumi/provider";
 import {WebApp, WebAppArgs} from "./webapp";
-import {ContainerApp, ContainerAppArgs} from "./webapp";
+import {ContainerApp, ContainerAppArgs} from "./containerapp";
 
 export class Provider implements provider.Provider {
     constructor(readonly version: string, readonly schema: string) { }
