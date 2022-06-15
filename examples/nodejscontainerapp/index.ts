@@ -4,7 +4,7 @@ import * as resources from "@pulumi/azure-native/resources";
 import * as storage from "@pulumi/azure-native/storage";
 
 // Create an Azure Resource Group
-const containerapp = new justrun.ContainerApp("containerapp", {
+const containerapp = new justrun.Containerapp("containerapp", {
     "imageDirectory": "./node-app",
 });
 
