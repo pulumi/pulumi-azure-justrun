@@ -1,5 +1,5 @@
 {
-    "name": "nodejswebapp",
+    "name": "nodejscontainerapp",
     "devDependencies": {
         "@types/node": "^14"
     },
