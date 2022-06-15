@@ -6,6 +6,7 @@ package examples
 import (
 	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
 	"github.com/pulumi/pulumi/sdk/v3/go/common/util/executable"
+	"github.com/stretchr/testify/assert"
 	"path/filepath"
 	"testing"
 )
@@ -28,7 +29,7 @@ func getGoBaseOptions(t *testing.T) integration.ProgramTestOptions {
 			exec, err := executable.FindExecutable("go")
 			assert.NoError(t, err)
 
-			err := integration.RunCommand(t, "Go Mod Replace", []string{exec, "mod", "edit", "replace", "github.com/pulumi/pulumi-azure-justrun/sdk/go/azure-justrun=../../sdk/go/azure-justrun"}, cwd, opts)
+			err := integration.RunCommand(t, "Go Mod Replace", []string{exec, "mod", "edit", "replace", "github.com/pulumi/pulumi-azure-justrun/sdk/go/azure-justrun=../../sdk/go/azure-justrun"}, cwd, &integration.ProgramTestOptions{})
 			assert.NoError(t, err)
 		},
 	})

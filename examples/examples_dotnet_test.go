@@ -5,6 +5,7 @@ package examples
 
 import (
 	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
+	"github.com/stretchr/testify/assert"
 	"path/filepath"
 	"testing"
 )
@@ -25,7 +26,7 @@ func getCsharpBaseOptions(t *testing.T) integration.ProgramTestOptions {
 			cwd := stack.Outputs["cwd"].(string)
 			assert.NotEmpty(t, cwd)
 
-			err := integration.RunCommand(t, "yarn", []string{"link"}, cwd, opts)
+			err := integration.RunCommand(t, "yarn", []string{"link"}, cwd, &integration.ProgramTestOptions{})
 			assert.NoError(t, err)
 		},
 	})
