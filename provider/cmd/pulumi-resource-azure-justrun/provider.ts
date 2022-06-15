@@ -15,6 +15,7 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as provider from "@pulumi/pulumi/provider";
 import {WebApp, WebAppArgs} from "./webapp";
+import {ContainerApp, ContainerAppArgs} from "./webapp";
 
 export class Provider implements provider.Provider {
     constructor(readonly version: string, readonly schema: string) { }
@@ -26,6 +27,8 @@ export class Provider implements provider.Provider {
         switch (type) {
             case "azure-justrun:index:webapp":
                 return await constructWebApp(name, inputs, options);
+            case "azure-justrun:index:containerapp":
+                return await constructContainerApp(name, inputs, options);
             default:
                 throw new Error(`unknown resource type ${type}`);
         }
@@ -33,15 +36,21 @@ export class Provider implements provider.Provider {
 }
 
 async function constructWebApp(name: string, inputs: pulumi.Inputs, options: pulumi.ComponentResourceOptions): Promise<provider.ConstructResult> {
-
-    // Create the component resource.
-    const staticPage = new WebApp(name, inputs as WebAppArgs, options);
-
-    // Return the component resource's URN and outputs as its state.
+    const webapp = new WebApp(name, inputs as WebAppArgs, options);
     return {
-        urn: staticPage.urn,
+        urn: webapp.urn,
         state: {
-            url: staticPage.url,
+            url: webapp.url,
         },
     };
+}
+
+async function constructContainerApp(name: string, inputs: pulumi.Inputs, options: pulumi.ComponentResourceOptions): Promise<provider.ConstructResult> {
+        const containerApp = new ContainerApp(name, inputs as ContainerAppArgs, options);
+        return {
+            urn: containerApp.urn,
+            state: {
+                url: containerApp.url,
+            },
+        };
 }
