@@ -35,7 +35,7 @@ func getJSBaseOptions(t *testing.T) integration.ProgramTestOptions {
 			exec, err := executable.FindExecutable("yarn")
 			assert.NoError(t, err)
 
-			err := integration.RunCommand(t, "Yarn Link", []string{exec, "link", "@pulumi/azure-justrun"}, cwd, opts)
+			err := integration.RunCommand(t, "Yarn Link", []string{exec, "link", "@pulumi/azure-justrun"}, cwd, &integration.ProgramTestOptions{})
 			assert.NoError(t, err)
 		},
 	})
