@@ -97,8 +97,6 @@ build_nodejs_sdk:: gen_nodejs_sdk
 
 install_nodejs_sdk:: build_nodejs_sdk
 	yarn link --cwd ${WORKING_DIR}/sdk/nodejs/bin
-	cd examples/nodejscontainerapp && yarn link @pulumi/azurejustrun
-	cd examples/nodejswebapp && yarn link @pulumi/azurejustrun
 
 # Python SDK
 
@@ -119,6 +117,8 @@ build_python_sdk:: gen_python_sdk
 test_nodejs:: PATH := $(WORKING_DIR)/bin:$(PATH)
 test_nodejs:: ./bin install_nodejs_sdk
 	@export PATH
+	cd examples/nodejscontainerapp && yarn link @pulumi/azure-justrun
+	cd examples/nodejswebapp && yarn link @pulumi/azure-justrun
 	cd examples && go test -tags=nodejs -v -json -count=1 -cover -timeout 3h -parallel ${TESTPARALLELISM} . 2>&1 | tee /tmp/gotest.log | gotestfmt
 
 test_python:: PATH := $(WORKING_DIR)/bin/python:$(PATH)
@@ -129,6 +129,8 @@ test_python:: ./bin
 test_go:: PATH := $(WORKING_DIR)/bin:$(PATH)
 test_go:: ./bin
 	@export PATH
+	cd examples/golangcontainerapp && yarn link @pulumi/azure-justrun
+	cd examples/golangwebapp && yarn link @pulumi/azure-justrun
 	cd examples && go test -tags=go -v -json -count=1 -cover -timeout 3h -parallel ${TESTPARALLELISM} . 2>&1 | tee /tmp/gotest.log | gotestfmt
 
 test_dotnet:: PATH := $(WORKING_DIR)/bin:$(PATH)
