@@ -16,6 +16,13 @@ func TestWebAppGo(t *testing.T) {
 	integration.ProgramTest(t, &test)
 }
 
+func TestContainerAppGo(t *testing.T) {
+	test := getGoBaseOptions(t).With(integration.ProgramTestOptions{
+		Dir: filepath.Join(getCwd(t), "golangcontainerapp"),
+	})
+	integration.ProgramTest(t, &test)
+}
+
 func getGoBaseOptions(t *testing.T) integration.ProgramTestOptions {
 	base := getBaseOptions()
 	baseGo := base.With(integration.ProgramTestOptions{

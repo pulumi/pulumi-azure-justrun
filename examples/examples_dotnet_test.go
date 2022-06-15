@@ -16,6 +16,13 @@ func TestWebAppDotNet(t *testing.T) {
 	integration.ProgramTest(t, &test)
 }
 
+func TestContainerAppDotNet(t *testing.T) {
+	test := getCsharpBaseOptions(t).With(integration.ProgramTestOptions{
+		Dir: filepath.Join(getCwd(t), "cscontainerapp"),
+	})
+	integration.ProgramTest(t, &test)
+}
+
 func getCsharpBaseOptions(t *testing.T) integration.ProgramTestOptions {
 	base := getBaseOptions()
 	baseCsharp := base.With(integration.ProgramTestOptions{
