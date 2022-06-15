@@ -97,7 +97,8 @@ build_nodejs_sdk:: gen_nodejs_sdk
 
 install_nodejs_sdk:: build_nodejs_sdk
 	yarn link --cwd ${WORKING_DIR}/sdk/nodejs/bin
-
+	cd examples/nodejscontainerapp && yarn link @pulumi/azurejustrun
+	cd examples/nodejswebapp && yarn link @pulumi/azurejustrun
 
 # Python SDK
 
