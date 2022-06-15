@@ -3,13 +3,8 @@
 package examples
 
 import (
-	"io/ioutil"
-	"net/http"
 	"os"
 	"testing"
-	"time"
-
-	"github.com/stretchr/testify/assert"
 
 	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
 )
