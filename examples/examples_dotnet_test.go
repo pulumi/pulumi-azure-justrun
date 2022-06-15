@@ -19,7 +19,14 @@ func TestWebAppDotNet(t *testing.T) {
 func getCsharpBaseOptions(t *testing.T) integration.ProgramTestOptions {
 	base := getBaseOptions()
 	baseCsharp := base.With(integration.ProgramTestOptions{
-		Dependencies: []string{
+		Dependencies: []string{},
+		ExtraRuntimeValidation: func(t *testing.T, stack integration.RuntimeValidationStackInfo) {
+
+			cwd := stack.Outputs["cwd"].(string)
+			assert.NotEmpty(t, cwd)
+
+			err := integration.RunCommand(t, "yarn", []string{"link"}, cwd, opts)
+			assert.NoError(t, err)
 		},
 	})
 

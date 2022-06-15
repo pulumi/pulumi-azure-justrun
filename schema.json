@@ -1,6 +1,6 @@
 {
     "name": "azure-justrun",
-    "version": "v0.1.14",
+    "version": "v0.2.0",
     "types": {
         "azure-justrun:index:emptyType": {
             "type": "object",

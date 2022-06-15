@@ -27,6 +27,16 @@ func getJSBaseOptions(t *testing.T) integration.ProgramTestOptions {
 	base := getBaseOptions()
 	baseJS := base.With(integration.ProgramTestOptions{
 		Dependencies: []string{},
+		ExtraRuntimeValidation: func(t *testing.T, stack integration.RuntimeValidationStackInfo) {
+			cwd := stack.Outputs["cwd"].(string)
+			assert.NotEmpty(t, cwd)
+
+			exec, err := executable.FindExecutable("yarn")
+			assert.NoError(t, err)
+
+			err := integration.RunCommand(t, "Yarn Link", []string{exec, "link", "@pulumi/azure-justrun"}, cwd, opts)
+			assert.NoError(t, err)
+		},
 	})
 
 	return baseJS

@@ -1,4 +1,4 @@
-VERSION         := 0.1.14
+VERSION         := 0.2.0
 
 PACK            := azure-justrun
 PROJECT         := github.com/pulumi/pulumi-${PACK}
@@ -77,7 +77,8 @@ build_dotnet_sdk:: gen_dotnet_sdk
 install_dotnet_sdk:: build_dotnet_sdk
 	rm -rf ${WORKING_DIR}/nuget
 	mkdir -p ${WORKING_DIR}/nuget
-	find . -name '*.nupkg' -print -exec cp -p {} ${WORKING_DIR}/nuget \;
+	find . -name '*.nupkg' -print -exec cp -p {} ${WORKING_DIR}/nuget \
+	dotnet nuget add source ${{WORKING_DIR}}/nuget
 
 
 # Node.js SDK

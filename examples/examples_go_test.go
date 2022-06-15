@@ -5,6 +5,7 @@ package examples
 
 import (
 	"github.com/pulumi/pulumi/pkg/v2/testing/integration"
+	"github.com/pulumi/pulumi/sdk/v3/go/common/util/executable"
 	"path/filepath"
 	"testing"
 )
@@ -19,7 +20,16 @@ func TestWebAppGo(t *testing.T) {
 func getGoBaseOptions(t *testing.T) integration.ProgramTestOptions {
 	base := getBaseOptions()
 	baseGo := base.With(integration.ProgramTestOptions{
-		Dependencies: []string{
+		Dependencies: []string{},
+		ExtraRuntimeValidation: func(t *testing.T, stack integration.RuntimeValidationStackInfo) {
+			cwd := stack.Outputs["cwd"].(string)
+			assert.NotEmpty(t, cwd)
+
+			exec, err := executable.FindExecutable("go")
+			assert.NoError(t, err)
+
+			err := integration.RunCommand(t, "Go Mod Replace", []string{exec, "mod", "edit", "replace", "github.com/pulumi/pulumi-azure-justrun/sdk/go/azure-justrun=../../sdk/go/azure-justrun"}, cwd, opts)
+			assert.NoError(t, err)
 		},
 	})
 
