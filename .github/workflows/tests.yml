@@ -110,6 +110,12 @@ jobs:
           pip3 install pipenv
       - name: Update path
         run: echo "${{ github.workspace }}/dist" >> $GITHUB_PATH
+      - name: Install Node deps
+        run:  yarn global add typescript
+      - run: dotnet nuget add source ${{ github.workspace }}/nuget
+      - name: Restore binary perms
+        run: find ${{ github.workspace }} -name "pulumi-*-${{ env.PROVIDER }}" -print
+          -exec chmod +x {} \;
       - name: Install Plugins
         run: pulumi plugin install resource azure-justrun v0.2.0 -f ${{ github.workspace }}/dist/pulumi-resource-azure-justrun-v0.2.0-linux-amd64.tar.gz
       - run: cd dist && dir
