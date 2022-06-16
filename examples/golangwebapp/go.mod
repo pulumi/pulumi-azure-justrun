@@ -1,13 +1,13 @@
 module golangwebapp
 
-replace github.com/pulumi/pulumi-azure-justrun/sdk/go/azure-justrun => ../../sdk/go/azure-justrun
-
 go 1.17
 
 require (
 	github.com/pulumi/pulumi-azure-justrun v0.1.14
 	github.com/pulumi/pulumi/sdk/v3 v3.34.1
 )
+
+replace github.com/pulumi/pulumi-azure-justrun/sdk/go/azure-justrun => ../../sdk/go/azure-justrun
 
 require (
 	github.com/blang/semver v3.5.1+incompatible // indirect

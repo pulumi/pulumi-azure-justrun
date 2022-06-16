@@ -124,6 +124,8 @@ test_nodejs:: ./bin install_nodejs_sdk
 test_python:: PATH := $(WORKING_DIR)/bin/python:$(PATH)
 test_python:: ./bin
 	@export PATH
+	cd examples/pythonwebapp && pip install -e ../../sdk/python
+	cd examples/pythoncontainerapp && pip install -e ../../sdk/python
 	cd examples && go test -tags=python -v -json -count=1 -cover -timeout 3h -parallel ${TESTPARALLELISM} . 2>&1 | tee /tmp/gotest.log | gotestfmt
 
 test_go:: PATH := $(WORKING_DIR)/bin:$(PATH)
