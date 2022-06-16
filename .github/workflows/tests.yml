@@ -14,6 +14,7 @@ env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }} #Necessary for Testing
   PULUMI_API: https://api.pulumi-staging.io #Necessary for Testing
+  PULUMI_LOCAL_NUGET: ${{ github.workspace }}/nuget
 
 jobs:
   build-provider:
