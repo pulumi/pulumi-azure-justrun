@@ -1,7 +1,7 @@
 package main
 
 import (
-	justrun "github.com/pulumi/pulumi-azure-justrun/sdk"
+	justrun "github.com/pulumi/pulumi-azure-justrun/sdk/go/azure-justrun"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 

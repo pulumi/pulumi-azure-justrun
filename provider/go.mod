@@ -1,4 +1,4 @@
-module github.com/pulumi/pulumi-azure-justrun
+module github.com/pulumi/pulumi-azure-justrun/sdk
 
 go 1.18
 
