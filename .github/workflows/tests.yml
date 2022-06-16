@@ -121,7 +121,7 @@ jobs:
           pip3 install virtualenv==20.0.23
           pip3 install pipenv
       - name: Update path
-        run: echo "${{ github.workspace }}/bin" >> $GITHUB_PATH && export PATH=${{github.workspace}}/bin:$PATH
+        run: echo "/bin" >> $GITHUB_PATH
       - name: Build SDK
         run: make build_${{ matrix.language }}_sdk
       - name: Check worktree clean
