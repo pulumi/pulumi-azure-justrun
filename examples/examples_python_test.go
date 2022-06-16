@@ -27,7 +27,7 @@ func getPythonBaseOptions(t *testing.T) integration.ProgramTestOptions {
 	base := getBaseOptions()
 	pythonBase := base.With(integration.ProgramTestOptions{
 		Dependencies: []string{
-			filepath.Join("..", "..", "sdk", "python"),
+			filepath.Join("..", "sdk", "python", "bin"),
 		},
 	})
 
