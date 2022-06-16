@@ -114,24 +114,24 @@ build_python_sdk:: gen_python_sdk
 		rm ./bin/setup.py.bak && \
 		cd ./bin && python3 setup.py build sdist
 
-test_nodejs:: ./dist install_nodejs_sdk
+test_nodejs:: ./examples install_nodejs_sdk
 	@export PATH
 	cd examples/nodejscontainerapp && yarn link @pulumi/azure-justrun
 	cd examples/nodejswebapp && yarn link @pulumi/azure-justrun
 	cd examples && go test -tags=nodejs -v -json -count=1 -cover -timeout 3h -parallel ${TESTPARALLELISM} . 2>&1 | tee /tmp/gotest.log | gotestfmt
 
-test_python:: ./dist
+test_python:: ./examples
 	@export PATH
 	cd examples/pythonwebapp && pip install -e ../../sdk/python
 	cd examples/pythoncontainerapp && pip install -e ../../sdk/python
 	cd examples && go test -tags=python -v -json -count=1 -cover -timeout 3h -parallel ${TESTPARALLELISM} . 2>&1 | tee /tmp/gotest.log | gotestfmt
 
-test_go:: ./dist gen_go_sdk
+test_go:: ./examples gen_go_sdk
 	@export PATH
 	cd examples/golangcontainerapp && go mod edit -replace github.com/pulumi/pulumi-azure-justrun/sdk/go/azure-justrun=../../sdk/go/azure-justrun
 	cd examples/golangwebapp && go mod edit -replace github.com/pulumi/pulumi-azure-justrun/sdk/go/azure-justrun=../../sdk/go/azure-justrun
 	cd examples && go test -tags=go -v -json -count=1 -cover -timeout 3h -parallel ${TESTPARALLELISM} . 2>&1 | tee /tmp/gotest.log | gotestfmt
 
-test_dotnet:: ./dist install_dotnet_sdk
+test_dotnet:: ./examples install_dotnet_sdk
 	@export PATH
 	cd examples && go test -tags=dotnet -v -json -count=1 -cover -timeout 3h -parallel ${TESTPARALLELISM} . 2>&1 | tee /tmp/gotest.log | gotestfmt
