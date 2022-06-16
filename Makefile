@@ -59,8 +59,11 @@ gen_go_sdk::
 	rm -rf sdk/go
 	cd provider/cmd/${CODEGEN} && go run . go ../../../sdk/go ${SCHEMA_PATH}
 
+
+install_go_sdk:: build_go_sdk
+
 ## Empty build target for Go
-build_go_sdk::
+build_go_sdk:: gen_go_sdk
 
 # .NET SDK
 
@@ -105,6 +108,8 @@ gen_python_sdk::
 	cd provider/cmd/${CODEGEN} && go run . python ../../../sdk/python ${SCHEMA_PATH}
 	cp ${WORKING_DIR}/README.md sdk/python
 
+install_python_sdk:: build_python_sdk
+
 build_python_sdk:: PYPI_VERSION := ${VERSION}
 build_python_sdk:: gen_python_sdk
 	cd sdk/python/ && \
@@ -114,7 +119,7 @@ build_python_sdk:: gen_python_sdk
 		rm ./bin/setup.py.bak && \
 		cd ./bin && python3 setup.py build sdist
 
-test_nodejs:: ./examples install_nodejs_sdk
+test_nodejs:: ./examples
 	@export PATH
 	cd examples/nodejscontainerapp && yarn link @pulumi/azure-justrun
 	cd examples/nodejswebapp && yarn link @pulumi/azure-justrun
@@ -126,12 +131,12 @@ test_python:: ./examples
 	cd examples/pythoncontainerapp && pip install -e ../../sdk/python
 	cd examples && go test -tags=python -v -json -count=1 -cover -timeout 3h -parallel ${TESTPARALLELISM} . 2>&1 | tee /tmp/gotest.log | gotestfmt
 
-test_go:: ./examples gen_go_sdk
+test_go:: ./examples
 	@export PATH
 	cd examples/golangcontainerapp && go mod edit -replace github.com/pulumi/pulumi-azure-justrun/sdk/go/azure-justrun=../../sdk/go/azure-justrun
 	cd examples/golangwebapp && go mod edit -replace github.com/pulumi/pulumi-azure-justrun/sdk/go/azure-justrun=../../sdk/go/azure-justrun
 	cd examples && go test -tags=go -v -json -count=1 -cover -timeout 3h -parallel ${TESTPARALLELISM} . 2>&1 | tee /tmp/gotest.log | gotestfmt
 
-test_dotnet:: ./examples install_dotnet_sdk
+test_dotnet:: ./examples
 	@export PATH
 	cd examples && go test -tags=dotnet -v -json -count=1 -cover -timeout 3h -parallel ${TESTPARALLELISM} . 2>&1 | tee /tmp/gotest.log | gotestfmt
