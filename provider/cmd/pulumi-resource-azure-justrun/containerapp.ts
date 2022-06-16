@@ -20,7 +20,7 @@ export class ContainerApp extends pulumi.ComponentResource {
 
         const resourceGroup = args.resourceGroup ?? new resources.ResourceGroup(`${namePrefix}rg`, {}, {parent: this});;
 
-        const workspace = new operationalinsights.Workspace("${namePrefix}loganalytics", {
+        const workspace = new operationalinsights.Workspace(`${namePrefix}loganalytics`, {
             resourceGroupName: resourceGroup.name,
             sku: {
                 name: "PerGB2018",
@@ -33,7 +33,7 @@ export class ContainerApp extends pulumi.ComponentResource {
             workspaceName: workspace.name,
         });
 
-        const managedEnv = new app.ManagedEnvironment("${namePrefix}env", {
+        const managedEnv = new app.ManagedEnvironment(`${namePrefix}env`, {
             resourceGroupName: resourceGroup.name,
             appLogsConfiguration: {
                 destination: "log-analytics",
@@ -44,7 +44,7 @@ export class ContainerApp extends pulumi.ComponentResource {
             },
         }, {parent: this});
 
-        const registry = args.registry ?? new containerregistry.Registry("${namePrefix}registry", {
+        const registry = args.registry ?? new containerregistry.Registry(`${namePrefix}registry`, {
             resourceGroupName: resourceGroup.name,
             sku: {
                 name: "Basic",
@@ -63,7 +63,7 @@ export class ContainerApp extends pulumi.ComponentResource {
             throw new Error("Either dockerImageName or imageDirectory must be specified");
         }
 
-        const imageName = args.dockerImageName ?? new docker.Image("${namePrefix}image", {
+        const imageName = args.dockerImageName ?? new docker.Image(`${namePrefix}image`, {
             imageName: pulumi.interpolate`${registry.loginServer}/${args.imageDirectory}:v${version}`,
             build: { context: `./${args.imageDirectory}` },
             registry: {
@@ -73,7 +73,7 @@ export class ContainerApp extends pulumi.ComponentResource {
             },
         },{parent: this}).imageName;
 
-        const containerApp = new app.ContainerApp("${namePrefix}app", {
+        const containerApp = new app.ContainerApp(`${namePrefix}app`, {
             resourceGroupName: resourceGroup.name,
             managedEnvironmentId: managedEnv.id,
             configuration: {
