@@ -28,7 +28,7 @@ jobs:
         id: cache
         uses: actions/cache@v3
         with:
-          path: bin
+          path: dist
           key: ${{ runner.os }}-${{ hashFiles('provider/**') }}
       - name: Setup Node
         if: steps.cache.outputs.cache-hit != 'true'
@@ -52,12 +52,6 @@ jobs:
       - name: Create Provider Binaries
         if: steps.cache.outputs.cache-hit != 'true'
         run: make dist
-      - name: Upload bin
-        if: steps.cache.outputs.cache-hit != 'true'
-        uses: actions/upload-artifact@v3
-        with:
-          name: bin
-          path: bin
 
     strategy:
       fail-fast: true
@@ -108,20 +102,14 @@ jobs:
         id: cache
         uses: actions/cache@v3
         with:
-          path: bin
+          path: dist
           key: ${{ runner.os }}-${{ hashFiles('provider/**') }}
-      - name: Download bin
-        if: steps.cache.outputs.cache-hit != 'true'
-        uses: actions/download-artifact@v3
-        with:
-          name: bin
-          path: bin
       - name: Install Python deps
         run: |-
           pip3 install virtualenv==20.0.23
           pip3 install pipenv
       - name: Update path
-        run: echo "${{ github.workspace }}/bin" >> $GITHUB_PATH
+        run: echo "${{ github.workspace }}/bin" >> $GITHUB_PATH && echo "${{ github.workspace }}/dist" >> $GITHUB_PATH
       - run: cd bin && dir
       - name: Build SDK
         run: make build_${{ matrix.language }}_sdk
