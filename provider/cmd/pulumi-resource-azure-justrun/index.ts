@@ -19,6 +19,7 @@ import { Provider } from "./provider";
 function main(args: string[]) {
     const schema: string = readFileSync(require.resolve("./schema.json"), {encoding: "utf-8"});
     let version: string = require("./package.json").version;
+    let thing: pulumi.Input<pulumi.Output<any>[]> = undefined;
     // Node allows for the version to be prefixed by a "v",
     // while semver doesn't. If there is a v, strip it off.
     if (version.startsWith("v")) {
