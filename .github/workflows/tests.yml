@@ -110,6 +110,7 @@ jobs:
           pip3 install pipenv
       - name: Update path
         run: echo "${{ github.workspace }}/dist" >> $GITHUB_PATH
+      - name: Install Plugins
         run: pulumi plugin install resource azure-justrun v0.2.0 -f ${{ github.workspace }}/dist/pulumi-resource-azure-justrun-v0.2.0-linux-amd64.tar.gz
       - run: cd dist && dir
       - name: Install SDK
@@ -120,7 +121,6 @@ jobs:
       - name: Restore binary perms
         run: find ${{ github.workspace }} -name "pulumi-*-${{ env.PROVIDER }}" -print
           -exec chmod +x {} \;
-      - name: Install Plugins
       - name: Check worktree clean
         run: |
           git update-index -q --refresh
