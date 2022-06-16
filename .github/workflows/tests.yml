@@ -110,6 +110,8 @@ jobs:
           pip3 install pipenv
       - name: Update path
         run: echo "${{ github.workspace }}/dist" >> $GITHUB_PATH
+      - name: Install Plugins
+        run: pulumi plugin install -f {{ github.workspace }}/dist/*
       - run: cd dist && dir
       - name: Build SDK
         run: make build_${{ matrix.language }}_sdk
