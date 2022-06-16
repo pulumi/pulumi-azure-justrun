@@ -57,5 +57,3 @@ require (
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	sourcegraph.com/sourcegraph/appdash v0.0.0-20190731080439-ebfcffb1b5c0 // indirect
 )
-
-replace github.com/pulumi/pulumi-azure-justrun/sdk/go/azure-justrun => ../../sdk/go/azure-justrun
