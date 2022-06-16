@@ -59,7 +59,7 @@ export class ContainerApp extends pulumi.ComponentResource {
         const adminUsername = credentials.apply(c => c.username!);
         const adminPassword = credentials.apply(c => c.passwords![0].value!);
         
-        if(args.dockerImageName != null || args.imageDirectory != null) {
+        if(args.dockerImageName == null && args.imageDirectory == null) {
             throw new Error("Either dockerImageName or imageDirectory must be specified");
         }
 
