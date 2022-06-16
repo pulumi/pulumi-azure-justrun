@@ -7,7 +7,7 @@ require (
 	github.com/pulumi/pulumi/sdk/v3 v3.34.1
 )
 
-replace github.com/pulumi/pulumi-azure-justrun/sdk/go/azure-justrun => ../../sdk/go/azure-justrun
+replace github.com/pulumi/pulumi-azure-justrun/sdk/go/azure-justrun => ../../sdk/go/azure-justrun v0.2.0
 
 require (
 	github.com/blang/semver v3.5.1+incompatible // indirect
