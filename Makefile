@@ -126,7 +126,7 @@ test_python:: ./dist
 	cd examples/pythoncontainerapp && pip install -e ../../sdk/python
 	cd examples && go test -tags=python -v -json -count=1 -cover -timeout 3h -parallel ${TESTPARALLELISM} . 2>&1 | tee /tmp/gotest.log | gotestfmt
 
-test_go:: ./dist
+test_go:: ./dist gen_go_sdk
 	@export PATH
 	cd examples/golangcontainerapp && go mod edit -replace github.com/pulumi/pulumi-azure-justrun/sdk/go/azure-justrun=../../sdk/go/azure-justrun
 	cd examples/golangwebapp && go mod edit -replace github.com/pulumi/pulumi-azure-justrun/sdk/go/azure-justrun=../../sdk/go/azure-justrun
