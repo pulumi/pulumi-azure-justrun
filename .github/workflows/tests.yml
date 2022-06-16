@@ -115,9 +115,6 @@ jobs:
       - run: cd dist && dir
       - name: Install SDK
         run: make install_${{ matrix.language }}_sdk
-      - name: Install Node deps
-        run:  yarn global add typescript
-      - run: dotnet nuget add source ${{ github.workspace }}/nuget
       - name: Restore binary perms
         run: find ${{ github.workspace }} -name "pulumi-*-${{ env.PROVIDER }}" -print
           -exec chmod +x {} \;
