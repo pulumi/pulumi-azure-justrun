@@ -143,7 +143,7 @@
         },
         "go": {
             "generateResourceContainerTypes": true,
-            "importBasePath": "github.com/pulumi/pulumi-azure-justrun/sdk/go/azurejustrun",
+            "importBasePath": "github.com/pulumi/pulumi-azure-justrun/sdk/go/azure-justrun",
             "respectSchemaVersion": true
         },
         "nodejs": {
