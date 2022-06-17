@@ -31,6 +31,12 @@ jobs:
         with:
           path: dist
           key: ${{ runner.os }}-${{ hashFiles('provider/**') }}
+      - name: Cache Provider Binaries
+        id: cache
+        uses: actions/cache@v3
+        with:
+          path: bin
+          key: ${{ runner.os }}-${{ hashFiles('provider/**') }}
       - name: Setup Node
         if: steps.cache.outputs.cache-hit != 'true'
         uses: actions/setup-node@v1
@@ -103,16 +109,14 @@ jobs:
         id: cache
         uses: actions/cache@v3
         with:
-          path: dist
+          path: bin
           key: ${{ runner.os }}-${{ hashFiles('provider/**') }}
       - name: Install Python deps
         run: |-
           pip3 install virtualenv==20.0.23
           pip3 install pipenv
-      - name: Update path
-        run: echo "${{ github.workspace }}/dist" >> $GITHUB_PATH
-      - name: Install Plugins
-        run: pulumi plugin install resource azure-justrun v0.2.0 -f ${{ github.workspace }}/dist/pulumi-resource-azure-justrun-v0.2.0-linux-amd64.tar.gz
+      - name: Update path 2
+        run: echo "${{ github.workspace }}/bin" >> $GITHUB_PATH
       - run: cd dist && dir
       - name: Install SDK
         run: make install_${{ matrix.language }}_sdk

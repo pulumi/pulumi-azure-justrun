@@ -127,10 +127,9 @@ test_python:: ./examples
 	@export PATH
 	cd examples && go test -tags=python -v -json -count=1 -cover -timeout 3h -parallel ${TESTPARALLELISM} . 2>&1 | tee /tmp/gotest.log | gotestfmt
 
+test_go:: PATH := $(WORKING_DIR)/bin:$(PATH)
 test_go:: ./examples
 	@export PATH
-	cd examples/golangcontainerapp && go mod edit -replace github.com/pulumi/pulumi-azure-justrun/sdk@v0.2.0=../sdk && go mod tidy
-	cd examples/golangwebapp && go mod edit -replace github.com/pulumi/pulumi-azure-justrun/sdk@v0.2.0=../sdk && go mod tidy
 	cd examples && go test -tags=go -v -json -count=1 -cover -timeout 3h -parallel ${TESTPARALLELISM} . 2>&1 | tee /tmp/gotest.log | gotestfmt
 
 test_dotnet:: ./examples
