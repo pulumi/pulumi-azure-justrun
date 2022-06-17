@@ -55,11 +55,11 @@ jobs:
       - name: Create Provider Binaries
         if: steps.cache.outputs.cache-hit != 'true'
         run: make dist
-      - name: Upload bin
+      - name: Upload tarballed bins
         uses: actions/upload-artifact@v3
         with:
           name: bin
-          path: bin
+          path: dist
 
 
     strategy:
