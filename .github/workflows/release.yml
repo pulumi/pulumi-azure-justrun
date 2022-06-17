@@ -3,7 +3,7 @@ on:
   push:
     tags:
       - v*.*.*
-      - '!v*.*.*-**'
+      - v*.*.*-**
 env:
   PROVIDER: "pulumi-azure-justrun"
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

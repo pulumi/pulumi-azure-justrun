@@ -133,7 +133,7 @@ jobs:
               exit 1
           fi
       - name: Install Plugins #In theory this should not be necessary, but putting /bin on the path isn't working.
-        run: pulumi plugin install resource azure-justrun v0.2.0 -f ${{ github.workspace }}/bin/pulumi-resource-azure-justrun-v0.2.0-linux-amd64.tar.gz
+        run: pulumi plugin install resource azure-justrun ${{matrix.pkgversion}} -f ${{ github.workspace }}/bin/pulumi-resource-azure-justrun-${{matrix.pkgversion}}-linux-amd64.tar.gz
       - name: Compress SDK folder
         run: tar -zcf sdk/${{ matrix.language }}.tar.gz -C sdk/${{ matrix.language }}
           .
@@ -154,3 +154,5 @@ jobs:
           - python
           - dotnet
           - go
+        pkgversion:
+          v0.2.0
