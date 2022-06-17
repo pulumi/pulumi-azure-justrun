@@ -3,7 +3,7 @@ module golangwebapp
 go 1.18
 
 require (
-	github.com/pulumi/pulumi-azure-justrun/sdk v0.0.0-00010101000000-000000000000
+	github.com/pulumi/pulumi-azure-justrun v0.1.14
 	github.com/pulumi/pulumi/sdk/v3 v3.34.1
 )
 
@@ -56,5 +56,3 @@ require (
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	sourcegraph.com/sourcegraph/appdash v0.0.0-20190731080439-ebfcffb1b5c0 // indirect
 )
-
-replace github.com/pulumi/pulumi-azure-justrun/sdk => /mnt/c/pulumidev/pulumi-azure-justrun/sdk
