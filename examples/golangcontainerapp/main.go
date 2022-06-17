@@ -7,7 +7,7 @@ import (
 
 func main() {
 	pulumi.Run(func(ctx *pulumi.Context) error {
-		containerapp, err := justrun.NewContainerapp(ctx, "containerapp", &justrun.containerappArgs{
+		containerapp, err := justrun.NewContainerapp(ctx, "containerapp", &justrun.ContainerappArgs{
 			ImageDirectory: pulumi.String("node-app"),
 		})
 		if err != nil {
