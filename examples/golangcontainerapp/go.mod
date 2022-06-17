@@ -3,7 +3,7 @@ module golangwebapp
 go 1.18
 
 require (
-	github.com/pulumi/pulumi-azure-justrun v0.1.14
+	github.com/pulumi/pulumi-azure-justrun/sdk v0.1.14
 	github.com/pulumi/pulumi/sdk/v3 v3.34.1
 )
 
@@ -22,6 +22,7 @@ require (
 	github.com/inconshreveable/mousetrap v1.0.0 // indirect
 	github.com/jbenet/go-context v0.0.0-20150711004518-d14ea06fba99 // indirect
 	github.com/kevinburke/ssh_config v0.0.0-20190725054713-01f96b0aa0cd // indirect
+	github.com/mattn/go-isatty v0.0.14 // indirect
 	github.com/mattn/go-runewidth v0.0.8 // indirect
 	github.com/mitchellh/go-homedir v1.1.0 // indirect
 	github.com/mitchellh/go-ps v1.0.0 // indirect
