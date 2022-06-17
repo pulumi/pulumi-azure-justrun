@@ -16,10 +16,18 @@ func TestWebAppNodeJS(t *testing.T) {
 	integration.ProgramTest(t, &test)
 }
 
+func TestContainerAppNodeJS(t *testing.T) {
+	test := getJSBaseOptions(t).With(integration.ProgramTestOptions{
+		Dir: filepath.Join(getCwd(t), "nodejscontainerapp"),
+	})
+	integration.ProgramTest(t, &test)
+}
+
 func getJSBaseOptions(t *testing.T) integration.ProgramTestOptions {
 	base := getBaseOptions()
 	baseJS := base.With(integration.ProgramTestOptions{
 		Dependencies: []string{
+			"@pulumi/azure-justrun",
 		},
 	})
 

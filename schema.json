@@ -1,13 +1,12 @@
 {
     "name": "azure-justrun",
-    "version": "v0.1.14",
+    "version": "v0.2.0",
     "types": {
-        "azure-justrun:index:emptyType":{
+        "azure-justrun:index:emptyType": {
             "type": "object",
-            "properties": {
-            }
+            "properties": {}
         },
-        "azure-justrun:index:PublicAccess":{
+        "azure-justrun:index:PublicAccess": {
             "type": "string",
             "description": "Duplicates azure-native:storage:PublicAccess",
             "enum": [
@@ -22,7 +21,7 @@
                 }
             ]
         },
-        "azure-justrun:index:SkuName":{
+        "azure-justrun:index:SkuName": {
             "type": "string",
             "description": "Duplicates azure-native:storage:SkuName",
             "enum": [
@@ -52,10 +51,9 @@
                 }
             ]
         }
-
     },
     "resources": {
-        "azure-justrun:index:webapp":{
+        "azure-justrun:index:webapp": {
             "isComponent": true,
             "inputProperties": {
                 "appSkuName": {
@@ -77,11 +75,11 @@
                     "$ref": "#/types/azure-justrun:index:PublicAccess",
                     "description": "The public access level of the BlobContainer containg the website data."
                 },
-                "storageSkuName":{
+                "storageSkuName": {
                     "$ref": "#/types/azure-justrun:index:SkuName",
                     "description": "The name of the SKU of the storage account created, if storageAccount is not provided"
                 },
-                "storageAccount":{
+                "storageAccount": {
                     "$ref": "/azure-native/v1.64.1/schema.json#/resources/azure-native:storage:StorageAccount",
                     "description": "The storage account to use. One will be created if not provided."
                 },
@@ -92,6 +90,40 @@
                 "namePrefix": {
                     "type": "string",
                     "description": "The name prefix given to child resources of this component. Should not contain dashes."
+                }
+            },
+            "properties": {
+                "url": {
+                    "type": "string"
+                }
+            }
+        },
+        "azure-justrun:index:containerapp": {
+            "isComponent": true,
+            "inputProperties": {
+                "namePrefix": {
+                    "type": "string",
+                    "description": "The name prefix given to child resources of this component. Should not contain dashes."
+                },
+                "resourceGroup": {
+                    "$ref": "/azure-native/v1.64.1/schema.json#/resources/azure-native:resources:ResourceGroup",
+                    "description": "The resource group to use. One will be created if not provided."
+                },
+                "registry": {
+                    "$ref": "/azure-native/v1.64.1/schema.json#/resources/azure-native:containerregistry:Registry",
+                    "description": "The container registry to use. One will be created if not provided."
+                },
+                "dockerImageName": {
+                    "type": "string",
+                    "description": "The name of the docker image to use. Required. Either this or imageDirectory must be provided. A docker image will be created if this is not provided."
+                },
+                "imageDirectory": {
+                    "type": "string",
+                    "description": "The relative directory path to the folder containing the docker image. Either this or dockerImageName must be provided."
+                },
+                "version": {
+                    "type": "string",
+                    "description": "The version of the docker image created, if not provided"
                 }
             },
             "properties": {

@@ -16,6 +16,13 @@ func TestWebAppPython(t *testing.T) {
 	integration.ProgramTest(t, &test)
 }
 
+func TestContainerAppPython(t *testing.T) {
+	test := getPythonBaseOptions(t).With(integration.ProgramTestOptions{
+		Dir: filepath.Join(getCwd(t), "pythoncontainerapp"),
+	})
+	integration.ProgramTest(t, &test)
+}
+
 func getPythonBaseOptions(t *testing.T) integration.ProgramTestOptions {
 	base := getBaseOptions()
 	pythonBase := base.With(integration.ProgramTestOptions{

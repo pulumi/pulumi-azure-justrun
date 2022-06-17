@@ -14,6 +14,8 @@ env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }} #Necessary for Testing
   PULUMI_API: https://api.pulumi-staging.io #Necessary for Testing
+  PULUMI_LOCAL_NUGET: ${{ github.workspace }}/nuget
+  PULUMI_GO_DEP_ROOT: ${{ github.workspace }}/.. #DO NOT REMOVE
 
 jobs:
   build-provider:
@@ -28,7 +30,8 @@ jobs:
         id: cache
         uses: actions/cache@v3
         with:
-          path: bin
+          path: |
+            ./dist
           key: ${{ runner.os }}-${{ hashFiles('provider/**') }}
       - name: Setup Node
         if: steps.cache.outputs.cache-hit != 'true'
@@ -52,12 +55,12 @@ jobs:
       - name: Create Provider Binaries
         if: steps.cache.outputs.cache-hit != 'true'
         run: make dist
-      - name: Upload bin
-        if: steps.cache.outputs.cache-hit != 'true'
+      - name: Upload tarballed bins
         uses: actions/upload-artifact@v3
         with:
           name: bin
-          path: bin
+          path: dist
+
 
     strategy:
       fail-fast: true
@@ -104,14 +107,7 @@ jobs:
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: ${{matrix.dotnetversion}}
-      - name: Cache Provider Binaries
-        id: cache
-        uses: actions/cache@v3
-        with:
-          path: bin
-          key: ${{ runner.os }}-${{ hashFiles('provider/**') }}
       - name: Download bin
-        if: steps.cache.outputs.cache-hit != 'true'
         uses: actions/download-artifact@v3
         with:
           name: bin
@@ -120,10 +116,13 @@ jobs:
         run: |-
           pip3 install virtualenv==20.0.23
           pip3 install pipenv
-      - name: Update path
+      - name: add bin to path
         run: echo "${{ github.workspace }}/bin" >> $GITHUB_PATH
-      - name: Build SDK
-        run: make build_${{ matrix.language }}_sdk
+      - name: Install SDK
+        run: make install_${{ matrix.language }}_sdk
+      - name: Restore binary perms
+        run: find ${{ github.workspace }} -name "pulumi-*-${{ env.PROVIDER }}" -print
+          -exec chmod +x {} \;
       - name: Check worktree clean
         run: |
           git update-index -q --refresh
@@ -133,6 +132,8 @@ jobs:
               git diff
               exit 1
           fi
+      - name: Install Plugins #In theory this should not be necessary, but putting /bin on the path isn't working.
+        run: pulumi plugin install resource azure-justrun ${{matrix.pkgversion}} -f ${{ github.workspace }}/bin/pulumi-resource-azure-justrun-${{matrix.pkgversion}}-linux-amd64.tar.gz
       - name: Compress SDK folder
         run: tar -zcf sdk/${{ matrix.language }}.tar.gz -C sdk/${{ matrix.language }}
           .
@@ -153,3 +154,5 @@ jobs:
           - python
           - dotnet
           - go
+        pkgversion:
+          - v0.2.0

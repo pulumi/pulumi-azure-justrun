@@ -21,6 +21,8 @@ ci-scripts/
 
 **/venv
 **/__pycache__
+**egg-info/
+
 
 # This is an artifact only so that we can pass the
 # schema for the provider GetSchema gRPC request
