@@ -57,4 +57,4 @@ require (
 	sourcegraph.com/sourcegraph/appdash v0.0.0-20190731080439-ebfcffb1b5c0 // indirect
 )
 
-replace github.com/pulumi/pulumi-azure-justrun/sdk => /mnt/c/pulumidev/pulumi-azure-justrun/sdk
+replace github.com/pulumi/pulumi-azure-justrun/sdk => ../sdk
