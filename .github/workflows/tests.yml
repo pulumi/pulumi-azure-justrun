@@ -30,7 +30,9 @@ jobs:
         id: cache
         uses: actions/cache@v3
         with:
-          path: bin
+          path: |
+          ${{ github.workspace }}/bin
+          ${{ github.workspace }}/dist
           key: ${{ runner.os }}-${{ hashFiles('provider/**') }}
       - name: Setup Node
         if: steps.cache.outputs.cache-hit != 'true'
@@ -104,14 +106,18 @@ jobs:
         id: cache
         uses: actions/cache@v3
         with:
-          path: bin
+          path: |
+          ${{ github.workspace }}/bin
+          ${{ github.workspace }}/dist
           key: ${{ runner.os }}-${{ hashFiles('provider/**') }}
       - name: Install Python deps
         run: |-
           pip3 install virtualenv==20.0.23
           pip3 install pipenv
-      - name: Update path 2
+      - name: add bin to path
         run: echo "${{ github.workspace }}/bin" >> $GITHUB_PATH
+      - name: add dist to path
+        run: echo "${{ github.workspace }}/dist" >> $GITHUB_PATH
       - name: Install SDK
         run: make install_${{ matrix.language }}_sdk
       - name: Restore binary perms
