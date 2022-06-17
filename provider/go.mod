@@ -1,4 +1,4 @@
-module github.com/pulumi/pulumi-
+module github.com/pulumi/pulumi-azure-justrun/provider
 
 go 1.17
 

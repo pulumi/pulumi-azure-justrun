@@ -134,3 +134,10 @@ test_dotnet:: PATH := $(WORKING_DIR)/bin:$(PATH)
 test_dotnet:: ./bin install_dotnet_sdk
 	@export PATH
 	cd examples && go test -tags=dotnet -v -json -count=1 -cover -timeout 3h -parallel ${TESTPARALLELISM} . 2>&1 | tee /tmp/gotest.log | gotestfmt
+
+
+bin/${CODEGEN}: ${CODEGEN_SRC}
+	cd provider && go build -o $(WORKING_DIR)/bin/${CODEGEN} $(WORKING_DIR)/schemagen/cmd/$(CODEGEN)
+
+awsx/schema.json: bin/${CODEGEN}
+	cd provider/cmd/$(CODEGEN) && go run . schema $(WORKING_DIR)/$(PACK)

@@ -26,6 +26,8 @@ import (
 	gogen "github.com/pulumi/pulumi/pkg/v3/codegen/go"
 	nodejsgen "github.com/pulumi/pulumi/pkg/v3/codegen/nodejs"
 	pygen "github.com/pulumi/pulumi/pkg/v3/codegen/python"
+
+	gen "github.com/pulumi/pulumi-azure-justrun/provider/pkg/gen"
 	"github.com/pulumi/pulumi/pkg/v3/codegen/schema"
 )
 
@@ -48,7 +50,7 @@ func emitSDK(language, outdir, schemaPath string) error {
 	if err != nil {
 		return err
 	}
-	
+
 	tool := "Pulumi SDK Generator"
 	extraFiles := map[string][]byte{}
 
@@ -62,6 +64,9 @@ func emitSDK(language, outdir, schemaPath string) error {
 		generator = func() (map[string][]byte, error) { return nodejsgen.GeneratePackage(tool, pkg, extraFiles) }
 	case "python":
 		generator = func() (map[string][]byte, error) { return pygen.GeneratePackage(tool, pkg, extraFiles) }
+	case "schema":
+		pkgSpec := gen.GenerateSchema(outdir)
+		mustWritePulumiSchema(pkgSpec, outdir)
 	default:
 		return errors.Errorf("Unrecognized language %q", language)
 	}
