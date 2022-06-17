@@ -29,12 +29,6 @@ jobs:
         id: cache
         uses: actions/cache@v3
         with:
-          path: dist
-          key: ${{ runner.os }}-${{ hashFiles('provider/**') }}
-      - name: Cache Provider Binaries
-        id: cache
-        uses: actions/cache@v3
-        with:
           path: bin
           key: ${{ runner.os }}-${{ hashFiles('provider/**') }}
       - name: Setup Node
