@@ -27,7 +27,7 @@ func getGoBaseOptions(t *testing.T) integration.ProgramTestOptions {
 	base := getBaseOptions()
 	baseGo := base.With(integration.ProgramTestOptions{
 		Dependencies: []string{
-			"github.com/pulumi/pulumi-azure-justrun",
+			"github.com/pulumi/pulumi-azure-justrun/sdk",
 		},
 	})
 
