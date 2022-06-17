@@ -31,7 +31,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: |
-            ./bin
+            ./dist
           key: ${{ runner.os }}-${{ hashFiles('provider/**') }}
       - name: Setup Node
         if: steps.cache.outputs.cache-hit != 'true'
