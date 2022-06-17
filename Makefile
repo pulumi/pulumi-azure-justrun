@@ -134,7 +134,7 @@ test_go:: ./examples
 	@export PATH
 	cd examples && go test -tags=go -v -json -count=1 -cover -timeout 3h -parallel ${TESTPARALLELISM} . 2>&1 | tee /tmp/gotest.log | gotestfmt
 
-test_dotnet:: PATH := $(WORKING_DIR)/bin:$(PATH)
+test_dotnet:: PATH := $(WORKING_DIR)/bin:$(PATH) 
 test_dotnet:: ./examples
 	@export PATH
 	cd examples && go test -tags=dotnet -v -json -count=1 -cover -timeout 3h -parallel ${TESTPARALLELISM} . 2>&1 | tee /tmp/gotest.log | gotestfmt
