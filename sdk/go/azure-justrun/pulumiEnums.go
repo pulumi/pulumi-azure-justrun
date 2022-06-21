@@ -177,130 +177,130 @@ func (in *publicAccessPtr) ToPublicAccessPtrOutputWithContext(ctx context.Contex
 }
 
 // The SKU name. Required for account creation; optional for update. Note that in older versions, SKU name was called accountType.
-type SkuName string
+type StorageSkuName string
 
 const (
-	SkuName_Standard_LRS    = SkuName("Standard_LRS")
-	SkuName_Standard_GRS    = SkuName("Standard_GRS")
-	SkuName_Standard_RAGRS  = SkuName("Standard_RAGRS")
-	SkuName_Standard_ZRS    = SkuName("Standard_ZRS")
-	SkuName_Premium_LRS     = SkuName("Premium_LRS")
-	SkuName_Premium_ZRS     = SkuName("Premium_ZRS")
-	SkuName_Standard_GZRS   = SkuName("Standard_GZRS")
-	SkuName_Standard_RAGZRS = SkuName("Standard_RAGZRS")
+	StorageSkuName_Standard_LRS    = StorageSkuName("Standard_LRS")
+	StorageSkuName_Standard_GRS    = StorageSkuName("Standard_GRS")
+	StorageSkuName_Standard_RAGRS  = StorageSkuName("Standard_RAGRS")
+	StorageSkuName_Standard_ZRS    = StorageSkuName("Standard_ZRS")
+	StorageSkuName_Premium_LRS     = StorageSkuName("Premium_LRS")
+	StorageSkuName_Premium_ZRS     = StorageSkuName("Premium_ZRS")
+	StorageSkuName_Standard_GZRS   = StorageSkuName("Standard_GZRS")
+	StorageSkuName_Standard_RAGZRS = StorageSkuName("Standard_RAGZRS")
 )
 
-func (SkuName) ElementType() reflect.Type {
-	return reflect.TypeOf((*SkuName)(nil)).Elem()
+func (StorageSkuName) ElementType() reflect.Type {
+	return reflect.TypeOf((*StorageSkuName)(nil)).Elem()
 }
 
-func (e SkuName) ToSkuNameOutput() SkuNameOutput {
-	return pulumi.ToOutput(e).(SkuNameOutput)
+func (e StorageSkuName) ToStorageSkuNameOutput() StorageSkuNameOutput {
+	return pulumi.ToOutput(e).(StorageSkuNameOutput)
 }
 
-func (e SkuName) ToSkuNameOutputWithContext(ctx context.Context) SkuNameOutput {
-	return pulumi.ToOutputWithContext(ctx, e).(SkuNameOutput)
+func (e StorageSkuName) ToStorageSkuNameOutputWithContext(ctx context.Context) StorageSkuNameOutput {
+	return pulumi.ToOutputWithContext(ctx, e).(StorageSkuNameOutput)
 }
 
-func (e SkuName) ToSkuNamePtrOutput() SkuNamePtrOutput {
-	return e.ToSkuNamePtrOutputWithContext(context.Background())
+func (e StorageSkuName) ToStorageSkuNamePtrOutput() StorageSkuNamePtrOutput {
+	return e.ToStorageSkuNamePtrOutputWithContext(context.Background())
 }
 
-func (e SkuName) ToSkuNamePtrOutputWithContext(ctx context.Context) SkuNamePtrOutput {
-	return SkuName(e).ToSkuNameOutputWithContext(ctx).ToSkuNamePtrOutputWithContext(ctx)
+func (e StorageSkuName) ToStorageSkuNamePtrOutputWithContext(ctx context.Context) StorageSkuNamePtrOutput {
+	return StorageSkuName(e).ToStorageSkuNameOutputWithContext(ctx).ToStorageSkuNamePtrOutputWithContext(ctx)
 }
 
-func (e SkuName) ToStringOutput() pulumi.StringOutput {
+func (e StorageSkuName) ToStringOutput() pulumi.StringOutput {
 	return pulumi.ToOutput(pulumi.String(e)).(pulumi.StringOutput)
 }
 
-func (e SkuName) ToStringOutputWithContext(ctx context.Context) pulumi.StringOutput {
+func (e StorageSkuName) ToStringOutputWithContext(ctx context.Context) pulumi.StringOutput {
 	return pulumi.ToOutputWithContext(ctx, pulumi.String(e)).(pulumi.StringOutput)
 }
 
-func (e SkuName) ToStringPtrOutput() pulumi.StringPtrOutput {
+func (e StorageSkuName) ToStringPtrOutput() pulumi.StringPtrOutput {
 	return pulumi.String(e).ToStringPtrOutputWithContext(context.Background())
 }
 
-func (e SkuName) ToStringPtrOutputWithContext(ctx context.Context) pulumi.StringPtrOutput {
+func (e StorageSkuName) ToStringPtrOutputWithContext(ctx context.Context) pulumi.StringPtrOutput {
 	return pulumi.String(e).ToStringOutputWithContext(ctx).ToStringPtrOutputWithContext(ctx)
 }
 
-type SkuNameOutput struct{ *pulumi.OutputState }
+type StorageSkuNameOutput struct{ *pulumi.OutputState }
 
-func (SkuNameOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*SkuName)(nil)).Elem()
+func (StorageSkuNameOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*StorageSkuName)(nil)).Elem()
 }
 
-func (o SkuNameOutput) ToSkuNameOutput() SkuNameOutput {
+func (o StorageSkuNameOutput) ToStorageSkuNameOutput() StorageSkuNameOutput {
 	return o
 }
 
-func (o SkuNameOutput) ToSkuNameOutputWithContext(ctx context.Context) SkuNameOutput {
+func (o StorageSkuNameOutput) ToStorageSkuNameOutputWithContext(ctx context.Context) StorageSkuNameOutput {
 	return o
 }
 
-func (o SkuNameOutput) ToSkuNamePtrOutput() SkuNamePtrOutput {
-	return o.ToSkuNamePtrOutputWithContext(context.Background())
+func (o StorageSkuNameOutput) ToStorageSkuNamePtrOutput() StorageSkuNamePtrOutput {
+	return o.ToStorageSkuNamePtrOutputWithContext(context.Background())
 }
 
-func (o SkuNameOutput) ToSkuNamePtrOutputWithContext(ctx context.Context) SkuNamePtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, v SkuName) *SkuName {
+func (o StorageSkuNameOutput) ToStorageSkuNamePtrOutputWithContext(ctx context.Context) StorageSkuNamePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v StorageSkuName) *StorageSkuName {
 		return &v
-	}).(SkuNamePtrOutput)
+	}).(StorageSkuNamePtrOutput)
 }
 
-func (o SkuNameOutput) ToStringOutput() pulumi.StringOutput {
+func (o StorageSkuNameOutput) ToStringOutput() pulumi.StringOutput {
 	return o.ToStringOutputWithContext(context.Background())
 }
 
-func (o SkuNameOutput) ToStringOutputWithContext(ctx context.Context) pulumi.StringOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, e SkuName) string {
+func (o StorageSkuNameOutput) ToStringOutputWithContext(ctx context.Context) pulumi.StringOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, e StorageSkuName) string {
 		return string(e)
 	}).(pulumi.StringOutput)
 }
 
-func (o SkuNameOutput) ToStringPtrOutput() pulumi.StringPtrOutput {
+func (o StorageSkuNameOutput) ToStringPtrOutput() pulumi.StringPtrOutput {
 	return o.ToStringPtrOutputWithContext(context.Background())
 }
 
-func (o SkuNameOutput) ToStringPtrOutputWithContext(ctx context.Context) pulumi.StringPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, e SkuName) *string {
+func (o StorageSkuNameOutput) ToStringPtrOutputWithContext(ctx context.Context) pulumi.StringPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, e StorageSkuName) *string {
 		v := string(e)
 		return &v
 	}).(pulumi.StringPtrOutput)
 }
 
-type SkuNamePtrOutput struct{ *pulumi.OutputState }
+type StorageSkuNamePtrOutput struct{ *pulumi.OutputState }
 
-func (SkuNamePtrOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((**SkuName)(nil)).Elem()
+func (StorageSkuNamePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**StorageSkuName)(nil)).Elem()
 }
 
-func (o SkuNamePtrOutput) ToSkuNamePtrOutput() SkuNamePtrOutput {
+func (o StorageSkuNamePtrOutput) ToStorageSkuNamePtrOutput() StorageSkuNamePtrOutput {
 	return o
 }
 
-func (o SkuNamePtrOutput) ToSkuNamePtrOutputWithContext(ctx context.Context) SkuNamePtrOutput {
+func (o StorageSkuNamePtrOutput) ToStorageSkuNamePtrOutputWithContext(ctx context.Context) StorageSkuNamePtrOutput {
 	return o
 }
 
-func (o SkuNamePtrOutput) Elem() SkuNameOutput {
-	return o.ApplyT(func(v *SkuName) SkuName {
+func (o StorageSkuNamePtrOutput) Elem() StorageSkuNameOutput {
+	return o.ApplyT(func(v *StorageSkuName) StorageSkuName {
 		if v != nil {
 			return *v
 		}
-		var ret SkuName
+		var ret StorageSkuName
 		return ret
-	}).(SkuNameOutput)
+	}).(StorageSkuNameOutput)
 }
 
-func (o SkuNamePtrOutput) ToStringPtrOutput() pulumi.StringPtrOutput {
+func (o StorageSkuNamePtrOutput) ToStringPtrOutput() pulumi.StringPtrOutput {
 	return o.ToStringPtrOutputWithContext(context.Background())
 }
 
-func (o SkuNamePtrOutput) ToStringPtrOutputWithContext(ctx context.Context) pulumi.StringPtrOutput {
-	return o.ApplyTWithContext(ctx, func(_ context.Context, e *SkuName) *string {
+func (o StorageSkuNamePtrOutput) ToStringPtrOutputWithContext(ctx context.Context) pulumi.StringPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, e *StorageSkuName) *string {
 		if e == nil {
 			return nil
 		}
@@ -309,51 +309,51 @@ func (o SkuNamePtrOutput) ToStringPtrOutputWithContext(ctx context.Context) pulu
 	}).(pulumi.StringPtrOutput)
 }
 
-// SkuNameInput is an input type that accepts SkuNameArgs and SkuNameOutput values.
-// You can construct a concrete instance of `SkuNameInput` via:
+// StorageSkuNameInput is an input type that accepts StorageSkuNameArgs and StorageSkuNameOutput values.
+// You can construct a concrete instance of `StorageSkuNameInput` via:
 //
-//          SkuNameArgs{...}
-type SkuNameInput interface {
+//          StorageSkuNameArgs{...}
+type StorageSkuNameInput interface {
 	pulumi.Input
 
-	ToSkuNameOutput() SkuNameOutput
-	ToSkuNameOutputWithContext(context.Context) SkuNameOutput
+	ToStorageSkuNameOutput() StorageSkuNameOutput
+	ToStorageSkuNameOutputWithContext(context.Context) StorageSkuNameOutput
 }
 
-var skuNamePtrType = reflect.TypeOf((**SkuName)(nil)).Elem()
+var storageSkuNamePtrType = reflect.TypeOf((**StorageSkuName)(nil)).Elem()
 
-type SkuNamePtrInput interface {
+type StorageSkuNamePtrInput interface {
 	pulumi.Input
 
-	ToSkuNamePtrOutput() SkuNamePtrOutput
-	ToSkuNamePtrOutputWithContext(context.Context) SkuNamePtrOutput
+	ToStorageSkuNamePtrOutput() StorageSkuNamePtrOutput
+	ToStorageSkuNamePtrOutputWithContext(context.Context) StorageSkuNamePtrOutput
 }
 
-type skuNamePtr string
+type storageSkuNamePtr string
 
-func SkuNamePtr(v string) SkuNamePtrInput {
-	return (*skuNamePtr)(&v)
+func StorageSkuNamePtr(v string) StorageSkuNamePtrInput {
+	return (*storageSkuNamePtr)(&v)
 }
 
-func (*skuNamePtr) ElementType() reflect.Type {
-	return skuNamePtrType
+func (*storageSkuNamePtr) ElementType() reflect.Type {
+	return storageSkuNamePtrType
 }
 
-func (in *skuNamePtr) ToSkuNamePtrOutput() SkuNamePtrOutput {
-	return pulumi.ToOutput(in).(SkuNamePtrOutput)
+func (in *storageSkuNamePtr) ToStorageSkuNamePtrOutput() StorageSkuNamePtrOutput {
+	return pulumi.ToOutput(in).(StorageSkuNamePtrOutput)
 }
 
-func (in *skuNamePtr) ToSkuNamePtrOutputWithContext(ctx context.Context) SkuNamePtrOutput {
-	return pulumi.ToOutputWithContext(ctx, in).(SkuNamePtrOutput)
+func (in *storageSkuNamePtr) ToStorageSkuNamePtrOutputWithContext(ctx context.Context) StorageSkuNamePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, in).(StorageSkuNamePtrOutput)
 }
 
 func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*PublicAccessInput)(nil)).Elem(), PublicAccess("Container"))
 	pulumi.RegisterInputType(reflect.TypeOf((*PublicAccessPtrInput)(nil)).Elem(), PublicAccess("Container"))
-	pulumi.RegisterInputType(reflect.TypeOf((*SkuNameInput)(nil)).Elem(), SkuName("Standard_LRS"))
-	pulumi.RegisterInputType(reflect.TypeOf((*SkuNamePtrInput)(nil)).Elem(), SkuName("Standard_LRS"))
+	pulumi.RegisterInputType(reflect.TypeOf((*StorageSkuNameInput)(nil)).Elem(), StorageSkuName("Standard_LRS"))
+	pulumi.RegisterInputType(reflect.TypeOf((*StorageSkuNamePtrInput)(nil)).Elem(), StorageSkuName("Standard_LRS"))
 	pulumi.RegisterOutputType(PublicAccessOutput{})
 	pulumi.RegisterOutputType(PublicAccessPtrOutput{})
-	pulumi.RegisterOutputType(SkuNameOutput{})
-	pulumi.RegisterOutputType(SkuNamePtrOutput{})
+	pulumi.RegisterOutputType(StorageSkuNameOutput{})
+	pulumi.RegisterOutputType(StorageSkuNamePtrOutput{})
 }

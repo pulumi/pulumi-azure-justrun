@@ -62,7 +62,7 @@
                 }
             ]
         },
-        "azure-justrun:index:SkuName": {
+        "azure-justrun:index:StorageSkuName": {
             "description": "The SKU name. Required for account creation; optional for update. Note that in older versions, SKU name was called accountType.",
             "type": "string",
             "enum": [
@@ -118,7 +118,7 @@
                 },
                 "registryName": {
                     "type": "string",
-                    "description": "The name of the image registry. One will be created if not provided"
+                    "description": "The name of the image registry. Must belong to the resource group specified in ResourceGroupName. One will be created if not provided."
                 },
                 "resourceGroupName": {
                     "type": "string",
@@ -146,13 +146,11 @@
             "inputProperties": {
                 "appSkuName": {
                     "type": "string",
-                    "description": "The tier of the compute instance running the server. Also see appSkuName",
-                    "default": "Basic"
+                    "description": "The tier of the compute instance running the server. Also see appSkuName"
                 },
                 "appSkuTier": {
                     "type": "string",
-                    "description": "The name of the compute instance running the server. Also see appSkuTier",
-                    "default": "B1"
+                    "description": "The name of the compute instance running the server. Also see appSkuTier"
                 },
                 "containerPublicAccess": {
                     "$ref": "#/types/azure-justrun:index:PublicAccess",
@@ -176,7 +174,7 @@
                     "description": "The name of the storage account to use. One will be created if not provided."
                 },
                 "storageSkuName": {
-                    "$ref": "#/types/azure-justrun:index:SkuName",
+                    "$ref": "#/types/azure-justrun:index:StorageSkuName",
                     "description": "The SKU name of the storage account created, if storageAccount is not provided"
                 }
             },

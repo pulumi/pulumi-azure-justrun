@@ -95,12 +95,10 @@ namespace Pulumi.AzureJustrun
         /// The SKU name of the storage account created, if storageAccount is not provided
         /// </summary>
         [Input("storageSkuName")]
-        public Input<Pulumi.AzureJustrun.SkuName>? StorageSkuName { get; set; }
+        public Input<Pulumi.AzureJustrun.StorageSkuName>? StorageSkuName { get; set; }
 
         public WebappArgs()
         {
-            AppSkuName = "Basic";
-            AppSkuTier = "B1";
             FilePath = "./www";
         }
     }

@@ -68,7 +68,7 @@ namespace Pulumi.AzureJustrun
         public Input<string>? NamePrefix { get; set; }
 
         /// <summary>
-        /// The name of the image registry. One will be created if not provided
+        /// The name of the image registry. Must belong to the resource group specified in ResourceGroupName. One will be created if not provided.
         /// </summary>
         [Input("registryName")]
         public Input<string>? RegistryName { get; set; }

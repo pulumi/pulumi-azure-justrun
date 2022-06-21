@@ -71,7 +71,7 @@ export interface ContainerappArgs {
      */
     namePrefix?: pulumi.Input<string>;
     /**
-     * The name of the image registry. One will be created if not provided
+     * The name of the image registry. Must belong to the resource group specified in ResourceGroupName. One will be created if not provided.
      */
     registryName?: pulumi.Input<string>;
     /**

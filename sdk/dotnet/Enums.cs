@@ -43,32 +43,32 @@ namespace Pulumi.AzureJustrun
     /// The SKU name. Required for account creation; optional for update. Note that in older versions, SKU name was called accountType.
     /// </summary>
     [EnumType]
-    public readonly struct SkuName : IEquatable<SkuName>
+    public readonly struct StorageSkuName : IEquatable<StorageSkuName>
     {
         private readonly string _value;
 
-        private SkuName(string value)
+        private StorageSkuName(string value)
         {
             _value = value ?? throw new ArgumentNullException(nameof(value));
         }
 
-        public static SkuName Standard_LRS { get; } = new SkuName("Standard_LRS");
-        public static SkuName Standard_GRS { get; } = new SkuName("Standard_GRS");
-        public static SkuName Standard_RAGRS { get; } = new SkuName("Standard_RAGRS");
-        public static SkuName Standard_ZRS { get; } = new SkuName("Standard_ZRS");
-        public static SkuName Premium_LRS { get; } = new SkuName("Premium_LRS");
-        public static SkuName Premium_ZRS { get; } = new SkuName("Premium_ZRS");
-        public static SkuName Standard_GZRS { get; } = new SkuName("Standard_GZRS");
-        public static SkuName Standard_RAGZRS { get; } = new SkuName("Standard_RAGZRS");
+        public static StorageSkuName Standard_LRS { get; } = new StorageSkuName("Standard_LRS");
+        public static StorageSkuName Standard_GRS { get; } = new StorageSkuName("Standard_GRS");
+        public static StorageSkuName Standard_RAGRS { get; } = new StorageSkuName("Standard_RAGRS");
+        public static StorageSkuName Standard_ZRS { get; } = new StorageSkuName("Standard_ZRS");
+        public static StorageSkuName Premium_LRS { get; } = new StorageSkuName("Premium_LRS");
+        public static StorageSkuName Premium_ZRS { get; } = new StorageSkuName("Premium_ZRS");
+        public static StorageSkuName Standard_GZRS { get; } = new StorageSkuName("Standard_GZRS");
+        public static StorageSkuName Standard_RAGZRS { get; } = new StorageSkuName("Standard_RAGZRS");
 
-        public static bool operator ==(SkuName left, SkuName right) => left.Equals(right);
-        public static bool operator !=(SkuName left, SkuName right) => !left.Equals(right);
+        public static bool operator ==(StorageSkuName left, StorageSkuName right) => left.Equals(right);
+        public static bool operator !=(StorageSkuName left, StorageSkuName right) => !left.Equals(right);
 
-        public static explicit operator string(SkuName value) => value._value;
+        public static explicit operator string(StorageSkuName value) => value._value;
 
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public override bool Equals(object? obj) => obj is SkuName other && Equals(other);
-        public bool Equals(SkuName other) => string.Equals(_value, other._value, StringComparison.Ordinal);
+        public override bool Equals(object? obj) => obj is StorageSkuName other && Equals(other);
+        public bool Equals(StorageSkuName other) => string.Equals(_value, other._value, StringComparison.Ordinal);
 
         [EditorBrowsable(EditorBrowsableState.Never)]
         public override int GetHashCode() => _value?.GetHashCode() ?? 0;

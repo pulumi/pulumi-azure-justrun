@@ -19,10 +19,10 @@ import (
 )
 
 const (
-	WebApp       string = "azure-justrun:index:webapp"
-	PublicAccess string = "azure-justrun:index:PublicAccess"
-	SkuName      string = "azure-justrun:index:SkuName"
-	ContainerApp string = "azure-justrun:index:containerapp"
+	WebApp         string = "azure-justrun:index:webapp"
+	PublicAccess   string = "azure-justrun:index:PublicAccess"
+	StorageSkuName string = "azure-justrun:index:StorageSkuName"
+	ContainerApp   string = "azure-justrun:index:containerapp"
 )
 
 func generateSchema(azureNativeSpec schema.PackageSpec, dockerSpec schema.PackageSpec) schema.PackageSpec {
@@ -32,8 +32,8 @@ func generateSchema(azureNativeSpec schema.PackageSpec, dockerSpec schema.Packag
 			ContainerApp: containerappResourceSpec(azureNativeSpec),
 		},
 		Types: map[string]schema.ComplexTypeSpec{
-			PublicAccess: publicAccessTypeSpec(azureNativeSpec),
-			SkuName:      skuNameTypeSpec(azureNativeSpec),
+			PublicAccess:   publicAccessTypeSpec(azureNativeSpec),
+			StorageSkuName: skuNameTypeSpec(azureNativeSpec),
 		},
 		Functions: map[string]schema.FunctionSpec{},
 	}
@@ -51,8 +51,8 @@ func webappResourceSpec(azureNativeSpec schema.PackageSpec) schema.ResourceSpec 
 	spec := schema.ResourceSpec{
 		IsComponent: true,
 		InputProperties: map[string]schema.PropertySpec{
-			"appSkuName": stringPropertyDefault("The tier of the compute instance running the server. Also see appSkuName", "Basic"),
-			"appSkuTier": stringPropertyDefault("The name of the compute instance running the server. Also see appSkuTier", "B1"),
+			"appSkuName": stringProperty("The tier of the compute instance running the server. Also see appSkuName"),
+			"appSkuTier": stringProperty("The name of the compute instance running the server. Also see appSkuTier"),
 			"filePath":   stringPropertyDefault("The relative file path to the folder containing web files.", "./www"),
 			"containerPublicAccess": schema.PropertySpec{
 				TypeSpec: schema.TypeSpec{
@@ -62,7 +62,7 @@ func webappResourceSpec(azureNativeSpec schema.PackageSpec) schema.ResourceSpec 
 			},
 			"storageSkuName": schema.PropertySpec{
 				TypeSpec: schema.TypeSpec{
-					Ref: selfTypeRef(SkuName),
+					Ref: selfTypeRef(StorageSkuName),
 				},
 				Description: "The SKU name of the storage account created, if storageAccount is not provided",
 			},

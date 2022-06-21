@@ -25,12 +25,6 @@ func NewWebapp(ctx *pulumi.Context,
 		args = &WebappArgs{}
 	}
 
-	if isZero(args.AppSkuName) {
-		args.AppSkuName = pulumi.StringPtr("Basic")
-	}
-	if isZero(args.AppSkuTier) {
-		args.AppSkuTier = pulumi.StringPtr("B1")
-	}
 	if isZero(args.FilePath) {
 		args.FilePath = pulumi.StringPtr("./www")
 	}
@@ -58,7 +52,7 @@ type webappArgs struct {
 	// The name of the storage account to use. One will be created if not provided.
 	StorageAccountName *string `pulumi:"storageAccountName"`
 	// The SKU name of the storage account created, if storageAccount is not provided
-	StorageSkuName *SkuName `pulumi:"storageSkuName"`
+	StorageSkuName *StorageSkuName `pulumi:"storageSkuName"`
 }
 
 // The set of arguments for constructing a Webapp resource.
@@ -78,7 +72,7 @@ type WebappArgs struct {
 	// The name of the storage account to use. One will be created if not provided.
 	StorageAccountName pulumi.StringPtrInput
 	// The SKU name of the storage account created, if storageAccount is not provided
-	StorageSkuName SkuNamePtrInput
+	StorageSkuName StorageSkuNamePtrInput
 }
 
 func (WebappArgs) ElementType() reflect.Type {

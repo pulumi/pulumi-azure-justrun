@@ -21,7 +21,7 @@ class WebappArgs:
                  name_prefix: Optional[pulumi.Input[str]] = None,
                  resource_group_name: Optional[pulumi.Input[str]] = None,
                  storage_account_name: Optional[pulumi.Input[str]] = None,
-                 storage_sku_name: Optional[pulumi.Input['SkuName']] = None):
+                 storage_sku_name: Optional[pulumi.Input['StorageSkuName']] = None):
         """
         The set of arguments for constructing a Webapp resource.
         :param pulumi.Input[str] app_sku_name: The tier of the compute instance running the server. Also see appSkuName
@@ -31,14 +31,10 @@ class WebappArgs:
         :param pulumi.Input[str] name_prefix: The name prefix given to child resources of this component. Should not contain dashes.
         :param pulumi.Input[str] resource_group_name: The resource group to use. One will be created if not provided.
         :param pulumi.Input[str] storage_account_name: The name of the storage account to use. One will be created if not provided.
-        :param pulumi.Input['SkuName'] storage_sku_name: The SKU name of the storage account created, if storageAccount is not provided
+        :param pulumi.Input['StorageSkuName'] storage_sku_name: The SKU name of the storage account created, if storageAccount is not provided
         """
-        if app_sku_name is None:
-            app_sku_name = 'Basic'
         if app_sku_name is not None:
             pulumi.set(__self__, "app_sku_name", app_sku_name)
-        if app_sku_tier is None:
-            app_sku_tier = 'B1'
         if app_sku_tier is not None:
             pulumi.set(__self__, "app_sku_tier", app_sku_tier)
         if container_public_access is not None:
@@ -142,14 +138,14 @@ class WebappArgs:
 
     @property
     @pulumi.getter(name="storageSkuName")
-    def storage_sku_name(self) -> Optional[pulumi.Input['SkuName']]:
+    def storage_sku_name(self) -> Optional[pulumi.Input['StorageSkuName']]:
         """
         The SKU name of the storage account created, if storageAccount is not provided
         """
         return pulumi.get(self, "storage_sku_name")
 
     @storage_sku_name.setter
-    def storage_sku_name(self, value: Optional[pulumi.Input['SkuName']]):
+    def storage_sku_name(self, value: Optional[pulumi.Input['StorageSkuName']]):
         pulumi.set(self, "storage_sku_name", value)
 
 
@@ -165,7 +161,7 @@ class Webapp(pulumi.ComponentResource):
                  name_prefix: Optional[pulumi.Input[str]] = None,
                  resource_group_name: Optional[pulumi.Input[str]] = None,
                  storage_account_name: Optional[pulumi.Input[str]] = None,
-                 storage_sku_name: Optional[pulumi.Input['SkuName']] = None,
+                 storage_sku_name: Optional[pulumi.Input['StorageSkuName']] = None,
                  __props__=None):
         """
         This represents a web app component resource
@@ -179,7 +175,7 @@ class Webapp(pulumi.ComponentResource):
         :param pulumi.Input[str] name_prefix: The name prefix given to child resources of this component. Should not contain dashes.
         :param pulumi.Input[str] resource_group_name: The resource group to use. One will be created if not provided.
         :param pulumi.Input[str] storage_account_name: The name of the storage account to use. One will be created if not provided.
-        :param pulumi.Input['SkuName'] storage_sku_name: The SKU name of the storage account created, if storageAccount is not provided
+        :param pulumi.Input['StorageSkuName'] storage_sku_name: The SKU name of the storage account created, if storageAccount is not provided
         """
         ...
     @overload
@@ -212,7 +208,7 @@ class Webapp(pulumi.ComponentResource):
                  name_prefix: Optional[pulumi.Input[str]] = None,
                  resource_group_name: Optional[pulumi.Input[str]] = None,
                  storage_account_name: Optional[pulumi.Input[str]] = None,
-                 storage_sku_name: Optional[pulumi.Input['SkuName']] = None,
+                 storage_sku_name: Optional[pulumi.Input['StorageSkuName']] = None,
                  __props__=None):
         if opts is None:
             opts = pulumi.ResourceOptions()
@@ -227,11 +223,7 @@ class Webapp(pulumi.ComponentResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = WebappArgs.__new__(WebappArgs)
 
-            if app_sku_name is None:
-                app_sku_name = 'Basic'
             __props__.__dict__["app_sku_name"] = app_sku_name
-            if app_sku_tier is None:
-                app_sku_tier = 'B1'
             __props__.__dict__["app_sku_tier"] = app_sku_tier
             __props__.__dict__["container_public_access"] = container_public_access
             if file_path is None:

@@ -40,7 +40,7 @@ type containerappArgs struct {
 	ImageDirectory *string `pulumi:"imageDirectory"`
 	// The name prefix given to child resources of this component. Should not contain dashes.
 	NamePrefix *string `pulumi:"namePrefix"`
-	// The name of the image registry. One will be created if not provided
+	// The name of the image registry. Must belong to the resource group specified in ResourceGroupName. One will be created if not provided.
 	RegistryName *string `pulumi:"registryName"`
 	// The resource group to use. One will be created if not provided.
 	ResourceGroupName *string `pulumi:"resourceGroupName"`
@@ -58,7 +58,7 @@ type ContainerappArgs struct {
 	ImageDirectory pulumi.StringPtrInput
 	// The name prefix given to child resources of this component. Should not contain dashes.
 	NamePrefix pulumi.StringPtrInput
-	// The name of the image registry. One will be created if not provided
+	// The name of the image registry. Must belong to the resource group specified in ResourceGroupName. One will be created if not provided.
 	RegistryName pulumi.StringPtrInput
 	// The resource group to use. One will be created if not provided.
 	ResourceGroupName pulumi.StringPtrInput

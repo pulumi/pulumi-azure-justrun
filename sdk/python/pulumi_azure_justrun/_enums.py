@@ -6,7 +6,7 @@ from enum import Enum
 
 __all__ = [
     'PublicAccess',
-    'SkuName',
+    'StorageSkuName',
 ]
 
 
@@ -19,7 +19,7 @@ class PublicAccess(str, Enum):
     NONE = "None"
 
 
-class SkuName(str, Enum):
+class StorageSkuName(str, Enum):
     """
     The SKU name. Required for account creation; optional for update. Note that in older versions, SKU name was called accountType.
     """

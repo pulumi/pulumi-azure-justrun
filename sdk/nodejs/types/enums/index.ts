@@ -13,7 +13,7 @@ export const PublicAccess = {
  */
 export type PublicAccess = (typeof PublicAccess)[keyof typeof PublicAccess];
 
-export const SkuName = {
+export const StorageSkuName = {
     Standard_LRS: "Standard_LRS",
     Standard_GRS: "Standard_GRS",
     Standard_RAGRS: "Standard_RAGRS",
@@ -27,4 +27,4 @@ export const SkuName = {
 /**
  * The SKU name. Required for account creation; optional for update. Note that in older versions, SKU name was called accountType.
  */
-export type SkuName = (typeof SkuName)[keyof typeof SkuName];
+export type StorageSkuName = (typeof StorageSkuName)[keyof typeof StorageSkuName];

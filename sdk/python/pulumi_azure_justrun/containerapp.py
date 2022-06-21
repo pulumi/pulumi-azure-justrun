@@ -25,7 +25,7 @@ class ContainerappArgs:
         :param pulumi.Input[str] docker_image_name: The name of the docker image. One will be created if not provided
         :param pulumi.Input[str] image_directory: The name of the directory where the docker image to be created is. NOT the actual directory, i.e. 'nodeapp' instead of './nodeapp'
         :param pulumi.Input[str] name_prefix: The name prefix given to child resources of this component. Should not contain dashes.
-        :param pulumi.Input[str] registry_name: The name of the image registry. One will be created if not provided
+        :param pulumi.Input[str] registry_name: The name of the image registry. Must belong to the resource group specified in ResourceGroupName. One will be created if not provided.
         :param pulumi.Input[str] resource_group_name: The resource group to use. One will be created if not provided.
         :param pulumi.Input[str] storage_account_name: The name of the storage account to use. One will be created if not provided.
         :param pulumi.Input[str] version: The version of the created docker image
@@ -85,7 +85,7 @@ class ContainerappArgs:
     @pulumi.getter(name="registryName")
     def registry_name(self) -> Optional[pulumi.Input[str]]:
         """
-        The name of the image registry. One will be created if not provided
+        The name of the image registry. Must belong to the resource group specified in ResourceGroupName. One will be created if not provided.
         """
         return pulumi.get(self, "registry_name")
 
@@ -151,7 +151,7 @@ class Containerapp(pulumi.ComponentResource):
         :param pulumi.Input[str] docker_image_name: The name of the docker image. One will be created if not provided
         :param pulumi.Input[str] image_directory: The name of the directory where the docker image to be created is. NOT the actual directory, i.e. 'nodeapp' instead of './nodeapp'
         :param pulumi.Input[str] name_prefix: The name prefix given to child resources of this component. Should not contain dashes.
-        :param pulumi.Input[str] registry_name: The name of the image registry. One will be created if not provided
+        :param pulumi.Input[str] registry_name: The name of the image registry. Must belong to the resource group specified in ResourceGroupName. One will be created if not provided.
         :param pulumi.Input[str] resource_group_name: The resource group to use. One will be created if not provided.
         :param pulumi.Input[str] storage_account_name: The name of the storage account to use. One will be created if not provided.
         :param pulumi.Input[str] version: The version of the created docker image

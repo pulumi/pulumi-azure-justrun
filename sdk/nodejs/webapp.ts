@@ -39,8 +39,8 @@ export class Webapp extends pulumi.ComponentResource {
         let resourceInputs: pulumi.Inputs = {};
         opts = opts || {};
         if (!opts.id) {
-            resourceInputs["appSkuName"] = (args ? args.appSkuName : undefined) ?? "Basic";
-            resourceInputs["appSkuTier"] = (args ? args.appSkuTier : undefined) ?? "B1";
+            resourceInputs["appSkuName"] = args ? args.appSkuName : undefined;
+            resourceInputs["appSkuTier"] = args ? args.appSkuTier : undefined;
             resourceInputs["containerPublicAccess"] = args ? args.containerPublicAccess : undefined;
             resourceInputs["filePath"] = (args ? args.filePath : undefined) ?? "./www";
             resourceInputs["namePrefix"] = args ? args.namePrefix : undefined;
@@ -91,5 +91,5 @@ export interface WebappArgs {
     /**
      * The SKU name of the storage account created, if storageAccount is not provided
      */
-    storageSkuName?: pulumi.Input<enums.SkuName>;
+    storageSkuName?: pulumi.Input<enums.StorageSkuName>;
 }
