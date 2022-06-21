@@ -1,6 +1,6 @@
 {
     "name": "@pulumi/azure-justrun",
-    "version": "${VERSION}",
+    "version": "0.2.0",
     "keywords": [
         ""
     ],
@@ -9,7 +9,7 @@
     "license": "Apache-2.0",
     "scripts": {
         "build": "tsc",
-        "install": "node scripts/install-pulumi-plugin.js resource azure-justrun ${VERSION}"
+        "install": "node scripts/install-pulumi-plugin.js resource azure-justrun 0.2.0"
     },
     "dependencies": {
         "@pulumi/azure-native": "^1.0.0",
@@ -19,6 +19,7 @@
         "typescript": "^4.3.5"
     },
     "pulumi": {
-        "resource": true
+        "resource": true,
+        "version": "0.2.0"
     }
 }

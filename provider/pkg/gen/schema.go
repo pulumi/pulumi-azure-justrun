@@ -25,6 +25,7 @@ func GenerateSchema(packageDir string) schema.PackageSpec {
 
 	packageSpec := schema.PackageSpec{
 		Name:        "azure-justrun",
+		Version:     "v0.2.0",
 		Description: "Provides some simple components to run azure apps",
 		License:     "Apache-2.0",
 		Publisher:   "Pulumi",
