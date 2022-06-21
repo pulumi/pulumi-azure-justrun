@@ -1,6 +1,6 @@
 {
     "name": "azure-justrun",
-    "version": "v0.2.0",
+    "version": "v0.2.1",
     "description": "Provides some simple components to run azure apps",
     "keywords": [
         ""
