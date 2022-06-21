@@ -7,14 +7,14 @@ import (
 	"context"
 	"reflect"
 
-	containerregistry "github.com/pulumi/pulumi-azure-native/sdk/go/azure/containerregistry"
-	resources "github.com/pulumi/pulumi-azure-native/sdk/go/azure/resources"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// This represents a container app component resource
 type Containerapp struct {
 	pulumi.ResourceState
 
+	// The URL of the container app
 	Url pulumi.StringPtrOutput `pulumi:"url"`
 }
 
@@ -34,33 +34,37 @@ func NewContainerapp(ctx *pulumi.Context,
 }
 
 type containerappArgs struct {
-	// The name of the docker image to use. Required. Either this or imageDirectory must be provided. A docker image will be created if this is not provided.
+	// The name of the docker image. One will be created if not provided
 	DockerImageName *string `pulumi:"dockerImageName"`
-	// The relative directory path to the folder containing the docker image. Either this or dockerImageName must be provided.
+	// The name of the directory where the docker image to be created is. NOT the actual directory, i.e. 'nodeapp' instead of './nodeapp'
 	ImageDirectory *string `pulumi:"imageDirectory"`
 	// The name prefix given to child resources of this component. Should not contain dashes.
 	NamePrefix *string `pulumi:"namePrefix"`
-	// The container registry to use. One will be created if not provided.
-	Registry *containerregistry.Registry `pulumi:"registry"`
+	// The name of the image registry. Must belong to the resource group specified in ResourceGroupName. One will be created if not provided.
+	RegistryName *string `pulumi:"registryName"`
 	// The resource group to use. One will be created if not provided.
-	ResourceGroup *resources.ResourceGroup `pulumi:"resourceGroup"`
-	// The version of the docker image created, if not provided
+	ResourceGroupName *string `pulumi:"resourceGroupName"`
+	// The name of the storage account to use. One will be created if not provided.
+	StorageAccountName *string `pulumi:"storageAccountName"`
+	// The version of the created docker image
 	Version *string `pulumi:"version"`
 }
 
 // The set of arguments for constructing a Containerapp resource.
 type ContainerappArgs struct {
-	// The name of the docker image to use. Required. Either this or imageDirectory must be provided. A docker image will be created if this is not provided.
+	// The name of the docker image. One will be created if not provided
 	DockerImageName pulumi.StringPtrInput
-	// The relative directory path to the folder containing the docker image. Either this or dockerImageName must be provided.
+	// The name of the directory where the docker image to be created is. NOT the actual directory, i.e. 'nodeapp' instead of './nodeapp'
 	ImageDirectory pulumi.StringPtrInput
 	// The name prefix given to child resources of this component. Should not contain dashes.
 	NamePrefix pulumi.StringPtrInput
-	// The container registry to use. One will be created if not provided.
-	Registry containerregistry.RegistryInput
+	// The name of the image registry. Must belong to the resource group specified in ResourceGroupName. One will be created if not provided.
+	RegistryName pulumi.StringPtrInput
 	// The resource group to use. One will be created if not provided.
-	ResourceGroup resources.ResourceGroupInput
-	// The version of the docker image created, if not provided
+	ResourceGroupName pulumi.StringPtrInput
+	// The name of the storage account to use. One will be created if not provided.
+	StorageAccountName pulumi.StringPtrInput
+	// The version of the created docker image
 	Version pulumi.StringPtrInput
 }
 
@@ -151,6 +155,7 @@ func (o ContainerappOutput) ToContainerappOutputWithContext(ctx context.Context)
 	return o
 }
 
+// The URL of the container app
 func (o ContainerappOutput) Url() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Containerapp) pulumi.StringPtrOutput { return v.Url }).(pulumi.StringPtrOutput)
 }

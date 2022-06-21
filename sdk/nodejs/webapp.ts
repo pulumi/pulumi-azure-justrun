@@ -5,8 +5,9 @@ import * as pulumi from "@pulumi/pulumi";
 import { input as inputs, output as outputs, enums } from "./types";
 import * as utilities from "./utilities";
 
-import * as pulumiAzureNative from "@pulumi/azure-native";
-
+/**
+ * This represents a web app component resource
+ */
 export class Webapp extends pulumi.ComponentResource {
     /** @internal */
     public static readonly __pulumiType = 'azure-justrun:index:webapp';
@@ -22,6 +23,9 @@ export class Webapp extends pulumi.ComponentResource {
         return obj['__pulumiType'] === Webapp.__pulumiType;
     }
 
+    /**
+     * The URL of the web app
+     */
     public /*out*/ readonly url!: pulumi.Output<string | undefined>;
 
     /**
@@ -35,13 +39,13 @@ export class Webapp extends pulumi.ComponentResource {
         let resourceInputs: pulumi.Inputs = {};
         opts = opts || {};
         if (!opts.id) {
-            resourceInputs["appSkuName"] = (args ? args.appSkuName : undefined) ?? "B1";
-            resourceInputs["appSkuTier"] = (args ? args.appSkuTier : undefined) ?? "Basic";
+            resourceInputs["appSkuName"] = args ? args.appSkuName : undefined;
+            resourceInputs["appSkuTier"] = args ? args.appSkuTier : undefined;
             resourceInputs["containerPublicAccess"] = args ? args.containerPublicAccess : undefined;
-            resourceInputs["filePath"] = (args ? args.filePath : undefined) ?? "wwwroot";
+            resourceInputs["filePath"] = (args ? args.filePath : undefined) ?? "./www";
             resourceInputs["namePrefix"] = args ? args.namePrefix : undefined;
-            resourceInputs["resourceGroup"] = args ? args.resourceGroup : undefined;
-            resourceInputs["storageAccount"] = args ? args.storageAccount : undefined;
+            resourceInputs["resourceGroupName"] = args ? args.resourceGroupName : undefined;
+            resourceInputs["storageAccountName"] = args ? args.storageAccountName : undefined;
             resourceInputs["storageSkuName"] = args ? args.storageSkuName : undefined;
             resourceInputs["url"] = undefined /*out*/;
         } else {
@@ -57,11 +61,11 @@ export class Webapp extends pulumi.ComponentResource {
  */
 export interface WebappArgs {
     /**
-     * The name of the compute instance running the server. Also see appSkuTier
+     * The tier of the compute instance running the server. Also see appSkuName
      */
     appSkuName?: pulumi.Input<string>;
     /**
-     * The tier of the compute instance running the server. Also see appSkuName
+     * The name of the compute instance running the server. Also see appSkuTier
      */
     appSkuTier?: pulumi.Input<string>;
     /**
@@ -79,13 +83,13 @@ export interface WebappArgs {
     /**
      * The resource group to use. One will be created if not provided.
      */
-    resourceGroup?: pulumi.Input<pulumiAzureNative.resources.ResourceGroup>;
+    resourceGroupName?: pulumi.Input<string>;
     /**
-     * The storage account to use. One will be created if not provided.
+     * The name of the storage account to use. One will be created if not provided.
      */
-    storageAccount?: pulumi.Input<pulumiAzureNative.storage.StorageAccount>;
+    storageAccountName?: pulumi.Input<string>;
     /**
-     * The name of the SKU of the storage account created, if storageAccount is not provided
+     * The SKU name of the storage account created, if storageAccount is not provided
      */
-    storageSkuName?: pulumi.Input<enums.SkuName>;
+    storageSkuName?: pulumi.Input<enums.StorageSkuName>;
 }

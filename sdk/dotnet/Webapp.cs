@@ -9,9 +9,15 @@ using Pulumi.Serialization;
 
 namespace Pulumi.AzureJustrun
 {
+    /// <summary>
+    /// This represents a web app component resource
+    /// </summary>
     [AzureJustrunResourceType("azure-justrun:index:webapp")]
     public partial class Webapp : Pulumi.ComponentResource
     {
+        /// <summary>
+        /// The URL of the web app
+        /// </summary>
         [Output("url")]
         public Output<string?> Url { get; private set; } = null!;
 
@@ -44,13 +50,13 @@ namespace Pulumi.AzureJustrun
     public sealed class WebappArgs : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The name of the compute instance running the server. Also see appSkuTier
+        /// The tier of the compute instance running the server. Also see appSkuName
         /// </summary>
         [Input("appSkuName")]
         public Input<string>? AppSkuName { get; set; }
 
         /// <summary>
-        /// The tier of the compute instance running the server. Also see appSkuName
+        /// The name of the compute instance running the server. Also see appSkuTier
         /// </summary>
         [Input("appSkuTier")]
         public Input<string>? AppSkuTier { get; set; }
@@ -76,26 +82,24 @@ namespace Pulumi.AzureJustrun
         /// <summary>
         /// The resource group to use. One will be created if not provided.
         /// </summary>
-        [Input("resourceGroup")]
-        public Input<Pulumi.AzureNative.Resources.ResourceGroup>? ResourceGroup { get; set; }
+        [Input("resourceGroupName")]
+        public Input<string>? ResourceGroupName { get; set; }
 
         /// <summary>
-        /// The storage account to use. One will be created if not provided.
+        /// The name of the storage account to use. One will be created if not provided.
         /// </summary>
-        [Input("storageAccount")]
-        public Input<Pulumi.AzureNative.Storage.StorageAccount>? StorageAccount { get; set; }
+        [Input("storageAccountName")]
+        public Input<string>? StorageAccountName { get; set; }
 
         /// <summary>
-        /// The name of the SKU of the storage account created, if storageAccount is not provided
+        /// The SKU name of the storage account created, if storageAccount is not provided
         /// </summary>
         [Input("storageSkuName")]
-        public Input<Pulumi.AzureJustrun.SkuName>? StorageSkuName { get; set; }
+        public Input<Pulumi.AzureJustrun.StorageSkuName>? StorageSkuName { get; set; }
 
         public WebappArgs()
         {
-            AppSkuName = "B1";
-            AppSkuTier = "Basic";
-            FilePath = "wwwroot";
+            FilePath = "./www";
         }
     }
 }

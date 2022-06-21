@@ -4,8 +4,9 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
-import * as pulumiAzureNative from "@pulumi/azure-native";
-
+/**
+ * This represents a container app component resource
+ */
 export class Containerapp extends pulumi.ComponentResource {
     /** @internal */
     public static readonly __pulumiType = 'azure-justrun:index:containerapp';
@@ -21,6 +22,9 @@ export class Containerapp extends pulumi.ComponentResource {
         return obj['__pulumiType'] === Containerapp.__pulumiType;
     }
 
+    /**
+     * The URL of the container app
+     */
     public /*out*/ readonly url!: pulumi.Output<string | undefined>;
 
     /**
@@ -37,8 +41,9 @@ export class Containerapp extends pulumi.ComponentResource {
             resourceInputs["dockerImageName"] = args ? args.dockerImageName : undefined;
             resourceInputs["imageDirectory"] = args ? args.imageDirectory : undefined;
             resourceInputs["namePrefix"] = args ? args.namePrefix : undefined;
-            resourceInputs["registry"] = args ? args.registry : undefined;
-            resourceInputs["resourceGroup"] = args ? args.resourceGroup : undefined;
+            resourceInputs["registryName"] = args ? args.registryName : undefined;
+            resourceInputs["resourceGroupName"] = args ? args.resourceGroupName : undefined;
+            resourceInputs["storageAccountName"] = args ? args.storageAccountName : undefined;
             resourceInputs["version"] = args ? args.version : undefined;
             resourceInputs["url"] = undefined /*out*/;
         } else {
@@ -54,11 +59,11 @@ export class Containerapp extends pulumi.ComponentResource {
  */
 export interface ContainerappArgs {
     /**
-     * The name of the docker image to use. Required. Either this or imageDirectory must be provided. A docker image will be created if this is not provided.
+     * The name of the docker image. One will be created if not provided
      */
     dockerImageName?: pulumi.Input<string>;
     /**
-     * The relative directory path to the folder containing the docker image. Either this or dockerImageName must be provided.
+     * The name of the directory where the docker image to be created is. NOT the actual directory, i.e. 'nodeapp' instead of './nodeapp'
      */
     imageDirectory?: pulumi.Input<string>;
     /**
@@ -66,15 +71,19 @@ export interface ContainerappArgs {
      */
     namePrefix?: pulumi.Input<string>;
     /**
-     * The container registry to use. One will be created if not provided.
+     * The name of the image registry. Must belong to the resource group specified in ResourceGroupName. One will be created if not provided.
      */
-    registry?: pulumi.Input<pulumiAzureNative.containerregistry.Registry>;
+    registryName?: pulumi.Input<string>;
     /**
      * The resource group to use. One will be created if not provided.
      */
-    resourceGroup?: pulumi.Input<pulumiAzureNative.resources.ResourceGroup>;
+    resourceGroupName?: pulumi.Input<string>;
     /**
-     * The version of the docker image created, if not provided
+     * The name of the storage account to use. One will be created if not provided.
+     */
+    storageAccountName?: pulumi.Input<string>;
+    /**
+     * The version of the created docker image
      */
     version?: pulumi.Input<string>;
 }

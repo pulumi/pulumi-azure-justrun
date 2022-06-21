@@ -7,14 +7,14 @@ import (
 	"context"
 	"reflect"
 
-	resources "github.com/pulumi/pulumi-azure-native/sdk/go/azure/resources"
-	storage "github.com/pulumi/pulumi-azure-native/sdk/go/azure/storage"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// This represents a web app component resource
 type Webapp struct {
 	pulumi.ResourceState
 
+	// The URL of the web app
 	Url pulumi.StringPtrOutput `pulumi:"url"`
 }
 
@@ -25,14 +25,8 @@ func NewWebapp(ctx *pulumi.Context,
 		args = &WebappArgs{}
 	}
 
-	if isZero(args.AppSkuName) {
-		args.AppSkuName = pulumi.StringPtr("B1")
-	}
-	if isZero(args.AppSkuTier) {
-		args.AppSkuTier = pulumi.StringPtr("Basic")
-	}
 	if isZero(args.FilePath) {
-		args.FilePath = pulumi.StringPtr("wwwroot")
+		args.FilePath = pulumi.StringPtr("./www")
 	}
 	var resource Webapp
 	err := ctx.RegisterRemoteComponentResource("azure-justrun:index:webapp", name, args, &resource, opts...)
@@ -43,9 +37,9 @@ func NewWebapp(ctx *pulumi.Context,
 }
 
 type webappArgs struct {
-	// The name of the compute instance running the server. Also see appSkuTier
-	AppSkuName *string `pulumi:"appSkuName"`
 	// The tier of the compute instance running the server. Also see appSkuName
+	AppSkuName *string `pulumi:"appSkuName"`
+	// The name of the compute instance running the server. Also see appSkuTier
 	AppSkuTier *string `pulumi:"appSkuTier"`
 	// The public access level of the BlobContainer containg the website data.
 	ContainerPublicAccess *PublicAccess `pulumi:"containerPublicAccess"`
@@ -54,18 +48,18 @@ type webappArgs struct {
 	// The name prefix given to child resources of this component. Should not contain dashes.
 	NamePrefix *string `pulumi:"namePrefix"`
 	// The resource group to use. One will be created if not provided.
-	ResourceGroup *resources.ResourceGroup `pulumi:"resourceGroup"`
-	// The storage account to use. One will be created if not provided.
-	StorageAccount *storage.StorageAccount `pulumi:"storageAccount"`
-	// The name of the SKU of the storage account created, if storageAccount is not provided
-	StorageSkuName *SkuName `pulumi:"storageSkuName"`
+	ResourceGroupName *string `pulumi:"resourceGroupName"`
+	// The name of the storage account to use. One will be created if not provided.
+	StorageAccountName *string `pulumi:"storageAccountName"`
+	// The SKU name of the storage account created, if storageAccount is not provided
+	StorageSkuName *StorageSkuName `pulumi:"storageSkuName"`
 }
 
 // The set of arguments for constructing a Webapp resource.
 type WebappArgs struct {
-	// The name of the compute instance running the server. Also see appSkuTier
-	AppSkuName pulumi.StringPtrInput
 	// The tier of the compute instance running the server. Also see appSkuName
+	AppSkuName pulumi.StringPtrInput
+	// The name of the compute instance running the server. Also see appSkuTier
 	AppSkuTier pulumi.StringPtrInput
 	// The public access level of the BlobContainer containg the website data.
 	ContainerPublicAccess PublicAccessPtrInput
@@ -74,11 +68,11 @@ type WebappArgs struct {
 	// The name prefix given to child resources of this component. Should not contain dashes.
 	NamePrefix pulumi.StringPtrInput
 	// The resource group to use. One will be created if not provided.
-	ResourceGroup resources.ResourceGroupInput
-	// The storage account to use. One will be created if not provided.
-	StorageAccount storage.StorageAccountInput
-	// The name of the SKU of the storage account created, if storageAccount is not provided
-	StorageSkuName SkuNamePtrInput
+	ResourceGroupName pulumi.StringPtrInput
+	// The name of the storage account to use. One will be created if not provided.
+	StorageAccountName pulumi.StringPtrInput
+	// The SKU name of the storage account created, if storageAccount is not provided
+	StorageSkuName StorageSkuNamePtrInput
 }
 
 func (WebappArgs) ElementType() reflect.Type {
@@ -168,6 +162,7 @@ func (o WebappOutput) ToWebappOutputWithContext(ctx context.Context) WebappOutpu
 	return o
 }
 
+// The URL of the web app
 func (o WebappOutput) Url() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Webapp) pulumi.StringPtrOutput { return v.Url }).(pulumi.StringPtrOutput)
 }

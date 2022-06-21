@@ -11,7 +11,7 @@ WORKING_DIR     := $(shell pwd)
 SCHEMA_PATH     := ${WORKING_DIR}/schema.json
 TESTPARALLELISM := 10
 
-generate:: gen_go_sdk gen_dotnet_sdk gen_nodejs_sdk gen_python_sdk
+generate:: schema gen_go_sdk gen_dotnet_sdk gen_nodejs_sdk gen_python_sdk
 
 build:: build_provider build_dotnet_sdk build_nodejs_sdk build_python_sdk
 
@@ -140,3 +140,10 @@ test_dotnet:: PATH := $(WORKING_DIR)/bin:$(PATH)
 test_dotnet:: ./examples
 	@export PATH
 	cd examples && go test -tags=dotnet -v -json -count=1 -cover -timeout 3h -parallel ${TESTPARALLELISM} . 2>&1 | tee /tmp/gotest.log | gotestfmt
+
+
+bin/${CODEGEN}: ${CODEGEN_SRC}
+	cd provider && go build -o $(WORKING_DIR)/bin/${CODEGEN} $(WORKING_DIR)/provider/cmd/$(CODEGEN)
+
+schema: bin/${CODEGEN}
+	cd provider/cmd/$(CODEGEN) && go run . schema ../../.. ${SCHEMA_PATH}

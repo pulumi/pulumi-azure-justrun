@@ -6,22 +6,22 @@ from enum import Enum
 
 __all__ = [
     'PublicAccess',
-    'SkuName',
+    'StorageSkuName',
 ]
 
 
 class PublicAccess(str, Enum):
     """
-    Duplicates azure-native:storage:PublicAccess
+    Specifies whether data in the container may be accessed publicly and the level of access.
     """
     CONTAINER = "Container"
     BLOB = "Blob"
     NONE = "None"
 
 
-class SkuName(str, Enum):
+class StorageSkuName(str, Enum):
     """
-    Duplicates azure-native:storage:SkuName
+    The SKU name. Required for account creation; optional for update. Note that in older versions, SKU name was called accountType.
     """
     STANDARD_LRS = "Standard_LRS"
     STANDARD_GRS = "Standard_GRS"

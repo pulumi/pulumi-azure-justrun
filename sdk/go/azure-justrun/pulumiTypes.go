@@ -3,7 +3,7 @@
 
 package azurejustrun
 
-type EmptyType struct {
+type Emptytype struct {
 }
 
 func init() {

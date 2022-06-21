@@ -9,9 +9,15 @@ using Pulumi.Serialization;
 
 namespace Pulumi.AzureJustrun
 {
+    /// <summary>
+    /// This represents a container app component resource
+    /// </summary>
     [AzureJustrunResourceType("azure-justrun:index:containerapp")]
     public partial class Containerapp : Pulumi.ComponentResource
     {
+        /// <summary>
+        /// The URL of the container app
+        /// </summary>
         [Output("url")]
         public Output<string?> Url { get; private set; } = null!;
 
@@ -44,13 +50,13 @@ namespace Pulumi.AzureJustrun
     public sealed class ContainerappArgs : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The name of the docker image to use. Required. Either this or imageDirectory must be provided. A docker image will be created if this is not provided.
+        /// The name of the docker image. One will be created if not provided
         /// </summary>
         [Input("dockerImageName")]
         public Input<string>? DockerImageName { get; set; }
 
         /// <summary>
-        /// The relative directory path to the folder containing the docker image. Either this or dockerImageName must be provided.
+        /// The name of the directory where the docker image to be created is. NOT the actual directory, i.e. 'nodeapp' instead of './nodeapp'
         /// </summary>
         [Input("imageDirectory")]
         public Input<string>? ImageDirectory { get; set; }
@@ -62,19 +68,25 @@ namespace Pulumi.AzureJustrun
         public Input<string>? NamePrefix { get; set; }
 
         /// <summary>
-        /// The container registry to use. One will be created if not provided.
+        /// The name of the image registry. Must belong to the resource group specified in ResourceGroupName. One will be created if not provided.
         /// </summary>
-        [Input("registry")]
-        public Input<Pulumi.AzureNative.ContainerRegistry.Registry>? Registry { get; set; }
+        [Input("registryName")]
+        public Input<string>? RegistryName { get; set; }
 
         /// <summary>
         /// The resource group to use. One will be created if not provided.
         /// </summary>
-        [Input("resourceGroup")]
-        public Input<Pulumi.AzureNative.Resources.ResourceGroup>? ResourceGroup { get; set; }
+        [Input("resourceGroupName")]
+        public Input<string>? ResourceGroupName { get; set; }
 
         /// <summary>
-        /// The version of the docker image created, if not provided
+        /// The name of the storage account to use. One will be created if not provided.
+        /// </summary>
+        [Input("storageAccountName")]
+        public Input<string>? StorageAccountName { get; set; }
+
+        /// <summary>
+        /// The version of the created docker image
         /// </summary>
         [Input("version")]
         public Input<string>? Version { get; set; }

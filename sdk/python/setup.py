@@ -39,11 +39,18 @@ def readme():
 
 setup(name='pulumi_azure_justrun',
       version=VERSION,
+      description="Provides some simple components to run azure apps",
       long_description=readme(),
       long_description_content_type='text/markdown',
       cmdclass={
           'install': InstallPluginCommand,
       },
+      keywords='',
+      url='https://pulumi.com',
+      project_urls={
+          'Repository': 'https://github.com/pulumi/pulumi-azure-justrun'
+      },
+      license='Apache-2.0',
       packages=find_packages(),
       package_data={
           'pulumi_azure_justrun': [

@@ -18,10 +18,10 @@ export class ContainerApp extends pulumi.ComponentResource {
 
         const version = args.version ?? "v1.0.0";
 
-        const resourceGroup = args.resourceGroup ?? new resources.ResourceGroup(`${namePrefix}rg`, {}, {parent: this});;
+        const resourceGroupName = args.resourceGroupName ?? new resources.ResourceGroup(`${namePrefix}rg`, {}, {parent: this}).name;
 
         const workspace = new operationalinsights.Workspace(`${namePrefix}loganalytics`, {
-            resourceGroupName: resourceGroup.name,
+            resourceGroupName: resourceGroupName,
             sku: {
                 name: "PerGB2018",
             },
@@ -29,12 +29,12 @@ export class ContainerApp extends pulumi.ComponentResource {
         }, {parent: this});
 
         const workspaceSharedKeys = operationalinsights.getSharedKeysOutput({
-            resourceGroupName: resourceGroup.name,
+            resourceGroupName: resourceGroupName,
             workspaceName: workspace.name,
         });
 
         const managedEnv = new app.ManagedEnvironment(`${namePrefix}env`, {
-            resourceGroupName: resourceGroup.name,
+            resourceGroupName: resourceGroupName,
             appLogsConfiguration: {
                 destination: "log-analytics",
                 logAnalyticsConfiguration: {
@@ -44,8 +44,24 @@ export class ContainerApp extends pulumi.ComponentResource {
             },
         }, {parent: this});
 
-        const registry = args.registry ?? new containerregistry.Registry(`${namePrefix}registry`, {
-            resourceGroupName: resourceGroup.name,
+
+        
+
+        var registry;
+
+        if (args.registryName) {
+            const resourceGroupName = args.resourceGroupName ?? ""
+            if(resourceGroupName == ""){
+                throw new Error("Resource Group Name must be provided to fetch registry")
+            }
+            registry = containerregistry.getRegistryOutput({
+                "registryName": args.registryName,
+                "resourceGroupName": resourceGroupName
+            })
+        }
+
+        registry = registry ?? new containerregistry.Registry(`${namePrefix}registry`, {
+            resourceGroupName: resourceGroupName,
             sku: {
                 name: "Basic",
             },
@@ -53,7 +69,7 @@ export class ContainerApp extends pulumi.ComponentResource {
         });
 
         const credentials = containerregistry.listRegistryCredentialsOutput({
-            resourceGroupName: resourceGroup.name,
+            resourceGroupName: resourceGroupName,
             registryName: registry.name,
         });
         const adminUsername = credentials.apply(c => c.username!);
@@ -74,7 +90,7 @@ export class ContainerApp extends pulumi.ComponentResource {
         },{parent: this}).imageName;
 
         const containerApp = new app.ContainerApp(`${namePrefix}app`, {
-            resourceGroupName: resourceGroup.name,
+            resourceGroupName: resourceGroupName,
             managedEnvironmentId: managedEnv.id,
             configuration: {
                 ingress: {
@@ -105,8 +121,8 @@ export class ContainerApp extends pulumi.ComponentResource {
 
 export interface ContainerAppArgs extends pulumi.ComponentResourceOptions{
     namePrefix?: string;
-    resourceGroup?: resources.ResourceGroup;
-    registry?: containerregistry.Registry;
+    resourceGroupName?: string;
+    registryName?: string;
     dockerImageName?: string;
     imageDirectory?: string;
     version?: string;
