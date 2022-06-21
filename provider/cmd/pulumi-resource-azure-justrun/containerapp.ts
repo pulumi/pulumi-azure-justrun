@@ -55,18 +55,18 @@ export class ContainerApp extends pulumi.ComponentResource {
                 throw new Error("Resource Group Name must be provided to fetch registry")
             }
             registry = containerregistry.getRegistryOutput({
-                "registryName": registryName,
+                "registryName": args.registryName,
                 "resourceGroupName": resourceGroupName
             })
-        } else {
-            const registry = new containerregistry.Registry(`${namePrefix}registry`, {
-                resourceGroupName: resourceGroupName,
-                sku: {
-                    name: "Basic",
-                },
-                adminUserEnabled: true,
-            });
         }
+
+        registry = registry ?? new containerregistry.Registry(`${namePrefix}registry`, {
+            resourceGroupName: resourceGroupName,
+            sku: {
+                name: "Basic",
+            },
+            adminUserEnabled: true,
+        });
 
         const credentials = containerregistry.listRegistryCredentialsOutput({
             resourceGroupName: resourceGroupName,
