@@ -18,23 +18,23 @@ export class ContainerApp extends pulumi.ComponentResource {
 
         const version = args.version ?? "v1.0.0";
 
-        const resourceGroup = args.resourceGroup ?? new resources.ResourceGroup(`${namePrefix}rg`, {}, {parent: this});;
+        const resourceGroupName = args.resourceGroupName ?? new resources.ResourceGroup(`${namePrefix}rg`, {}, {parent: this}).name;
 
-        const workspace = new operationalinsights.Workspace(`${namePrefix}loganalytics`, {
-            resourceGroupName: resourceGroup.name,
+        const workspaceName = new operationalinsights.Workspace(`${namePrefix}loganalytics`, {
+            resourceGroupName: resourceGroupName,
             sku: {
                 name: "PerGB2018",
             },
             retentionInDays: 30,
-        }, {parent: this});
+        }, {parent: this}).name;
 
         const workspaceSharedKeys = operationalinsights.getSharedKeysOutput({
-            resourceGroupName: resourceGroup.name,
-            workspaceName: workspace.name,
+            resourceGroupName: resourceGroupName,
+            workspaceName: workspaceName,
         });
 
         const managedEnv = new app.ManagedEnvironment(`${namePrefix}env`, {
-            resourceGroupName: resourceGroup.name,
+            resourceGroupName: resourceGroupName,
             appLogsConfiguration: {
                 destination: "log-analytics",
                 logAnalyticsConfiguration: {
@@ -44,17 +44,17 @@ export class ContainerApp extends pulumi.ComponentResource {
             },
         }, {parent: this});
 
-        const registry = args.registry ?? new containerregistry.Registry(`${namePrefix}registry`, {
-            resourceGroupName: resourceGroup.name,
+        const registryName = args.registryName ?? new containerregistry.Registry(`${namePrefix}registry`, {
+            resourceGroupName: resourceGroupName,
             sku: {
                 name: "Basic",
             },
             adminUserEnabled: true,
-        });
+        }).name;
 
         const credentials = containerregistry.listRegistryCredentialsOutput({
-            resourceGroupName: resourceGroup.name,
-            registryName: registry.name,
+            resourceGroupName: resourceGroupName,
+            registryName: registryName,
         });
         const adminUsername = credentials.apply(c => c.username!);
         const adminPassword = credentials.apply(c => c.passwords![0].value!);
@@ -74,7 +74,7 @@ export class ContainerApp extends pulumi.ComponentResource {
         },{parent: this}).imageName;
 
         const containerApp = new app.ContainerApp(`${namePrefix}app`, {
-            resourceGroupName: resourceGroup.name,
+            resourceGroupName: resourceGroupName,
             managedEnvironmentId: managedEnv.id,
             configuration: {
                 ingress: {
