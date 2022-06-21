@@ -12,6 +12,13 @@ export * from "./webapp";
 // Export enums:
 export * from "./types/enums";
 
+// Export sub-modules:
+import * as types from "./types";
+
+export {
+    types,
+};
+
 // Import resources to register:
 import { Containerapp } from "./containerapp";
 import { Webapp } from "./webapp";

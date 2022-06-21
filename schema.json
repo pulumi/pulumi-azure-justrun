@@ -91,6 +91,9 @@
                     "value": "Standard_RAGZRS"
                 }
             ]
+        },
+        "azure-justrun:index:emptytype": {
+            "type": "object"
         }
     },
     "provider": {},

@@ -34,6 +34,12 @@ func generateSchema(azureNativeSpec schema.PackageSpec, dockerSpec schema.Packag
 		Types: map[string]schema.ComplexTypeSpec{
 			PublicAccess:   publicAccessTypeSpec(azureNativeSpec),
 			StorageSkuName: skuNameTypeSpec(azureNativeSpec),
+			"azure-justrun:index:emptytype": schema.ComplexTypeSpec{
+				ObjectTypeSpec: schema.ObjectTypeSpec{
+					Type:       "object",
+					Properties: map[string]schema.PropertySpec{},
+				},
+			},
 		},
 		Functions: map[string]schema.FunctionSpec{},
 	}
