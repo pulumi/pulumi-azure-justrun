@@ -84,7 +84,7 @@ func containerappResourceSpec(azureNativeSpec schema.PackageSpec) schema.Resourc
 	spec := schema.ResourceSpec{
 		IsComponent: true,
 		InputProperties: map[string]schema.PropertySpec{
-			"registryName":       stringProperty("The name of the image registry. One will be created if not provided"),
+			"registryName":       stringProperty("The name of the image registry. Must belong to the resource group specified in ResourceGroupName. One will be created if not provided."),
 			"dockerImageName":    stringProperty("The name of the docker image. One will be created if not provided"),
 			"imageDirectory":     stringProperty("The name of the directory where the docker image to be created is. NOT the actual directory, i.e. 'nodeapp' instead of './nodeapp'"),
 			"version":            stringProperty("The version of the created docker image"),

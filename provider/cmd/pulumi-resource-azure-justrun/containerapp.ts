@@ -20,17 +20,17 @@ export class ContainerApp extends pulumi.ComponentResource {
 
         const resourceGroupName = args.resourceGroupName ?? new resources.ResourceGroup(`${namePrefix}rg`, {}, {parent: this}).name;
 
-        const workspaceName = new operationalinsights.Workspace(`${namePrefix}loganalytics`, {
+        const workspace = new operationalinsights.Workspace(`${namePrefix}loganalytics`, {
             resourceGroupName: resourceGroupName,
             sku: {
                 name: "PerGB2018",
             },
             retentionInDays: 30,
-        }, {parent: this}).name;
+        }, {parent: this});
 
         const workspaceSharedKeys = operationalinsights.getSharedKeysOutput({
             resourceGroupName: resourceGroupName,
-            workspaceName: workspaceName,
+            workspaceName: workspace.name,
         });
 
         const managedEnv = new app.ManagedEnvironment(`${namePrefix}env`, {
@@ -44,17 +44,33 @@ export class ContainerApp extends pulumi.ComponentResource {
             },
         }, {parent: this});
 
-        const registryName = args.registryName ?? new containerregistry.Registry(`${namePrefix}registry`, {
-            resourceGroupName: resourceGroupName,
-            sku: {
-                name: "Basic",
-            },
-            adminUserEnabled: true,
-        }).name;
+
+        
+
+        var registry;
+
+        if (args.registryName) {
+            const resourceGroupName = args.resourceGroupName ?? ""
+            if(resourceGroupName == ""){
+                throw new Error("Resource Group Name must be provided to fetch registry")
+            }
+            registry = containerregistry.getRegistryOutput({
+                "registryName": registryName,
+                "resourceGroupName": resourceGroupName
+            })
+        } else {
+            const registry = new containerregistry.Registry(`${namePrefix}registry`, {
+                resourceGroupName: resourceGroupName,
+                sku: {
+                    name: "Basic",
+                },
+                adminUserEnabled: true,
+            });
+        }
 
         const credentials = containerregistry.listRegistryCredentialsOutput({
             resourceGroupName: resourceGroupName,
-            registryName: registryName,
+            registryName: registry.name,
         });
         const adminUsername = credentials.apply(c => c.username!);
         const adminPassword = credentials.apply(c => c.passwords![0].value!);
