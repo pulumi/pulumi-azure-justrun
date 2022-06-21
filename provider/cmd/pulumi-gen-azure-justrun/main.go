@@ -39,10 +39,18 @@ func main() {
 
 	language, outdir, schemaPath := os.Args[1], os.Args[2], os.Args[3]
 
-	err := emitSDK(language, outdir, schemaPath)
+	var err error
+	if language == "schema" {
+		err = emitSchema(outdir)
+
+	} else {
+		err = emitSDK(language, outdir, schemaPath)
+	}
+
 	if err != nil {
 		fmt.Printf("Failed: %s", err.Error())
 	}
+
 }
 
 func emitSDK(language, outdir, schemaPath string) error {
@@ -64,9 +72,7 @@ func emitSDK(language, outdir, schemaPath string) error {
 		generator = func() (map[string][]byte, error) { return nodejsgen.GeneratePackage(tool, pkg, extraFiles) }
 	case "python":
 		generator = func() (map[string][]byte, error) { return pygen.GeneratePackage(tool, pkg, extraFiles) }
-	case "schema":
-		pkgSpec := gen.GenerateSchema(outdir)
-		mustWritePulumiSchema(pkgSpec, outdir)
+
 	default:
 		return errors.Errorf("Unrecognized language %q", language)
 	}
@@ -82,6 +88,12 @@ func emitSDK(language, outdir, schemaPath string) error {
 		}
 	}
 
+	return nil
+}
+
+func emitSchema(outdir string) error {
+	pkgSpec := gen.GenerateSchema(outdir)
+	mustWritePulumiSchema(pkgSpec, outdir)
 	return nil
 }
 
@@ -112,4 +124,30 @@ func emitFile(rootDir, filename string, contents []byte) error {
 		return err
 	}
 	return nil
+}
+
+func mustWriteFiles(rootDir string, files map[string][]byte) {
+	for filename, contents := range files {
+		mustWriteFile(rootDir, filename, contents)
+	}
+}
+
+func mustWriteFile(rootDir, filename string, contents []byte) {
+	outPath := filepath.Join(rootDir, filename)
+
+	if err := os.MkdirAll(filepath.Dir(outPath), 0755); err != nil {
+		panic(err)
+	}
+	err := ioutil.WriteFile(outPath, contents, 0600)
+	if err != nil {
+		panic(err)
+	}
+}
+
+func mustWritePulumiSchema(pkgSpec schema.PackageSpec, outdir string) {
+	schemaJSON, err := json.MarshalIndent(pkgSpec, "", "    ")
+	if err != nil {
+		panic(errors.Wrap(err, "marshaling Pulumi schema"))
+	}
+	mustWriteFile(outdir, "schema.json", schemaJSON)
 }

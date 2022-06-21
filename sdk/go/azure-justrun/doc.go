@@ -1,3 +1,3 @@
-// Package azure-justrun exports types, functions, subpackages for provisioning azure-justrun resources.
+// Provides some simple components to run azure apps
 //
 package azurejustrun

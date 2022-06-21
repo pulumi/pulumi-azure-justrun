@@ -8,23 +8,22 @@ export class WebApp extends pulumi.ComponentResource {
     public readonly url!: pulumi.Output<string>;
 
     constructor(name: string, args: WebAppArgs, opts: pulumi.ResourceOptions = {}) {
-        super("azure-justrun:index:webapp", name, {}, opts); // Register this component with name pulumi:examples:S3Folder
+        super("azure-justrun:index:webapp", name, {}, opts);
         const namePrefix = args.namePrefix ?? ""
 
-        const resourceGroup = args.resourceGroup ?? new resources.ResourceGroup(`${namePrefix}rg`, {}, {parent: this});
-
+        const resourceGroupName = args.resourceGroupName ??  new resources.ResourceGroup(`${namePrefix}rg`, {}, {parent: this}).name;
         // Storage Account name must be lowercase and cannot have any dash characters
-        const storageAccount = args.storageAccount ?? new storage.StorageAccount(`${namePrefix}sa`, {
-            resourceGroupName: resourceGroup.name,
+        const storageAccountName = args.storageAccountName ?? new storage.StorageAccount(`${namePrefix}sa`, {
+            resourceGroupName: resourceGroupName,
             kind: storage.Kind.StorageV2,
             sku: {
                 name: args.storageSkuName ?? storage.SkuName.Standard_LRS,
             },
-        }, {parent: this});
+        }, {parent: this}).name;
 
 
         const appServicePlan = new web.AppServicePlan(`${namePrefix}asp`, {
-            resourceGroupName: resourceGroup.name,
+            resourceGroupName: resourceGroupName,
             kind: "App",
             sku: {
                 name: args.appSkuName ?? "B1",
@@ -33,24 +32,24 @@ export class WebApp extends pulumi.ComponentResource {
         }, {parent: this});
 
         const storageContainer = new storage.BlobContainer(`${namePrefix}container`, {
-            resourceGroupName: resourceGroup.name,
-            accountName: storageAccount.name,
+            resourceGroupName: resourceGroupName,
+            accountName: storageAccountName,
             publicAccess: args.containerPublicAccess ?? storage.PublicAccess.None,
         }, {parent: this});
 
         const blob = new storage.Blob(`${namePrefix}blob`, {
-            resourceGroupName: resourceGroup.name,
-            accountName: storageAccount.name,
+            resourceGroupName: resourceGroupName,
+            accountName: storageAccountName,
             containerName: storageContainer.name,
             source: new pulumi.asset.FileArchive(args.filePath ?? "../wwwroot"),
         }, {parent: this});
 
         const codeBlobUrl = pulumi.all(
-            [storageAccount.name, storageContainer.name, blob.name, resourceGroup.name]).apply(
+            [storageAccountName, storageContainer.name, blob.name, resourceGroupName]).apply(
             (args: any) => getSASToken(args[0], args[1], args[2], args[3]));
 
         const app = new web.WebApp(`${namePrefix}webapp`, {
-            resourceGroupName: resourceGroup.name,
+            resourceGroupName: resourceGroupName,
             serverFarmId: appServicePlan.id,
             siteConfig: {
                 appSettings: [
@@ -93,8 +92,8 @@ export interface WebAppArgs extends pulumi.ComponentResourceOptions{
     filePath?: string,
     containerPublicAccess?: storage.PublicAccess,
     storageSkuName?: storage.SkuName,
-    storageAccount?: storage.StorageAccount,
-    resourceGroup?: resources.ResourceGroup,
+    storageAccountName?: string,
+    resourceGroupName?: string,
     namePrefix?: string
 }
 

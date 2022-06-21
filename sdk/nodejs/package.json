@@ -1,9 +1,15 @@
 {
     "name": "@pulumi/azure-justrun",
-    "version": "0.1.14",
+    "version": "${VERSION}",
+    "keywords": [
+        ""
+    ],
+    "homepage": "https://pulumi.com",
+    "repository": "https://github.com/pulumi/pulumi-azure-justrun",
+    "license": "Apache-2.0",
     "scripts": {
         "build": "tsc",
-        "install": "node scripts/install-pulumi-plugin.js resource azure-justrun 0.1.14"
+        "install": "node scripts/install-pulumi-plugin.js resource azure-justrun ${VERSION}"
     },
     "dependencies": {
         "@pulumi/azure-native": "^1.0.0",
@@ -13,7 +19,6 @@
         "typescript": "^4.3.5"
     },
     "pulumi": {
-        "resource": true,
-        "version": "0.1.14"
+        "resource": true
     }
 }

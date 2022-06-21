@@ -8,7 +8,7 @@ using Pulumi;
 namespace Pulumi.AzureJustrun
 {
     /// <summary>
-    /// Duplicates azure-native:storage:PublicAccess
+    /// Specifies whether data in the container may be accessed publicly and the level of access.
     /// </summary>
     [EnumType]
     public readonly struct PublicAccess : IEquatable<PublicAccess>
@@ -40,7 +40,7 @@ namespace Pulumi.AzureJustrun
     }
 
     /// <summary>
-    /// Duplicates azure-native:storage:SkuName
+    /// The SKU name. Required for account creation; optional for update. Note that in older versions, SKU name was called accountType.
     /// </summary>
     [EnumType]
     public readonly struct SkuName : IEquatable<SkuName>

@@ -9,7 +9,7 @@ export const PublicAccess = {
 } as const;
 
 /**
- * Duplicates azure-native:storage:PublicAccess
+ * Specifies whether data in the container may be accessed publicly and the level of access.
  */
 export type PublicAccess = (typeof PublicAccess)[keyof typeof PublicAccess];
 
@@ -25,6 +25,6 @@ export const SkuName = {
 } as const;
 
 /**
- * Duplicates azure-native:storage:SkuName
+ * The SKU name. Required for account creation; optional for update. Note that in older versions, SKU name was called accountType.
  */
 export type SkuName = (typeof SkuName)[keyof typeof SkuName];

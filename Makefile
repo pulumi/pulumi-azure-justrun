@@ -1,4 +1,4 @@
-VERSION         := 0.1.14
+VERSION         := 0.2.0
 
 PACK            := azure-justrun
 PROJECT         := github.com/pulumi/pulumi-${PACK}
@@ -59,8 +59,11 @@ gen_go_sdk::
 	rm -rf sdk/go
 	cd provider/cmd/${CODEGEN} && go run . go ../../../sdk/go ${SCHEMA_PATH}
 
+
+install_go_sdk:: build_go_sdk
+
 ## Empty build target for Go
-build_go_sdk::
+build_go_sdk:: gen_go_sdk
 
 # .NET SDK
 
@@ -78,7 +81,7 @@ install_dotnet_sdk:: build_dotnet_sdk
 	rm -rf ${WORKING_DIR}/nuget
 	mkdir -p ${WORKING_DIR}/nuget
 	find . -name '*.nupkg' -print -exec cp -p {} ${WORKING_DIR}/nuget \;
-
+	dotnet nuget add source ${WORKING_DIR}/nuget
 
 # Node.js SDK
 
@@ -98,13 +101,14 @@ build_nodejs_sdk:: gen_nodejs_sdk
 install_nodejs_sdk:: build_nodejs_sdk
 	yarn link --cwd ${WORKING_DIR}/sdk/nodejs/bin
 
-
 # Python SDK
 
 gen_python_sdk::
 	rm -rf sdk/python
 	cd provider/cmd/${CODEGEN} && go run . python ../../../sdk/python ${SCHEMA_PATH}
 	cp ${WORKING_DIR}/README.md sdk/python
+
+install_python_sdk:: build_python_sdk
 
 build_python_sdk:: PYPI_VERSION := ${VERSION}
 build_python_sdk:: gen_python_sdk
@@ -116,28 +120,30 @@ build_python_sdk:: gen_python_sdk
 		cd ./bin && python3 setup.py build sdist
 
 test_nodejs:: PATH := $(WORKING_DIR)/bin:$(PATH)
-test_nodejs:: ./bin install_nodejs_sdk
+test_nodejs:: ./examples
 	@export PATH
 	cd examples && go test -tags=nodejs -v -json -count=1 -cover -timeout 3h -parallel ${TESTPARALLELISM} . 2>&1 | tee /tmp/gotest.log | gotestfmt
 
-test_python:: PATH := $(WORKING_DIR)/bin/python:$(PATH)
-test_python:: ./bin
+test_python:: PATH := $(WORKING_DIR)/bin:$(PATH)
+test_python:: ./examples
 	@export PATH
 	cd examples && go test -tags=python -v -json -count=1 -cover -timeout 3h -parallel ${TESTPARALLELISM} . 2>&1 | tee /tmp/gotest.log | gotestfmt
 
 test_go:: PATH := $(WORKING_DIR)/bin:$(PATH)
-test_go:: ./bin
+test_go:: ./examples
 	@export PATH
+	cd examples/golangcontainerapp && go mod edit -replace github.com/pulumi/pulumi-azure-justrun/sdk=${WORKING_DIR}/sdk && go mod tidy
+	cd examples/golangwebapp && go mod edit -replace github.com/pulumi/pulumi-azure-justrun/sdk=${WORKING_DIR}/sdk && go mod tidy
 	cd examples && go test -tags=go -v -json -count=1 -cover -timeout 3h -parallel ${TESTPARALLELISM} . 2>&1 | tee /tmp/gotest.log | gotestfmt
 
 test_dotnet:: PATH := $(WORKING_DIR)/bin:$(PATH)
-test_dotnet:: ./bin install_dotnet_sdk
+test_dotnet:: ./examples
 	@export PATH
 	cd examples && go test -tags=dotnet -v -json -count=1 -cover -timeout 3h -parallel ${TESTPARALLELISM} . 2>&1 | tee /tmp/gotest.log | gotestfmt
 
 
 bin/${CODEGEN}: ${CODEGEN_SRC}
-	cd provider && go build -o $(WORKING_DIR)/bin/${CODEGEN} $(WORKING_DIR)/schemagen/cmd/$(CODEGEN)
+	cd provider && go build -o $(WORKING_DIR)/bin/${CODEGEN} $(WORKING_DIR)/provider/cmd/$(CODEGEN)
 
-awsx/schema.json: bin/${CODEGEN}
-	cd provider/cmd/$(CODEGEN) && go run . schema $(WORKING_DIR)/$(PACK)
+schema: bin/${CODEGEN}
+	cd provider/cmd/$(CODEGEN) && go run . schema ../../.. ${SCHEMA_PATH}

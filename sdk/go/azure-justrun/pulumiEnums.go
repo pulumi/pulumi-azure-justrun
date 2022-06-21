@@ -10,7 +10,7 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
-// Duplicates azure-native:storage:PublicAccess
+// Specifies whether data in the container may be accessed publicly and the level of access.
 type PublicAccess string
 
 const (
@@ -176,7 +176,7 @@ func (in *publicAccessPtr) ToPublicAccessPtrOutputWithContext(ctx context.Contex
 	return pulumi.ToOutputWithContext(ctx, in).(PublicAccessPtrOutput)
 }
 
-// Duplicates azure-native:storage:SkuName
+// The SKU name. Required for account creation; optional for update. Note that in older versions, SKU name was called accountType.
 type SkuName string
 
 const (

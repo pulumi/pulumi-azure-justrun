@@ -19,18 +19,18 @@ const (
 
 // nolint: lll
 func GenerateSchema(packageDir string) schema.PackageSpec {
-	dependencies := readPackageDependencies(packageDir)
-	azureNativeSpec := getPackageSpec("aws-native", dependencies.AzureNative)
-	dockerSpec := getPackageSpec("docker", dependencies.Docker)
+	//dependencies := readPackageDependencies(packageDir)
+	azureNativeSpec := getPackageSpec("azure-native", "1.65.0") //getPackageSpec("azure-native", dependencies.AzureNative)
+	dockerSpec := getPackageSpec("docker", "3.2.0")             //getPackageSpec("docker", dependencies.Docker)
 
 	packageSpec := schema.PackageSpec{
-		Name:        "awsx",
-		Description: "Pulumi Amazon Web Services (AWS) AWSX Components.",
+		Name:        "azure-justrun",
+		Description: "Provides some simple components to run azure apps",
 		License:     "Apache-2.0",
 		Publisher:   "Pulumi",
-		Keywords:    []string{"pulumi", "aws", "awsx", "kind/component", "category/cloud"},
+		Keywords:    []string{""},
 		Homepage:    "https://pulumi.com",
-		Repository:  "https://github.com/pulumi/pulumi-awsx",
+		Repository:  "https://github.com/pulumi/pulumi-azure-justrun",
 
 		Functions: map[string]schema.FunctionSpec{},
 		Resources: map[string]schema.ResourceSpec{},
@@ -38,41 +38,36 @@ func GenerateSchema(packageDir string) schema.PackageSpec {
 		Language: map[string]schema.RawMessage{
 			"csharp": rawMessage(map[string]interface{}{
 				"packageReferences": map[string]string{
-					"Pulumi":        "3.*",
-					"Pulumi.Aws":    "5.*",
-					"Pulumi.Docker": "3.*",
+					"Pulumi":             "3.*",
+					"Pulumi.AzureNative": "1.*",
 				},
 				"liftSingleValueMethodReturns": true,
+				"respectSchemaVersion":         true,
 			}),
 			"go": rawMessage(map[string]interface{}{
 				"generateResourceContainerTypes": true,
-				"importBasePath":                 "github.com/pulumi/pulumi-awsx/sdk/go/awsx",
+				"importBasePath":                 "github.com/pulumi/pulumi-azure-justrun/sdk/go/azure-justrun",
 				"liftSingleValueMethodReturns":   true,
 				"internalDependencies":           []string{"github.com/pulumi/pulumi-docker/sdk/v3/go/docker"},
+				"respectSchemaVersion":           true,
 			}),
 			"nodejs": rawMessage(map[string]interface{}{
 				"dependencies": map[string]string{
-					"@pulumi/pulumi":    "^3.0.0",
-					"@pulumi/aws":       "^5.3.0",
-					"@pulumi/docker":    "^3.0.0",
-					"@types/aws-lambda": "^8.10.23",
-					"mime":              "^2.0.0",
+					"@pulumi/pulumi":       "^3.0.0",
+					"@pulumi/azure-native": "^1.0.0",
 				},
-				"devDependencies": map[string]string{
-					"@types/node": "^17.0.21",
-					"@types/mime": "^2.0.0",
-					"typescript":  "^4.6.2",
-				},
+				"respectSchemaVersion": true,
+				"containsEnums":        true,
 			}),
 			"python": rawMessage(map[string]interface{}{
 				"requires": map[string]string{
-					"pulumi":        ">=3.0.0,<4.0.0",
-					"pulumi-aws":    ">=5.3.0,<6.0.0",
-					"pulumi-docker": ">=3.0.0,<4.0.0",
+					"pulumi":              ">=3.0.0,<4.0.0",
+					"pulumi-azure-native": ">=1.0.0,<2.0.0",
 				},
 				"usesIOClasses":                true,
-				"readme":                       "Pulumi Amazon Web Services (AWS) AWSX Components.",
+				"readme":                       "Pulumi Azure Justrun Components",
 				"liftSingleValueMethodReturns": true,
+				"respectSchemaVersion":         true,
 			}),
 		},
 	}
@@ -112,7 +107,6 @@ func getSpecFromUrl(url string) schema.PackageSpec {
 	if err != nil {
 		log.Fatal(err)
 	}
-
 	return spec
 }
 
