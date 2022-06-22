@@ -45,7 +45,7 @@ setup(name='pulumi_azure_justrun',
       cmdclass={
           'install': InstallPluginCommand,
       },
-      keywords='',
+      keywords='pulumi azure category/cloud kind/component containerapps appservice web',
       url='https://pulumi.com',
       project_urls={
           'Repository': 'https://github.com/pulumi/pulumi-azure-justrun'
